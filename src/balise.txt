@@ -1,0 +1,50 @@
+Major Brand
+Minor Version
+Compatible Brands
+Creation Time
+Modification Time
+Duration
+Media Time Scale
+Duration in Seconds
+Transformation Matrix
+Preferred Rate
+Preferred Volume
+Next Track ID
+Latitude
+Longitude
+Rotation
+
+
+Creation Time
+Modification Time
+ISO 639-2 Language Code
+Opcolor
+Graphics Mode
+Compression Type
+Width
+Height
+Depth
+Horizontal Resolution
+Vertical Resolution
+Frame Rate
+
+
+Creation Time
+Modification Time
+ISO 639-2 Language Code
+Balance
+Format
+Number of Channels
+Sample Size
+Sample Rate
+
+
+Detected File Type Name
+Detected File Type Long Name
+Detected MIME Type
+Expected File Name Extension
+
+
+File Name
+File Size
+File Modified Date
