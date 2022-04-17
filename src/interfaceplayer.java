@@ -4,10 +4,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.BorderFactory;
@@ -34,6 +30,8 @@ public class interfaceplayer extends JFrame {
     String cc = "salut"; //juste pour le teste
 
     public interfaceplayer(){
+        String path = "1365070268951.mp4";
+
         setTitle("BVW");
         setVisible(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // dispose_on_close permet de libérer les ressource de la frame et si c'est la dernière ca rend la main 
@@ -42,7 +40,7 @@ public class interfaceplayer extends JFrame {
         setLocationRelativeTo(null);// on centre la fenetre 
 
         //initialiser mes variables pour pouvoir les utiliser plus facilement
-        JTextField ZoneDeTexte = new JTextField("edit me");
+        JTextField ZoneDeTexte = new JTextField("");
 
         //set de l'icone de l'appli
         Image icon = Toolkit.getDefaultToolkit().getImage("image/BVW.png");
@@ -59,77 +57,68 @@ public class interfaceplayer extends JFrame {
 
         //extension 1 (mp4)
         ext1.setMnemonic(KeyEvent.VK_A);
-        ext1.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e)
-            {
-                //mettre le code de ce qu'on veut faire si la case ext1 est coché  
-                //attention le code ne gère pas la décoche si on ne met pas de condition 
-                if(ext1.getState()){
-                    setTitle(getTitle()+" mp4");
+        ext1.addItemListener(e -> {
+            //mettre le code de ce qu'on veut faire si la case ext1 est coché
+            //attention le code ne gère pas la décoche si on ne met pas de condition
+            if(ext1.getState()){
+                setTitle(getTitle()+" mp4");
+            }
+            else{
+                if (ext2.getState() && ext3.getState()){
+                    setTitle("BVW"+" avi"+" mp3");
+                }
+                else if(ext2.getState()){
+                    setTitle("BVW"+" avi");
+                }
+                else if(ext3.getState()){
+                    setTitle("BVW"+" mp3");
                 }
                 else{
-                    if (ext2.getState() && ext3.getState()){
-                        setTitle("BVW"+" avi"+" mp3");
-                    }
-                    else if(ext2.getState()){
-                        setTitle("BVW"+" avi");
-                    }
-                    else if(ext3.getState()){
-                        setTitle("BVW"+" mp3");
-                    }
-                    else{
-                        setTitle("BVW");
-                    }
+                    setTitle("BVW");
                 }
             }
         });
         //extension 2 (avi)
         ext2.setMnemonic(KeyEvent.VK_Z);
-        ext2.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e)
-            {
-                //mettre le code de ce qu'on veut faire si la case ext2 est coché 
-                if(ext2.getState()){
-                    setTitle(getTitle()+" avi");
+        ext2.addItemListener(e -> {
+            //mettre le code de ce qu'on veut faire si la case ext2 est coché
+            if(ext2.getState()){
+                setTitle(getTitle()+" avi");
+            }
+            else{
+                if (ext1.getState() && ext3.getState()){
+                    setTitle("BVW"+" mp4"+" mp3");
+                }
+                else if(ext1.getState()){
+                    setTitle("BVW"+" mp4");
+                }
+                else if(ext3.getState()){
+                    setTitle("BVW"+" mp3");
                 }
                 else{
-                    if (ext1.getState() && ext3.getState()){
-                        setTitle("BVW"+" mp4"+" mp3");
-                    }
-                    else if(ext1.getState()){
-                        setTitle("BVW"+" mp4");
-                    }
-                    else if(ext3.getState()){
-                        setTitle("BVW"+" mp3");
-                    }
-                    else{
-                        setTitle("BVW");
-                    }
+                    setTitle("BVW");
                 }
             }
         });
         //extension 3 (mp3)
         ext3.setMnemonic(KeyEvent.VK_E);
-        ext3.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e)
-            {
-                //mettre le code de ce qu'on veut faire si la case ext3 est coché 
-                if(ext3.getState()){
-                    setTitle(getTitle()+" mp3");
+        ext3.addItemListener(e -> {
+            //mettre le code de ce qu'on veut faire si la case ext3 est coché
+            if(ext3.getState()){
+                setTitle(getTitle()+" mp3");
+            }
+            else{
+                if (ext1.getState() && ext2.getState()){
+                    setTitle("BVW"+" mp4"+" avi");
+                }
+                else if(ext1.getState()){
+                    setTitle("BVW"+" mp4");
+                }
+                else if(ext2.getState()){
+                    setTitle("BVW"+" avi");
                 }
                 else{
-                    if (ext1.getState() && ext2.getState()){
-                        setTitle("BVW"+" mp4"+" avi");
-                    }
-                    else if(ext1.getState()){
-                        setTitle("BVW"+" mp4");
-                    }
-                    else if(ext2.getState()){
-                        setTitle("BVW"+" avi");
-                    }
-                    else{
-                        setTitle("BVW");
-                    }
+                    setTitle("BVW");
                 }
             }
         });
@@ -178,11 +167,10 @@ public class interfaceplayer extends JFrame {
 
         //premier boutton
         JButton PushMe1 = new JButton("1er_bouton");
-        PushMe1.addActionListener(new ActionListener(){  // donne l'action au bouton 
-            public void actionPerformed(ActionEvent evt){ // quand l'action evt ce produit avec la barre espace 
-                cc = ZoneTexteArea.getText();
-                ZoneTexteArea.setText("");
-            }
+        // donne l'action au bouton
+        PushMe1.addActionListener(evt -> { // quand l'action evt ce produit avec la barre espace
+            cc = ZoneTexteArea.getText();
+            ZoneTexteArea.setText("");
         });
 
         //affichage de texte
@@ -190,8 +178,10 @@ public class interfaceplayer extends JFrame {
         ZoneAffichageAuteur.setForeground(Color.white);
         JLabel ZoneAffichageTitre = new JLabel("Titre :     "+cc);
         ZoneAffichageTitre.setForeground(Color.white);
-        JLabel ZoneAffichageDateC = new JLabel("Date de création :     "+ Readerwiwi("/1365070268951.mp4","Creation Time"));
+        JLabel ZoneAffichageDateC = new JLabel("Date de création :     "+ Readerwiwi(path,"Creation Time"));
         ZoneAffichageDateC.setForeground(Color.white);
+        JLabel ZoneAffichageDuree = new JLabel("Durée :     "+Readerwiwi(path,"Duration in Seconds"));
+        ZoneAffichageDuree.setForeground(Color.white);
         JLabel ZoneAffichageTitre3 = new JLabel(ZoneDeTexte.getText());
         ZoneAffichageTitre3.setForeground(Color.white);
         ZoneAffichageAuteur.setMaximumSize(new Dimension(20,0)); // on peut deffinir une taille maximal 
@@ -222,33 +212,30 @@ public class interfaceplayer extends JFrame {
         panel2.add(ZoneAffichageTitre);
         panel2.add(ZoneAffichageAuteur);
         panel2.add(ZoneAffichageDateC);
+        panel2.add(ZoneAffichageDuree);
         panel2.add(ZoneAffichageTitre3);
         panel2.setPreferredSize(new Dimension(0,50)); //pas besoin de mettre de valeur en x vue que elle est mise automatiquement 
 
         //zone de texte recherche //on recupère en temps réel le texte
         ZoneDeTexte.setBackground(Color.black);
         ZoneDeTexte.setForeground(Color.white);
+
         ZoneDeTexte.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent e) {
-                // jTextField.getText() contient le texte présent dans le ZoneDeTexte avant l'appui sur la touche
-                // e.getKeyChar() est le caractère correspondant à la touche pressée
-            }
+
             public void keyReleased(java.awt.event.KeyEvent e) {
                 // jTextField.getText() contient le texte présent dans le JTextField après le relachement de la touche
                 // e.getKeyChar() est le caractère correspondant à la touche relachée
                 String texte = ZoneDeTexte.getText();
-                ZoneAffichageTitre3.setText(texte);
-            }
-            public void keyTyped(java.awt.event.KeyEvent e) {
-                // jTextField.getText() contient le texte présent dans le JTextField avant l'appui sur la touche
-                // e.getKeyChar() est le caractère correspondant à la touche pressée
+                //ZoneAffichageTitre3.setText(texte);
+
+                recherche.affichage(recherche.barre_recherche(texte));
             }
         });
         contentpane.add(ZoneDeTexte,BorderLayout.NORTH); //fenetre a ecrire
     }
 
-
     public static void main(String[] args) throws Exception {
+        recherche.liste_fichier();
 
         //mettre un look 
         UIManager.setLookAndFeel(new NimbusLookAndFeel()); //look nimbus
@@ -256,6 +243,6 @@ public class interfaceplayer extends JFrame {
         //créer la fenetre avec le constructeur interfaceplayer
         interfaceplayer fenetre = new interfaceplayer();
         fenetre.dispose();
-        fenetre = new interfaceplayer();
+        new interfaceplayer();
     }
 }
