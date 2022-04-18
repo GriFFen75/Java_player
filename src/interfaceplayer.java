@@ -129,6 +129,7 @@ public class interfaceplayer extends JFrame {
         //on ajoute le trie dans la bar de menu 
         JMenu mnuTri=new JMenu("Trier par");
         mbr.add(mnuTri);
+
         JRadioButton tri1 = new JRadioButton("Realisateur");
         JRadioButton tri2 = new JRadioButton("Annee");
         JRadioButton tri3 = new JRadioButton("Alphabetique");

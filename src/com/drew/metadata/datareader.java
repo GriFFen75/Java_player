@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-
 public class datareader {
     public static String Readerwiwi(String path,String data){ // detecte le reader de l'extension
         Path currentRelativePath = Paths.get("");
@@ -143,6 +142,7 @@ public class datareader {
     private static void print(Exception exception) {
         System.err.println("EXCEPTION: " + exception);
     }
+
     public static void main(String[] args) {
         //System.out.println(Readerwiwi("fan.mp4","Creation Time"));
         //System.out.println(Readerwiwi("fan.mp4","Modification Time"));
