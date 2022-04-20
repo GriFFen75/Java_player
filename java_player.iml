@@ -7,21 +7,11 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES />
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/Downloads/metadata-extractor-2.17.0.zip!/metadata-extractor-2.17.0/Samples" />
-          <root url="jar://$USER_HOME$/Downloads/metadata-extractor-2.17.0.zip!/metadata-extractor-2.17.0/Source" />
-          <root url="jar://$USER_HOME$/Downloads/metadata-extractor-2.17.0.zip!/metadata-extractor-2.17.0/Tests" />
-        </SOURCES>
-      </library>
-    </orderEntry>
+    <orderEntry type="library" exported="" name="Samples" level="project" />
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/tika-app-2.3.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../tika-app-2.3.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
