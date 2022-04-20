@@ -1,6 +1,3 @@
-import org.apache.tika.exception.TikaException;
-import org.xml.sax.SAXException;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -8,7 +5,6 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -27,14 +23,13 @@ import javax.swing.JTree;
 import javax.swing.UIManager;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
-import static com.drew.metadata.datareader.ReaderTitle;
 import static com.drew.metadata.datareader.Readerwiwi;
 
 public class interfaceplayer extends JFrame {
 
     String cc = "salut"; //juste pour le teste
 
-    public interfaceplayer() throws TikaException, IOException, SAXException {
+    public interfaceplayer(){
         String path = "1365070268951.mp4";
 
         setTitle("BVW");
@@ -153,6 +148,7 @@ public class interfaceplayer extends JFrame {
         groupB.add(tri1);
         groupB.add(tri2);
         groupB.add(tri3);
+        groupB.getSelection();
 
         mnuTri.add(tri1);
         mnuTri.add(tri2);
@@ -181,7 +177,7 @@ public class interfaceplayer extends JFrame {
         //affichage de texte
         JLabel ZoneAffichageAuteur = new JLabel("Auteur :   "+cc); // on peut afficher les truc recuperer dans des variables (test)
         ZoneAffichageAuteur.setForeground(Color.white);
-        JLabel ZoneAffichageTitre = new JLabel("Titre :     "+ReaderTitle(path));
+        JLabel ZoneAffichageTitre = new JLabel("Titre :     "+cc);
         ZoneAffichageTitre.setForeground(Color.white);
         JLabel ZoneAffichageDateC = new JLabel("Date de création :     "+ Readerwiwi(path,"Creation Time"));
         ZoneAffichageDateC.setForeground(Color.white);
