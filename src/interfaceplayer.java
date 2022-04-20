@@ -187,13 +187,15 @@ public class interfaceplayer extends JFrame {
         ZoneAffichageTitre3.setForeground(Color.white);
         ZoneAffichageAuteur.setMaximumSize(new Dimension(20,0)); // on peut deffinir une taille maximal 
 
-        //panel fichier 
-        JPanel panel1 = new JPanel(); //ma fenetre gauche 
+        //panel fichier
+        JPanel panel1 = new JPanel(); //ma fenetre droite
         //panel1.setLayout(new FlowLayout());
         panel1.setBackground(Color.black);
         panel1.setForeground(Color.white);
         panel1.setBorder(BorderFactory.createLineBorder(Color.white, 1));
         //panel1.setPreferredSize(new Dimension(200,0));
+        JList ZoneTitre = new JList();
+        panel1.add(ZoneTitre);
 
         contentpane.add(panel1);
 
@@ -229,7 +231,7 @@ public class interfaceplayer extends JFrame {
                 String texte = ZoneDeTexte.getText();
                 //ZoneAffichageTitre3.setText(texte);
 
-                recherche.affichage(recherche.barre_recherche(texte));
+                 ZoneTitre.setListData(recherche.barre_recherche(texte));
             }
         });
         contentpane.add(ZoneDeTexte,BorderLayout.NORTH); //fenetre a ecrire
