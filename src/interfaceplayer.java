@@ -19,8 +19,9 @@ public class interfaceplayer extends JFrame {
 
     public interfaceplayer(){
         String path = "1365070268951.mp4";
+        JPanel panel1 = new JPanel(); //ma fenetre droite // défini ici car j'en est besoin plus haut //environ ligne 260 sinon
 
-        setTitle("BVW .mp4"); //j'ai defini ce titre car on commence toujours avec le .mp4 en extension (le true dans la definition du bouton)
+        setTitle("BVW .mp4 .mp3 .avi"); //j'ai defini ce titre car on commence toujours avec le .mp4 en extension (le true dans la definition du bouton)
         setVisible(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // dispose_on_close permet de libérer les ressource de la frame et si c'est la dernière ca rend la main 
         setSize(new Dimension(800,600)); // bien mettre ce avant la localisation sinon bug
@@ -39,8 +40,8 @@ public class interfaceplayer extends JFrame {
         JMenuBar mbr=new JMenuBar();
         JMenu mnuExtention=new JMenu("Extension");
         mbr.add(mnuExtention);
-        JCheckBoxMenuItem ext3=new JCheckBoxMenuItem(".mp3");
-        JCheckBoxMenuItem ext2=new JCheckBoxMenuItem(".avi");
+        JCheckBoxMenuItem ext3=new JCheckBoxMenuItem(".mp3",true);
+        JCheckBoxMenuItem ext2=new JCheckBoxMenuItem(".avi",true);
         JCheckBoxMenuItem ext1=new JCheckBoxMenuItem(".mp4",true);
 
         //extension 1 (mp4)
@@ -49,17 +50,17 @@ public class interfaceplayer extends JFrame {
             //mettre le code de ce qu'on veut faire si la case ext1 est coché
             //attention le code ne gère pas la décoche si on ne met pas de condition
             if(ext1.getState()){
-                setTitle(getTitle()+" mp4");
+                setTitle(getTitle()+" .mp4");
             }
             else{
                 if (ext2.getState() && ext3.getState()){
-                    setTitle("BVW"+" avi"+" mp3");
+                    setTitle("BVW"+" .avi"+" .mp3");
                 }
                 else if(ext2.getState()){
-                    setTitle("BVW"+" avi");
+                    setTitle("BVW"+" .avi");
                 }
                 else if(ext3.getState()){
-                    setTitle("BVW"+" mp3");
+                    setTitle("BVW"+" .mp3");
                 }
                 else{
                     setTitle("BVW");
@@ -71,17 +72,17 @@ public class interfaceplayer extends JFrame {
         ext2.addItemListener(e -> {
             //mettre le code de ce qu'on veut faire si la case ext2 est coché
             if(ext2.getState()){
-                setTitle(getTitle()+" avi");
+                setTitle(getTitle()+" .avi");
             }
             else{
                 if (ext1.getState() && ext3.getState()){
-                    setTitle("BVW"+" mp4"+" mp3");
+                    setTitle("BVW"+" .mp4"+" .mp3");
                 }
                 else if(ext1.getState()){
-                    setTitle("BVW"+" mp4");
+                    setTitle("BVW"+" .mp4");
                 }
                 else if(ext3.getState()){
-                    setTitle("BVW"+" mp3");
+                    setTitle("BVW"+" .mp3");
                 }
                 else{
                     setTitle("BVW");
@@ -93,17 +94,17 @@ public class interfaceplayer extends JFrame {
         ext3.addItemListener(e -> {
             //mettre le code de ce qu'on veut faire si la case ext3 est coché
             if(ext3.getState()){
-                setTitle(getTitle()+" mp3");
+                setTitle(getTitle()+" .mp3");
             }
             else{
                 if (ext1.getState() && ext2.getState()){
-                    setTitle("BVW"+" mp4"+" avi");
+                    setTitle("BVW"+" .mp4"+" .avi");
                 }
                 else if(ext1.getState()){
-                    setTitle("BVW"+" mp4");
+                    setTitle("BVW"+" .mp4");
                 }
                 else if(ext2.getState()){
-                    setTitle("BVW"+" avi");
+                    setTitle("BVW"+" .avi");
                 }
                 else{
                     setTitle("BVW");
@@ -122,30 +123,21 @@ public class interfaceplayer extends JFrame {
         tri1.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e) {
-                JFrame frametri1 = new JFrame();
-                frametri1.setVisible(true);
-                frametri1.setTitle("frametri1");
-                frametri1.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                panel1.setBackground(Color.red);
             }
         });
         JRadioButton tri2 = new JRadioButton("Annee");
         tri2.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e) {
-                JFrame frametri2 = new JFrame();
-                frametri2.setVisible(true);
-                frametri2.setTitle("frametri2");
-                frametri2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                panel1.setBackground(Color.lightGray);
             }
         });
         JRadioButton tri3 = new JRadioButton("Alphabetique");
         tri3.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e) {
-                JFrame frametri3 = new JFrame();
-                frametri3.setVisible(true);
-                frametri3.setTitle("frametri3");
-                frametri3.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                panel1.setBackground(Color.orange);
             }
         });
         //pour le tri realisateur
@@ -254,14 +246,13 @@ public class interfaceplayer extends JFrame {
         ZoneAffichageTitre3.setForeground(Color.white);
         ZoneAffichageAuteur.setMaximumSize(new Dimension(20,0)); // on peut deffinir une taille maximal 
 
-        //panel fichier
-        JPanel panel1 = new JPanel(); //ma fenetre droite
+        //panel fichier // panel de droite
         //panel1.setLayout(new FlowLayout());
         panel1.setBackground(Color.black);
-        panel1.setForeground(Color.white);
         panel1.setBorder(BorderFactory.createLineBorder(Color.white, 1));
         //panel1.setPreferredSize(new Dimension(200,0));
         JList ZoneTitre = new JList();
+        ZoneTitre.setBackground(Color.lightGray);
         panel1.add(ZoneTitre);
 
         contentpane.add(panel1);

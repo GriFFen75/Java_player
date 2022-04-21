@@ -146,7 +146,7 @@ public class datareader {
     public static void main(String[] args) {
         //System.out.println(Readerwiwi("fan.mp4","Creation Time"));
         //System.out.println(Readerwiwi("fan.mp4","Modification Time"));
-        System.out.println(Readerwiwi("fan.mp4","ALL"));
+        System.out.println(Readerwiwi("1365070268951.mp4","ALL"));
         //System.out.println(Readerwiwi("fan.mp4","File Name"));
 
     }
