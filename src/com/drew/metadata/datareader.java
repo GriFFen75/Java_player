@@ -1,16 +1,7 @@
 package com.drew.metadata;
 
-
-import java.io.*;
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
-import org.apache.tika.exception.TikaException;
-import org.apache.tika.parser.AutoDetectParser;
-import org.apache.tika.parser.ParseContext;
-import org.apache.tika.parser.Parser;
-import org.apache.tika.sax.BodyContentHandler;
-import org.xml.sax.SAXException;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -24,37 +15,78 @@ public class datareader {
         try {
             Metadata metadata = ImageMetadataReader.readMetadata(file);
             if(data.equals("Creation Time") || data.equals("Modification Time")) {
-                String []temp = print(metadata, data).split(" ");
-                switch (temp[0]) {
-                    case "Mon" -> temp[0] = "Lundi";
-                    case "Tue" -> temp[0] = "Mardi";
-                    case "Wed" -> temp[0] = "Mercredi";
-                    case "Thu" -> temp[0] = "Jeudi";
-                    case "Fri" -> temp[0] = "vendredi";
-                    case "Sat" -> temp[0] = "Samedi";
-                    case "Sun" -> temp[0] = "Dimanche";
+                String []temp = String.valueOf(print(metadata, "Using ImageMetadataReader", data)).split(" ");
+                switch (temp[0]){
+                    case "Mon":
+                        temp[0] = "Lundi";
+                        break;
+                    case "Tue":
+                        temp[0] = "Mardi";
+                        break;
+                    case "Wed":
+                        temp[0] = "Mercredi";
+                        break;
+                    case "Thu":
+                        temp[0] = "Jeudi";
+                        break;
+                    case "Fri":
+                        temp[0] = "vendredi";
+                        break;
+                    case "Sat":
+                        temp[0] = "Samedi";
+                        break;
+                    case "Sun":
+                        temp[0] = "Dimanche";
+                        break;
                 }
-                switch (temp[1]) {
-                    case "Jan" -> temp[1] = "Janvier";
-                    case "Feb" -> temp[1] = "Fevrier";
-                    case "Mar" -> temp[1] = "Mars";
-                    case "Apr" -> temp[1] = "Avril";
-                    case "May" -> temp[1] = "Mai";
-                    case "Jun" -> temp[1] = "Juin";
-                    case "Jul" -> temp[1] = "Juillet";
-                    case "Aug" -> temp[1] = "Aout";
-                    case "Sep" -> temp[1] = "Septembre";
-                    case "Oct" -> temp[1] = "Octobre";
-                    case "Nov" -> temp[1] = "Novembre";
-                    case "Dec" -> temp[1] = "Decembre";
+                switch (temp[1]){
+                    case "Jan":
+                        temp[1] = "Janvier";
+                        break;
+                    case "Feb":
+                        temp[1] = "Fevrier";
+                        break;
+                    case "Mar":
+                        temp[1] = "Mars";
+                        break;
+                    case "Apr":
+                        temp[1] = "Avril";
+                        break;
+                    case "May":
+                        temp[1] = "Mai";
+                        break;
+                    case "Jun":
+                        temp[1] = "Juin";
+                        break;
+                    case "Jul":
+                        temp[1] = "Juillet";
+                        break;
+                    case "Aug":
+                        temp[1] = "Aout";
+                        break;
+                    case "Sep":
+                        temp[1] = "Septembre";
+                        break;
+                    case "Oct":
+                        temp[1] = "Octobre";
+                        break;
+                    case "Nov":
+                        temp[1] = "Novembre";
+                        break;
+                    case "Dec":
+                        temp[1] = "Decembre";
+                        break;
                 }
-                return temp[0]+" "+temp[2]+" "+temp[1]+" "+temp[5]+" à "+temp[3];
+                String end = temp[0]+" "+temp[2]+" "+temp[1]+" "+temp[5]+" à "+temp[3];
+                return end;
             }
             if(data.equals("Duration in Seconds")){
-                return print(metadata, data)+" seconds";
+                return print(metadata, "Using ImageMetadataReader", data)+" seconds";
             }
-            return print(metadata, data);
-        } catch (ImageProcessingException | IOException e) {
+            return print(metadata, "Using ImageMetadataReader", data);
+        } catch (ImageProcessingException e) {
+            print(e);
+        } catch (IOException e) {
             print(e);
         }
         return "pas de donnees";
@@ -62,9 +94,14 @@ public class datareader {
     /**
      * Write all extracted values to stdout.
      */
-    private static String print(Metadata metadata, String data){
+    private static String print(Metadata metadata, String method,String data){
         // A Metadata object contains multiple Directory objects
         for (Directory directory : metadata.getDirectories()) {
+
+            //
+            // Each Directory stores values in Tag objects
+            //
+            //System.out.println(directory);
             if(data.equals("ALL")) {
                 for (Tag tag : directory.getTags()) {
                     System.out.println(tag);
@@ -89,6 +126,16 @@ public class datareader {
                     }
                 }
             }
+            //System.out.println(directory.getTags());
+            //System.out.println(directory.getTags().size());
+
+            //
+            // Each Directory may also contain error messages
+            //
+            /*
+            for (String error : directory.getErrors()) {
+                System.err.println("ERROR: " + error);
+            }*/
         }
         return "pas de donnees";
     }
@@ -96,28 +143,9 @@ public class datareader {
         System.err.println("EXCEPTION: " + exception);
     }
 
-    public static String ReaderTitle(String path) throws IOException, TikaException, SAXException {
-        Path currentRelativePath = Paths.get("");
-        String s = currentRelativePath.toAbsolutePath().toString();
-        File file = new File(s+"/video/"+path);
-        Parser parser = new AutoDetectParser();
-        BodyContentHandler handler = new BodyContentHandler();
-        org.apache.tika.metadata.Metadata metadata = new org.apache.tika.metadata.Metadata();
-        FileInputStream inputstream = new FileInputStream(file);
-        ParseContext context = new ParseContext();
-        parser.parse(inputstream, handler, metadata, context);
-        String[] metadataNames = metadata.names();
-
-        for (String name : metadataNames) {
-            if (name.contains("dc:title")) {
-                return metadata.get(name);
-            }
-        }
-        return "il n'y a pas de titre";
-    }
-
-    public static void main(String[] args) throws TikaException, IOException, SAXException {
-        System.out.println("titre:"+ReaderTitle("1365070268951.mp4"));
+    public static void main(String[] args) {
+        //System.out.println(Readerwiwi("fan.mp4","Creation Time"));
+        //System.out.println(Readerwiwi("fan.mp4","Modification Time"));
         System.out.println(Readerwiwi("fan.mp4","ALL"));
         //System.out.println(Readerwiwi("fan.mp4","File Name"));
 

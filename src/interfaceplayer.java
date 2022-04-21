@@ -1,26 +1,14 @@
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JTree;
-import javax.swing.UIManager;
+import javax.imageio.ImageIO;
+//import javax.swing.ImageIcon;
+import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 import static com.drew.metadata.datareader.Readerwiwi;
@@ -32,10 +20,10 @@ public class interfaceplayer extends JFrame {
     public interfaceplayer(){
         String path = "1365070268951.mp4";
 
-        setTitle("BVW");
+        setTitle("BVW .mp4"); //j'ai defini ce titre car on commence toujours avec le .mp4 en extension (le true dans la definition du bouton)
         setVisible(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // dispose_on_close permet de libérer les ressource de la frame et si c'est la dernière ca rend la main 
-        setSize(new Dimension(800,600)); // bien mettre ce avant la localisation sinon beug
+        setSize(new Dimension(800,600)); // bien mettre ce avant la localisation sinon bug
         //setExtendedState(JFrame.MAXIMIZED_BOTH); // pour mettre la fenetre en pleine écran 
         setLocationRelativeTo(null);// on centre la fenetre 
 
@@ -53,7 +41,7 @@ public class interfaceplayer extends JFrame {
         mbr.add(mnuExtention);
         JCheckBoxMenuItem ext3=new JCheckBoxMenuItem(".mp3");
         JCheckBoxMenuItem ext2=new JCheckBoxMenuItem(".avi");
-        JCheckBoxMenuItem ext1=new JCheckBoxMenuItem(".mp4");
+        JCheckBoxMenuItem ext1=new JCheckBoxMenuItem(".mp4",true);
 
         //extension 1 (mp4)
         ext1.setMnemonic(KeyEvent.VK_A);
@@ -131,9 +119,35 @@ public class interfaceplayer extends JFrame {
         mbr.add(mnuTri);
 
         JRadioButton tri1 = new JRadioButton("Realisateur");
+        tri1.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e) {
+                JFrame frametri1 = new JFrame();
+                frametri1.setVisible(true);
+                frametri1.setTitle("frametri1");
+                frametri1.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            }
+        });
         JRadioButton tri2 = new JRadioButton("Annee");
+        tri2.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e) {
+                JFrame frametri2 = new JFrame();
+                frametri2.setVisible(true);
+                frametri2.setTitle("frametri2");
+                frametri2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            }
+        });
         JRadioButton tri3 = new JRadioButton("Alphabetique");
-
+        tri3.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e) {
+                JFrame frametri3 = new JFrame();
+                frametri3.setVisible(true);
+                frametri3.setTitle("frametri3");
+                frametri3.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            }
+        });
         //pour le tri realisateur
         tri1.setMnemonic(KeyEvent.VK_R); // pour passer dans le menu avec les touches alt + R
 
@@ -153,6 +167,59 @@ public class interfaceplayer extends JFrame {
         mnuTri.add(tri1);
         mnuTri.add(tri2);
         mnuTri.add(tri3);
+
+        //ajout du bouton de modification des metadata
+        JButton BoutonModifData = new JButton("Modifier Metadata");
+        BoutonModifData.setBackground(Color.BLACK);
+        BoutonModifData.setForeground(Color.WHITE);
+        BoutonModifData.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e) {
+                JFrame FrameModifMetadata = new JFrame("BVW / Modification des metadata");
+                FrameModifMetadata.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                FrameModifMetadata.setLayout(new BorderLayout());
+                FrameModifMetadata.setSize(new Dimension(800, 600));
+                FrameModifMetadata.setLocationRelativeTo(null);
+                FrameModifMetadata.setIconImage(icon);
+
+
+                //mise en place des zones de lecture et d'ecriture pour les metadata
+                JPanel PanelModifMeta = new JPanel(new GridLayout(4,2));
+                PanelModifMeta.add(new JLabel("Titres"));
+                PanelModifMeta.add(new JTextField());
+                PanelModifMeta.add(new JLabel("Réalisateur"));
+                PanelModifMeta.add(new JTextField());
+                PanelModifMeta.add(new JLabel("Date de création"));
+                PanelModifMeta.add(new JTextField());
+                PanelModifMeta.add(new JLabel("Durée"));
+                PanelModifMeta.add(new JTextField());
+                FrameModifMetadata.add(PanelModifMeta); //ajout dans la frame
+
+                //bouton pour valider ou annuler nos choix
+                JPanel PanelActionMeta = new JPanel();
+                JButton appliquer = new JButton("Appliquer");
+                appliquer.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        ////////////// mettre le code ici /////////////
+                        FrameModifMetadata.dispose(); //on ferme la frame de modification mais uniquement quand on aura save les modif
+                    }
+                });
+                JButton annuler = new JButton("Annuler");
+                annuler.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        FrameModifMetadata.dispose();
+                    }
+                });
+                PanelActionMeta.add(appliquer);
+                PanelActionMeta.add(annuler);
+                FrameModifMetadata.add(PanelActionMeta,BorderLayout.SOUTH);
+
+                FrameModifMetadata.setVisible(true);
+            }
+        });
+
+        mbr.add(BoutonModifData);
+
 
         setJMenuBar(mbr);
 
@@ -175,7 +242,7 @@ public class interfaceplayer extends JFrame {
         });
 
         //affichage de texte
-        JLabel ZoneAffichageAuteur = new JLabel("Auteur :   "+cc); // on peut afficher les truc recuperer dans des variables (test)
+        JLabel ZoneAffichageAuteur = new JLabel("Auteur :   "+cc); // on peut afficher les truc recupere dans des variables (test)
         ZoneAffichageAuteur.setForeground(Color.white);
         JLabel ZoneAffichageTitre = new JLabel("Titre :     "+cc);
         ZoneAffichageTitre.setForeground(Color.white);
@@ -201,7 +268,8 @@ public class interfaceplayer extends JFrame {
 
         //la scrollbar pour la fenetre de dossier 
         JScrollPane JCB = new JScrollPane(new JTree());
-        JCB.setPreferredSize(new Dimension(200,0));
+        JCB.getHorizontalScrollBar().setVisible(true); //je sais pas pourquoi ca marche pas
+        JCB.setPreferredSize(new Dimension(200,0)); //pas besoin de mettre de height elle est definie automatiquement
         contentpane.add(JCB,BorderLayout.WEST);
 
         //fenetre info
