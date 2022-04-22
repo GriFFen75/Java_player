@@ -17,5 +17,11 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" exported="" name="javafx.swing" level="project" />
+    <orderEntry type="library" exported="" name="openjfx.javafx.base" level="application" />
+    <orderEntry type="library" exported="" name="openjfx.javafx.controls" level="application" />
+    <orderEntry type="library" exported="" name="openjfx.javafx.fxml" level="application" />
+    <orderEntry type="library" exported="" name="openjfx.javafx.media" level="application" />
+    <orderEntry type="library" exported="" name="openjfx.javafx.web" level="application" />
   </component>
 </module>
