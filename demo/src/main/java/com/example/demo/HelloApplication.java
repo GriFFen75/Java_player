@@ -1,3 +1,5 @@
+package com.example.demo;
+
 import java.io.File;
 
 import javafx.application.Application;
@@ -9,12 +11,12 @@ import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
 
-public class videoReader extends Application {
+public class HelloApplication extends Application {
 
 
     @Override
-    public void start(Stage stage) throws Exception {
-        String path = "/Users/wx/IdeaProjects/Java_player/video/1365070268951.mp4";
+    public void start(Stage stage) {
+        String path = "C:\\Users\\savad\\Documents\\cours\\1ere_cybersecurite\\Programmation_oriente_objet\\Projet\\WLC\\demo4\\video\\video.mp4";
 
         Media media = new Media(new File(path).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);

@@ -21,7 +21,7 @@ public class apiwiwi {
         while ((output = br.readLine()) != null) {
             //System.out.println(output);
             for(int i = 0 ; i < output.length();i++){
-                if(output.charAt(i)==','){
+                if(output.charAt(i)=='{'){
                     System.out.println();
                 }
                 else {

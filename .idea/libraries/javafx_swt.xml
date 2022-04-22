@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="javafx.swing">
+  <library name="javafx-swt">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Desktop/javafx.swing.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/javafx-swt.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

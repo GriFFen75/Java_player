@@ -16,6 +16,27 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="tika-app-2.3.0" level="application" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Desktop/javafx-swt.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Desktop/javafx.swing.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" exported="" name="Maven: org.openjfx:javafx-graphics:mac:17.0.1" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.openjfx:javafx-media:mac:17.0.1" level="project" />
+    <orderEntry type="library" name="javafx.swing" level="project" />
+    <orderEntry type="library" name="javafx-swt" level="project" />
   </component>
 </module>
