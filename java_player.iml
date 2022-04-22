@@ -23,5 +23,12 @@
     <orderEntry type="library" exported="" name="openjfx.javafx.fxml" level="application" />
     <orderEntry type="library" exported="" name="openjfx.javafx.media" level="application" />
     <orderEntry type="library" exported="" name="openjfx.javafx.web" level="application" />
+    <orderEntry type="library" name="dlsc.formsfx.core" level="application" />
+    <orderEntry type="library" name="eu.hansolo.tilesfx" level="application" />
+    <orderEntry type="library" name="net.synedra.validatorfx" level="application" />
+    <orderEntry type="library" name="apiguardian.api" level="application" />
+    <orderEntry type="library" name="controlsfx" level="application" />
+    <orderEntry type="library" name="junit.jupiter.api" level="application" />
+    <orderEntry type="module" module-name="demo" />
   </component>
 </module>
