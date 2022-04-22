@@ -7,21 +7,15 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="Samples" level="project" />
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../tika-app-2.3.0.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/tika-app-2.3.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" exported="" name="javafx.swing" level="project" />
-    <orderEntry type="library" exported="" name="openjfx.javafx.base" level="application" />
-    <orderEntry type="library" exported="" name="openjfx.javafx.controls" level="application" />
-    <orderEntry type="library" exported="" name="openjfx.javafx.fxml" level="application" />
-    <orderEntry type="library" exported="" name="openjfx.javafx.media" level="application" />
-    <orderEntry type="library" exported="" name="openjfx.javafx.web" level="application" />
+    <orderEntry type="library" name="tika-app-2.3.0" level="application" />
   </component>
 </module>
