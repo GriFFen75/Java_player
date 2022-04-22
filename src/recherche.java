@@ -46,7 +46,5 @@ public class recherche {
         for (String s : liste) {
             System.out.println(s);
         }
-        //System.out.println(liste.length);
-        //System.out.println("stop");
     }
 }
