@@ -120,26 +120,11 @@ public class interfaceplayer extends JFrame {
         mbr.add(mnuTri);
 
         JRadioButton tri1 = new JRadioButton("Realisateur");
-        tri1.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e) {
-                panel1.setBackground(Color.red);
-            }
-        });
+        tri1.addActionListener(e -> panel1.setBackground(Color.red));
         JRadioButton tri2 = new JRadioButton("Annee");
-        tri2.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e) {
-                panel1.setBackground(Color.lightGray);
-            }
-        });
+        tri2.addActionListener(e -> panel1.setBackground(Color.lightGray));
         JRadioButton tri3 = new JRadioButton("Alphabetique");
-        tri3.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e) {
-                panel1.setBackground(Color.orange);
-            }
-        });
+        tri3.addActionListener(e -> panel1.setBackground(Color.orange));
         //pour le tri realisateur
         tri1.setMnemonic(KeyEvent.VK_R); // pour passer dans le menu avec les touches alt + R
 
@@ -164,50 +149,41 @@ public class interfaceplayer extends JFrame {
         JButton BoutonModifData = new JButton("Modifier Metadata");
         BoutonModifData.setBackground(Color.BLACK);
         BoutonModifData.setForeground(Color.WHITE);
-        BoutonModifData.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e) {
-                JFrame FrameModifMetadata = new JFrame("BVW / Modification des metadata");
-                FrameModifMetadata.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                FrameModifMetadata.setLayout(new BorderLayout());
-                FrameModifMetadata.setSize(new Dimension(800, 600));
-                FrameModifMetadata.setLocationRelativeTo(null);
-                FrameModifMetadata.setIconImage(icon);
+        BoutonModifData.addActionListener(e -> {
+            JFrame FrameModifMetadata = new JFrame("BVW / Modification des metadata");
+            FrameModifMetadata.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            FrameModifMetadata.setLayout(new BorderLayout());
+            FrameModifMetadata.setSize(new Dimension(800, 600));
+            FrameModifMetadata.setLocationRelativeTo(null);
+            FrameModifMetadata.setIconImage(icon);
 
 
-                //mise en place des zones de lecture et d'ecriture pour les metadata
-                JPanel PanelModifMeta = new JPanel(new GridLayout(4,2));
-                PanelModifMeta.add(new JLabel("Titres"));
-                PanelModifMeta.add(new JTextField());
-                PanelModifMeta.add(new JLabel("Réalisateur"));
-                PanelModifMeta.add(new JTextField());
-                PanelModifMeta.add(new JLabel("Date de création"));
-                PanelModifMeta.add(new JTextField());
-                PanelModifMeta.add(new JLabel("Durée"));
-                PanelModifMeta.add(new JTextField());
-                FrameModifMetadata.add(PanelModifMeta); //ajout dans la frame
+            //mise en place des zones de lecture et d'ecriture pour les metadata
+            JPanel PanelModifMeta = new JPanel(new GridLayout(4,2));
+            PanelModifMeta.add(new JLabel("Titres"));
+            PanelModifMeta.add(new JTextField());
+            PanelModifMeta.add(new JLabel("Réalisateur"));
+            PanelModifMeta.add(new JTextField());
+            PanelModifMeta.add(new JLabel("Date de création"));
+            PanelModifMeta.add(new JTextField());
+            PanelModifMeta.add(new JLabel("Durée"));
+            PanelModifMeta.add(new JTextField());
+            FrameModifMetadata.add(PanelModifMeta); //ajout dans la frame
 
-                //bouton pour valider ou annuler nos choix
-                JPanel PanelActionMeta = new JPanel();
-                JButton appliquer = new JButton("Appliquer");
-                appliquer.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        ////////////// mettre le code ici /////////////
-                        FrameModifMetadata.dispose(); //on ferme la frame de modification mais uniquement quand on aura save les modif
-                    }
-                });
-                JButton annuler = new JButton("Annuler");
-                annuler.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        FrameModifMetadata.dispose();
-                    }
-                });
-                PanelActionMeta.add(appliquer);
-                PanelActionMeta.add(annuler);
-                FrameModifMetadata.add(PanelActionMeta,BorderLayout.SOUTH);
+            //bouton pour valider ou annuler nos choix
+            JPanel PanelActionMeta = new JPanel();
+            JButton appliquer = new JButton("Appliquer");
+            appliquer.addActionListener(e1 -> {
+                ////////////// mettre le code ici /////////////
+                FrameModifMetadata.dispose(); //on ferme la frame de modification mais uniquement quand on aura save les modif
+            });
+            JButton annuler = new JButton("Annuler");
+            annuler.addActionListener(e12 -> FrameModifMetadata.dispose());
+            PanelActionMeta.add(appliquer);
+            PanelActionMeta.add(annuler);
+            FrameModifMetadata.add(PanelActionMeta,BorderLayout.SOUTH);
 
-                FrameModifMetadata.setVisible(true);
-            }
+            FrameModifMetadata.setVisible(true);
         });
 
         mbr.add(BoutonModifData);
