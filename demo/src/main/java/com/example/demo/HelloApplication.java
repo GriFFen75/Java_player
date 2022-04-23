@@ -16,7 +16,7 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) {
-        String path = "C:\\Users\\savad\\Documents\\cours\\1ere_cybersecurite\\Programmation_oriente_objet\\Projet\\WLC\\demo4\\video\\video.mp4";
+        String path = "/Users/wx/IdeaProjects/Java_player/video/1365070268951.mp4";
 
         Media media = new Media(new File(path).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
@@ -31,6 +31,7 @@ public class HelloApplication extends Application {
         stage.show();
     }
     public static void main(String[] args) {
+        
         launch(args);
     }
 }
