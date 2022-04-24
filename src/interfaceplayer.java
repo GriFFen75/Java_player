@@ -1,27 +1,24 @@
 
-import com.example.demo.HelloApplication;
-import com.example.demo.OpenPageHelp;
-import javafx.scene.web.WebView;
-
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.applet.*;
 import java.awt.event.*;
 
-//import javax.swing.ImageIcon;
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 import static com.drew.metadata.datareader.Readerwiwi;
+
 import com.example.demo.OpenPageHelp;
 
-public class interfaceplayer extends JFrame {
+public class interfaceplayer extends JFrame  {
 
     String cc = "salut"; //juste pour le teste
-    Icon iconAide = new ImageIcon("aide.png");
+    public String path ;
+    public String titreVideo;
 
     public interfaceplayer(){
-        String path = "1365070268951.mp4";
+
         JPanel panel1 = new JPanel(); //ma fenetre droite // défini ici car j'en est besoin plus haut //environ ligne 260 sinon
 
         setTitle("BVW .mp4 .mp3 .avi"); //j'ai defini ce titre car on commence toujours avec le .mp4 en extension (le true dans la definition du bouton)
@@ -194,9 +191,7 @@ public class interfaceplayer extends JFrame {
         //bouton d'aide
         JButton BoutonAide = new JButton();
         BoutonAide.setIcon(new ImageIcon("image/aide6.png"));
-        BoutonAide.addActionListener(e -> {
-            OpenPageHelp.main(null);
-        });
+        BoutonAide.addActionListener(e -> OpenPageHelp.main(null));
         mbr.add(BoutonAide);
 
 
@@ -212,20 +207,30 @@ public class interfaceplayer extends JFrame {
         ZoneTexteArea.setForeground(Color.white);
         //contentpane.add(ZoneTexteArea);
 
-        //premier boutton
-        JButton PushMe1 = new JButton("1er_bouton");
-        // donne l'action au bouton
-        PushMe1.addActionListener(evt -> { // quand l'action evt ce produit avec la barre espace
-            cc = ZoneTexteArea.getText();
-            ZoneTexteArea.setText("");
-        });
+        //panel fichier // panel de droite
+        panel1.setLayout(new BorderLayout());
+        panel1.setBackground(Color.black);
+        panel1.setBorder(BorderFactory.createLineBorder(Color.white, 1));
 
         //affichage de texte
         JList ZoneTitre = new JList();
-        String titreVideo = (String) ZoneTitre.getSelectedValue();
+        //JScrollPane JSP = new JScrollPane(panel1);
+        //panel1.setPreferredSize(new Dimension(200,0));
+        ZoneTitre.setBackground(Color.lightGray);
+        //final String titreVideo ;
+        ZoneTitre.addListSelectionListener(e -> {
+            titreVideo = (String) ZoneTitre.getSelectedValue();
+            path = titreVideo;
+            System.out.println(path);
+        });
+        panel1.add(ZoneTitre, BorderLayout.NORTH);
 
-        //path = titreVideo;    // a mettre quand le getselectedvalu fonctionnera pour update la recherche
-        JLabel ZoneAffichageAuteur = new JLabel("Auteur :   "+cc); // on peut afficher les truc recupere dans des variables (test)
+        contentpane.add(panel1);
+
+
+        //System.out.println(path);
+            // a mettre quand le getselectedvalue fonctionnera pour update la recherche
+        JLabel ZoneAffichageAuteur = new JLabel("Auteur :   "+cc); // () on peut afficher les truc recupere dans des variables (test)
         ZoneAffichageAuteur.setForeground(Color.white);
         JLabel ZoneAffichageTitre = new JLabel("Titre :     " + titreVideo);
         ZoneAffichageTitre.setForeground(Color.white);
@@ -237,29 +242,18 @@ public class interfaceplayer extends JFrame {
         ZoneAffichageTitre3.setForeground(Color.white);
         ZoneAffichageAuteur.setMaximumSize(new Dimension(20,0)); // on peut deffinir une taille maximal 
 
-        //panel fichier // panel de droite
-        //panel1.setLayout(new FlowLayout());
-        panel1.setBackground(Color.black);
-        panel1.setBorder(BorderFactory.createLineBorder(Color.white, 1));
-        //panel1.setPreferredSize(new Dimension(200,0));
-        ZoneTitre.setBackground(Color.lightGray);
-        panel1.add(ZoneTitre);
-
-        contentpane.add(panel1);
-
         //la scrollbar pour la fenetre de dossier 
         JScrollPane JCB = new JScrollPane(new JTree());
         //JCB.getHorizontalScrollBar().setVisible(true); //je sais pas pourquoi ca marche pas
-        JCB.setPreferredSize(new Dimension(200,0)); //pas besoin de mettre de height elle est definie automatiquement
+        JCB.setPreferredSize(new Dimension(150,0)); //pas besoin de mettre de height elle est definie automatiquement
         contentpane.add(JCB,BorderLayout.WEST);
 
-        //fenetre info
+        //fenetre info (en bas)
         JPanel panel2 = new JPanel(); // ma fenetre au sud pour les info
         panel2.setLayout(new GridLayout(4,1)); // ligne, colonne
         panel2.setBackground(Color.black);
         panel2.setForeground(Color.white);
         panel2.setBorder(BorderFactory.createLineBorder(Color.white, 1));
-        //JScrollPane JSP = new JScrollPane(panel2);
         contentpane.add(panel2,BorderLayout.SOUTH);
         panel2.add(ZoneAffichageTitre);
         panel2.add(ZoneAffichageAuteur);
@@ -268,9 +262,9 @@ public class interfaceplayer extends JFrame {
         panel2.add(ZoneAffichageTitre3);
         panel2.setPreferredSize(new Dimension(0,50)); //pas besoin de mettre de valeur en x vue que elle est mise automatiquement 
 
-        /*// ajout d'une frontière qui bouge entre le tree et la fenetre centrale // ca marche pas jsp pk
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT , JCB , panel2);
-        contentpane.add(splitPane);*/
+        // ajout d'une frontière qui bouge entre le tree et la fenetre centrale
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT , JCB , panel1);
+        contentpane.add(splitPane);
 
         //zone de texte recherche //on recupère en temps réel le texte
         ZoneDeTexte.setBackground(Color.black);
