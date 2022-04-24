@@ -10,13 +10,15 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
+import javafx.embed.swing.JFXPanel;
+
 
 public class HelloApplication extends Application {
 
 
     @Override
     public void start(Stage stage) throws Exception {
-        String path = "C:\\Users\\savad\\Documents\\cours\\1ere_cybersecurite\\Programmation_oriente_objet\\Projet\\WLC\\Java_player\\video\\laponie.mp4";
+        String path = "C:\\Users\\savad\\Documents\\cours\\1ere_cybersecurite\\Programmation_oriente_objet\\Projet\\WLC\\Java_player\\video\\fan.mp4";
 
         Media media = new Media(new File(path).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
