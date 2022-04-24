@@ -11,7 +11,7 @@ module com.example.demo {
     requires eu.hansolo.tilesfx;
     requires javafx.media;
     requires javafx.swing;
-    requires transitive javafx.base;
+    //requires transitive javafx.base;
 
     opens com.example.demo to javafx.fxml;
     exports com.example.demo;

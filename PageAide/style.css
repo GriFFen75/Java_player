@@ -1,0 +1,80 @@
+body
+{
+    background-image:url("pdf.jpg");
+}
+h1
+{
+	font-size: 4.5em;
+	text-align:center;
+	text-decoration:underline;
+	border: 3px red inset;
+	color: red;
+}
+#video_background 
+{
+	position: absolute;
+	bottom: 0px; 
+	right: 0px; 
+	left: 0px;
+	min-width: 100%; 
+	min-height: 100%; 
+	width: auto; 
+	height: auto; 
+	z-index: -1000; 
+	overflow: hidden;
+}
+a:active 
+{
+    background-color: red;
+}
+a:visited 
+{
+    color: #00FF00; 
+}
+p
+{
+	text-shadow: 2px 3px 5px black;
+	font-size: 1.75em;
+	text-align:center; 
+	color: #00FFFF
+}
+x
+{
+	text-shadow: 2px 2px 4px white;
+	font-size: 2em;
+	text-decoration:underline;
+	color: #00FFFF
+}
+u
+{
+	color:#FFD700;
+	font-size: 1.5em
+}
+aud
+{
+	display:flex;
+	justify-content:center;
+	align-items: center ;
+}
+
+h2
+{
+	text-shadow: 2px 3px 5px white;
+	font-size: 3em;
+	text-align:center; 
+	color: red
+}
+li
+{
+	text-shadow: 2px 3px 5px black;
+	font-size: 2em; 
+	color: #FFD700;
+}
+b
+{
+	text-shadow: 2px 3px 5px black;
+	font-size: 32.65px;
+	text-align:center;
+	color:#00FFFF;
+    font-family: comic Sans MS;
+}

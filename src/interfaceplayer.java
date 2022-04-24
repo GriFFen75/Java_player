@@ -1,18 +1,24 @@
 
 import com.example.demo.HelloApplication;
+import com.example.demo.OpenPageHelp;
+import javafx.scene.web.WebView;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.applet.*;
+import java.awt.event.*;
 
 //import javax.swing.ImageIcon;
 import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 import static com.drew.metadata.datareader.Readerwiwi;
+import com.example.demo.OpenPageHelp;
 
 public class interfaceplayer extends JFrame {
 
     String cc = "salut"; //juste pour le teste
+    Icon iconAide = new ImageIcon("aide.png");
 
     public interfaceplayer(){
         String path = "1365070268951.mp4";
@@ -20,7 +26,7 @@ public class interfaceplayer extends JFrame {
 
         setTitle("BVW .mp4 .mp3 .avi"); //j'ai defini ce titre car on commence toujours avec le .mp4 en extension (le true dans la definition du bouton)
         setVisible(true);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // dispose_on_close permet de libérer les ressource de la frame et si c'est la dernière ca rend la main 
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // dispose_on_close permet de libérer les ressource de la frame et si c'est la dernière ca rend la main
         setSize(new Dimension(800,600)); // bien mettre ce avant la localisation sinon bug
         //setExtendedState(JFrame.MAXIMIZED_BOTH); // pour mettre la fenetre en pleine écran 
         setLocationRelativeTo(null);// on centre la fenetre 
@@ -185,6 +191,14 @@ public class interfaceplayer extends JFrame {
 
         mbr.add(BoutonModifData);
 
+        //bouton d'aide
+        JButton BoutonAide = new JButton();
+        BoutonAide.setIcon(new ImageIcon("image/aide6.png"));
+        BoutonAide.addActionListener(e -> {
+            OpenPageHelp.main(null);
+        });
+        mbr.add(BoutonAide);
+
 
         setJMenuBar(mbr);
 
@@ -207,9 +221,13 @@ public class interfaceplayer extends JFrame {
         });
 
         //affichage de texte
+        JList ZoneTitre = new JList();
+        String titreVideo = (String) ZoneTitre.getSelectedValue();
+
+        //path = titreVideo;    // a mettre quand le getselectedvalu fonctionnera pour update la recherche
         JLabel ZoneAffichageAuteur = new JLabel("Auteur :   "+cc); // on peut afficher les truc recupere dans des variables (test)
         ZoneAffichageAuteur.setForeground(Color.white);
-        JLabel ZoneAffichageTitre = new JLabel("Titre :     "+cc);
+        JLabel ZoneAffichageTitre = new JLabel("Titre :     " + titreVideo);
         ZoneAffichageTitre.setForeground(Color.white);
         JLabel ZoneAffichageDateC = new JLabel("Date de création :     "+ Readerwiwi(path,"Creation Time"));
         ZoneAffichageDateC.setForeground(Color.white);
@@ -224,7 +242,6 @@ public class interfaceplayer extends JFrame {
         panel1.setBackground(Color.black);
         panel1.setBorder(BorderFactory.createLineBorder(Color.white, 1));
         //panel1.setPreferredSize(new Dimension(200,0));
-        JList ZoneTitre = new JList();
         ZoneTitre.setBackground(Color.lightGray);
         panel1.add(ZoneTitre);
 
@@ -232,7 +249,7 @@ public class interfaceplayer extends JFrame {
 
         //la scrollbar pour la fenetre de dossier 
         JScrollPane JCB = new JScrollPane(new JTree());
-        JCB.getHorizontalScrollBar().setVisible(true); //je sais pas pourquoi ca marche pas
+        //JCB.getHorizontalScrollBar().setVisible(true); //je sais pas pourquoi ca marche pas
         JCB.setPreferredSize(new Dimension(200,0)); //pas besoin de mettre de height elle est definie automatiquement
         contentpane.add(JCB,BorderLayout.WEST);
 
@@ -251,6 +268,10 @@ public class interfaceplayer extends JFrame {
         panel2.add(ZoneAffichageTitre3);
         panel2.setPreferredSize(new Dimension(0,50)); //pas besoin de mettre de valeur en x vue que elle est mise automatiquement 
 
+        /*// ajout d'une frontière qui bouge entre le tree et la fenetre centrale // ca marche pas jsp pk
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT , JCB , panel2);
+        contentpane.add(splitPane);*/
+
         //zone de texte recherche //on recupère en temps réel le texte
         ZoneDeTexte.setBackground(Color.black);
         ZoneDeTexte.setForeground(Color.white);
@@ -266,6 +287,7 @@ public class interfaceplayer extends JFrame {
                  ZoneTitre.setListData(recherche.barre_recherche(texte));
             }
         });
+        //JScrollPane JSCTitre = new JScrollPane(panel2);
         contentpane.add(ZoneDeTexte,BorderLayout.NORTH); //fenetre a ecrire
     }
 
@@ -279,6 +301,9 @@ public class interfaceplayer extends JFrame {
         interfaceplayer fenetre = new interfaceplayer();
         fenetre.dispose();
         new interfaceplayer();
-        HelloApplication.main(null);
+
+
+
+        //HelloApplication.main(null); //à l'ouverture de cette fenêtre on ferme la page de principal et quand on ferme cette page on r'ouvre la page principal
     }
 }
