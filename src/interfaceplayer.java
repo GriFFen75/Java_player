@@ -14,8 +14,12 @@ import com.example.demo.OpenPageHelp;
 public class interfaceplayer extends JFrame  {
 
     String cc = "salut"; //juste pour le teste
-    public String path ;
+    public String path = "1365070268951.mp4";
     public String titreVideo;
+    public JLabel ZoneAffichageTitre = new JLabel();
+    public JLabel ZoneAffichageAuteur = new JLabel("Auteur :     ");  // voir a zoneTitre Pourquoi elles sont ici
+    public JLabel ZoneAffichageDateC = new JLabel("Date de création :     ");
+    public JLabel ZoneAffichageDuree = new JLabel("Durée :     ");
 
     public interfaceplayer(){
 
@@ -214,15 +218,21 @@ public class interfaceplayer extends JFrame  {
 
         //affichage de texte
         JList ZoneTitre = new JList();
+
         //JScrollPane JSP = new JScrollPane(panel1);
         //panel1.setPreferredSize(new Dimension(200,0));
         ZoneTitre.setBackground(Color.lightGray);
-        //final String titreVideo ;
         ZoneTitre.addListSelectionListener(e -> {
             titreVideo = (String) ZoneTitre.getSelectedValue();
             path = titreVideo;
-            System.out.println(path);
+            ZoneAffichageTitre.setText("Titre :   " + titreVideo); // il faut définir chacune des Zones avant la fonction car sinon on ne peut pas accéder a au Zones dans l'action
+            //ZoneAffichageAuteur.setText(); //attend que l'api de william sois prête
+            ZoneAffichageDateC.setText("Date de création :   "+ Readerwiwi(path,"Creation Time"));
+            ZoneAffichageDuree.setText("Durée :     "+Readerwiwi(path,"Duration in Seconds"));
+
+            //System.out.println(path);
         });
+        //path = ZoneAffichageTitre.getText();
         panel1.add(ZoneTitre, BorderLayout.NORTH);
 
         contentpane.add(panel1);
@@ -230,13 +240,11 @@ public class interfaceplayer extends JFrame  {
 
         //System.out.println(path);
             // a mettre quand le getselectedvalue fonctionnera pour update la recherche
-        JLabel ZoneAffichageAuteur = new JLabel("Auteur :   "+cc); // () on peut afficher les truc recupere dans des variables (test)
-        ZoneAffichageAuteur.setForeground(Color.white);
-        JLabel ZoneAffichageTitre = new JLabel("Titre :     " + titreVideo);
+         // () on peut afficher les truc recupere dans des variables (test)
         ZoneAffichageTitre.setForeground(Color.white);
-        JLabel ZoneAffichageDateC = new JLabel("Date de création :     "+ Readerwiwi(path,"Creation Time"));
+        ZoneAffichageAuteur.setForeground(Color.white);
         ZoneAffichageDateC.setForeground(Color.white);
-        JLabel ZoneAffichageDuree = new JLabel("Durée :     "+Readerwiwi(path,"Duration in Seconds"));
+        //JLabel ZoneAffichageDuree = new JLabel("Durée :     "+Readerwiwi(path,"Duration in Seconds"));
         ZoneAffichageDuree.setForeground(Color.white);
         JLabel ZoneAffichageTitre3 = new JLabel(ZoneDeTexte.getText());
         ZoneAffichageTitre3.setForeground(Color.white);
