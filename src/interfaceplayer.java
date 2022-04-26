@@ -15,9 +15,9 @@ public class interfaceplayer extends JFrame  {
     public String path = "1365070268951.mp4";
     public String titreVideo;
     public static JLabel ZoneAffichageTitre = new JLabel();
-    public JLabel ZoneAffichageAuteur = new JLabel("Auteur :     ");  // voir a zoneTitre Pourquoi elles sont ici
-    public JLabel ZoneAffichageDateC = new JLabel("Date de création :     ");
-    public JLabel ZoneAffichageDuree = new JLabel("Durée :     ");
+    public JLabel ZoneAffichageAuteur = new JLabel();  // voir a zoneTitre Pourquoi elles sont ici
+    public JLabel ZoneAffichageDateC = new JLabel();
+    public JLabel ZoneAffichageDuree = new JLabel();
 
     public interfaceplayer(){
 
@@ -223,13 +223,13 @@ public class interfaceplayer extends JFrame  {
         ZoneTitre.addListSelectionListener(e -> {
             titreVideo = (String) ZoneTitre.getSelectedValue();
             path = titreVideo;
-            ZoneAffichageTitre.setText(titreVideo); // il faut définir chacune des Zones avant la fonction car sinon on ne peut pas accéder a au Zones dans l'action
+            ZoneAffichageTitre.setText("Titre :   " + titreVideo); // il faut définir chacune des Zones avant la fonction car sinon on ne peut pas accéder a au Zones dans l'action
             //ZoneAffichageAuteur.setText(); //attend que l'api de william sois prête
             ZoneAffichageDateC.setText("Date de création :   "+ Readerwiwi(path,"Creation Time"));
             ZoneAffichageDuree.setText("Durée :     "+Readerwiwi(path,"Duration in Seconds"));
-            HelloApplication.main(null,ZoneAffichageTitre.getText()); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
+            HelloApplication.main(null,path); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
             //System.out.println(path);
-            HelloApplication.close(); // oblige de faire ca sinon il y a 2 fenêtres
+            HelloApplication.closeFrame(); // oblige de faire ca sinon il y a 2 fenêtres
         });
 
 
