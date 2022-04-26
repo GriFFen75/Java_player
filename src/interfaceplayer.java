@@ -3,20 +3,18 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 import static com.drew.metadata.datareader.Readerwiwi;
 
-import com.example.demo.OpenPageHelp;
+import com.example.demo.HelloApplication;
 
 public class interfaceplayer extends JFrame  {
 
     String cc = "salut"; //juste pour le teste
     public String path = "1365070268951.mp4";
     public String titreVideo;
-    public JLabel ZoneAffichageTitre = new JLabel();
+    public static JLabel ZoneAffichageTitre = new JLabel();
     public JLabel ZoneAffichageAuteur = new JLabel("Auteur :     ");  // voir a zoneTitre Pourquoi elles sont ici
     public JLabel ZoneAffichageDateC = new JLabel("Date de création :     ");
     public JLabel ZoneAffichageDuree = new JLabel("Durée :     ");
@@ -154,7 +152,7 @@ public class interfaceplayer extends JFrame  {
         BoutonModifData.setBackground(Color.BLACK);
         BoutonModifData.setForeground(Color.WHITE);
         BoutonModifData.addActionListener(e -> {
-            JFrame FrameModifMetadata = new JFrame("BVW / Modification des metadata");
+            JFrame FrameModifMetadata = new JFrame("BVW / Modification des metadatas");
             FrameModifMetadata.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             FrameModifMetadata.setLayout(new BorderLayout());
             FrameModifMetadata.setSize(new Dimension(800, 600));
@@ -225,34 +223,29 @@ public class interfaceplayer extends JFrame  {
         ZoneTitre.addListSelectionListener(e -> {
             titreVideo = (String) ZoneTitre.getSelectedValue();
             path = titreVideo;
-            ZoneAffichageTitre.setText("Titre :   " + titreVideo); // il faut définir chacune des Zones avant la fonction car sinon on ne peut pas accéder a au Zones dans l'action
+            ZoneAffichageTitre.setText(titreVideo); // il faut définir chacune des Zones avant la fonction car sinon on ne peut pas accéder a au Zones dans l'action
             //ZoneAffichageAuteur.setText(); //attend que l'api de william sois prête
             ZoneAffichageDateC.setText("Date de création :   "+ Readerwiwi(path,"Creation Time"));
             ZoneAffichageDuree.setText("Durée :     "+Readerwiwi(path,"Duration in Seconds"));
-
+            HelloApplication.main(null,ZoneAffichageTitre.getText()); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
             //System.out.println(path);
+            HelloApplication.close(); // oblige de faire ca sinon il y a 2 fenêtres
         });
-        //path = ZoneAffichageTitre.getText();
-        panel1.add(ZoneTitre, BorderLayout.NORTH);
 
+
+        panel1.add(ZoneTitre, BorderLayout.NORTH);
         contentpane.add(panel1);
 
-
-        //System.out.println(path);
-            // a mettre quand le getselectedvalue fonctionnera pour update la recherche
-         // () on peut afficher les truc recupere dans des variables (test)
         ZoneAffichageTitre.setForeground(Color.white);
         ZoneAffichageAuteur.setForeground(Color.white);
         ZoneAffichageDateC.setForeground(Color.white);
-        //JLabel ZoneAffichageDuree = new JLabel("Durée :     "+Readerwiwi(path,"Duration in Seconds"));
         ZoneAffichageDuree.setForeground(Color.white);
         JLabel ZoneAffichageTitre3 = new JLabel(ZoneDeTexte.getText());
         ZoneAffichageTitre3.setForeground(Color.white);
-        ZoneAffichageAuteur.setMaximumSize(new Dimension(20,0)); // on peut deffinir une taille maximal 
+        ZoneAffichageAuteur.setMaximumSize(new Dimension(20,0)); // on peut définir une taille maximale
 
         //la scrollbar pour la fenetre de dossier 
         JScrollPane JCB = new JScrollPane(new JTree());
-        //JCB.getHorizontalScrollBar().setVisible(true); //je sais pas pourquoi ca marche pas
         JCB.setPreferredSize(new Dimension(150,0)); //pas besoin de mettre de height elle est definie automatiquement
         contentpane.add(JCB,BorderLayout.WEST);
 
@@ -306,6 +299,6 @@ public class interfaceplayer extends JFrame  {
 
 
 
-        //HelloApplication.main(null); //à l'ouverture de cette fenêtre on ferme la page de principal et quand on ferme cette page on r'ouvre la page principal
+        //HelloApplication.main(null,null); //à l'ouverture de cette fenêtre on ferme la page de principal et quand on ferme cette page on r'ouvre la page principal
     }
 }

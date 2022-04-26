@@ -1,5 +1,3 @@
-package com.example.demo;
-
 import java.awt.*;
 import java.io.File;
 
