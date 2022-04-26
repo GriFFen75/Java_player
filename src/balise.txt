@@ -48,3 +48,31 @@ Expected File Name Extension
 File Name
 File Size
 File Modified Date
+
+
+api film
+
+{"Title":"Orphan Black",
+"Year":"2013–2017",
+"Rated":"TV-MA",
+"Released":"30 Mar 2013",
+"Runtime":"44 min",
+"Genre":"Drama, Sci-Fi, Thriller",
+"Director":"N/A",
+"Writer":"Kim Coghill, Andrew De Angelis, Jeff Detsky",
+"Actors":"Tatiana Maslany, Dylan Bruce, Jordan Gavaris",
+"Plot":"A streetwise hustler is pulled into a compelling conspiracy after witnessing the suicide of a girl who looks just like her.",
+"Language":"English",
+"Country":"Canada",
+"Awards":"Won 1 Primetime Emmy. 69 wins & 96 nominations total",
+"Poster":"https://m.media-amazon.com/images/M/MV5BZjM1ZTVlMGYtNjVkZS00OGMzLWFjMmYtYTE3NjJhZDRlODY3XkEyXkFqcGdeQXVyNzA5NjUyNjM@._V1_SX300.jpg",
+"Ratings":[{"Source":
+"Internet Movie Database","Value":
+"8.3/10"}],"Metascore":
+"N/A","imdbRating":
+"8.3","imdbVotes":
+"108,181","imdbID":
+"tt2234222","Type":
+"series","totalSeasons":
+"5","Response":
+"True"}1
