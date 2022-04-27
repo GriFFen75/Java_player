@@ -164,7 +164,7 @@ public class HelloApplication {
 
     private static MediaPlayer mediaPlayer;
 
-    private static void initFX(JFXPanel fxPanel) {
+    private static void initFX(JFXPanel fxPanel) { // beug sur cette partie je pense (media , mediaplayer , mediaview??)
 
         Media media = null;
         media = new Media(new File(UpdatePath()).toURI().toString());
@@ -174,7 +174,7 @@ public class HelloApplication {
 
         Group root = new Group();
         root.getChildren().add(mediaView);
-        DoubleProperty mvw = mediaView.fitWidthProperty();
+        DoubleProperty mvw = mediaView.fitWidthProperty(); //code pour redimentionner la jfxframe a la bonne taille
         DoubleProperty mvh = mediaView.fitHeightProperty();
         mvw.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
         mvh.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));

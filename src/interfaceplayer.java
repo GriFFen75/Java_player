@@ -291,7 +291,7 @@ public class interfaceplayer extends JFrame  {
                 ZoneTitre.setListData(recherche.barre_recherche(texte));
 
                 // pour faire fonctionner les boutons d'extension
-                if(ext3.isSelected()){
+                /*if(ext3.isSelected()){
                     ZoneTitre.setListData(recherche.barreRechercheExtension(texte,"mp3"));
                 }
                 if(ext2.isSelected()){
@@ -299,7 +299,7 @@ public class interfaceplayer extends JFrame  {
                 }
                 if(ext1.isSelected()){
                     ZoneTitre.setListData(recherche.barreRechercheExtension(texte,"mp4"));
-                }
+                }*/
 
             }
         });
