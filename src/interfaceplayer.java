@@ -12,18 +12,22 @@ import com.example.demo.HelloApplication;
 public class interfaceplayer extends JFrame  {
 
     String cc = "salut"; //juste pour le teste
-    public String path = "1365070268951.mp4";
+    public String path = null;
     public String titreVideo;
     public static JLabel ZoneAffichageTitre = new JLabel();
     public JLabel ZoneAffichageAuteur = new JLabel();  // voir a zoneTitre Pourquoi elles sont ici
     public JLabel ZoneAffichageDateC = new JLabel();
     public JLabel ZoneAffichageDuree = new JLabel();
+    public JLabel ZoneAffichageExtension = new JLabel();
+    public static JCheckBoxMenuItem ext3;
+    public static JCheckBoxMenuItem ext2;
+    public static JCheckBoxMenuItem ext1;
 
     public interfaceplayer(){
 
         JPanel panel1 = new JPanel(); //ma fenetre droite // défini ici car j'en est besoin plus haut //environ ligne 260 sinon
 
-        setTitle("BVW .mp4 .mp3 .avi"); //j'ai defini ce titre car on commence toujours avec le .mp4 en extension (le true dans la definition du bouton)
+        setTitle("BVW .mp4 .mp3"); //j'ai defini ce titre car on commence toujours avec le .mp4 en extension (le true dans la definition du bouton)
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // dispose_on_close permet de libérer les ressource de la frame et si c'est la dernière ca rend la main
         setSize(new Dimension(800,600)); // bien mettre ce avant la localisation sinon bug
@@ -42,9 +46,9 @@ public class interfaceplayer extends JFrame  {
         JMenuBar mbr=new JMenuBar();
         JMenu mnuExtention=new JMenu("Extension");
         mbr.add(mnuExtention);
-        JCheckBoxMenuItem ext3=new JCheckBoxMenuItem(".mp3",true);
-        JCheckBoxMenuItem ext2=new JCheckBoxMenuItem(".avi",true);
-        JCheckBoxMenuItem ext1=new JCheckBoxMenuItem(".mp4",true);
+        ext3=new JCheckBoxMenuItem(".mp3",true);
+        ext2=new JCheckBoxMenuItem(".avi");
+        ext1=new JCheckBoxMenuItem(".mp4",true);
 
         //extension 1 (mp4)
         ext1.setMnemonic(KeyEvent.VK_A);
@@ -68,6 +72,7 @@ public class interfaceplayer extends JFrame  {
                     setTitle("BVW");
                 }
             }
+
         });
         //extension 2 (avi)
         ext2.setMnemonic(KeyEvent.VK_Z);
@@ -148,9 +153,8 @@ public class interfaceplayer extends JFrame  {
         mnuTri.add(tri3);
 
         //ajout du bouton de modification des metadata
-        JButton BoutonModifData = new JButton("Modifier Metadata");
-        BoutonModifData.setBackground(Color.BLACK);
-        BoutonModifData.setForeground(Color.WHITE);
+        JButton BoutonModifData = new JButton();
+        BoutonModifData.setIcon(new ImageIcon("image/modifMetadata.png"));
         BoutonModifData.addActionListener(e -> {
             JFrame FrameModifMetadata = new JFrame("BVW / Modification des metadatas");
             FrameModifMetadata.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -160,15 +164,15 @@ public class interfaceplayer extends JFrame  {
             FrameModifMetadata.setIconImage(icon);
 
 
-            //mise en place des zones de lecture et d'ecriture pour les metadata
+            //mise en place des zones de lecture et d'écriture pour les metadata
             JPanel PanelModifMeta = new JPanel(new GridLayout(4,2));
-            PanelModifMeta.add(new JLabel("Titres"));
+            PanelModifMeta.add(new JLabel(ZoneAffichageTitre.getText()));
             PanelModifMeta.add(new JTextField());
-            PanelModifMeta.add(new JLabel("Réalisateur"));
+            PanelModifMeta.add(new JLabel(ZoneAffichageAuteur.getText()));
             PanelModifMeta.add(new JTextField());
-            PanelModifMeta.add(new JLabel("Date de création"));
+            PanelModifMeta.add(new JLabel(ZoneAffichageDateC.getText()));//"Date de création"+ Readerwiwi(path,"Creation Time"))
             PanelModifMeta.add(new JTextField());
-            PanelModifMeta.add(new JLabel("Durée"));
+            PanelModifMeta.add(new JLabel(ZoneAffichageDuree.getText()));
             PanelModifMeta.add(new JTextField());
             FrameModifMetadata.add(PanelModifMeta); //ajout dans la frame
 
@@ -187,8 +191,8 @@ public class interfaceplayer extends JFrame  {
 
             FrameModifMetadata.setVisible(true);
         });
-
         mbr.add(BoutonModifData);
+
 
         //bouton d'aide
         JButton BoutonAide = new JButton();
@@ -223,15 +227,17 @@ public class interfaceplayer extends JFrame  {
         ZoneTitre.addListSelectionListener(e -> {
             titreVideo = (String) ZoneTitre.getSelectedValue();
             path = titreVideo;
+            ZoneAffichageExtension.setText(ExtensionGetTexte());//Readerwiwi("fan.mp4","Expected File Name Extension") // le mettre en premier sinon ca l'update pas pour les gif et les avi
             ZoneAffichageTitre.setText("Titre :   " + titreVideo); // il faut définir chacune des Zones avant la fonction car sinon on ne peut pas accéder a au Zones dans l'action
             //ZoneAffichageAuteur.setText(); //attend que l'api de william sois prête
             ZoneAffichageDateC.setText("Date de création :   "+ Readerwiwi(path,"Creation Time"));
             ZoneAffichageDuree.setText("Durée :     "+Readerwiwi(path,"Duration in Seconds"));
+
             HelloApplication.main(null,path); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
             //System.out.println(path);
             HelloApplication.closeFrame(); // oblige de faire ca sinon il y a 2 fenêtres
-        });
 
+        });
 
         panel1.add(ZoneTitre, BorderLayout.NORTH);
         contentpane.add(panel1);
@@ -240,12 +246,14 @@ public class interfaceplayer extends JFrame  {
         ZoneAffichageAuteur.setForeground(Color.white);
         ZoneAffichageDateC.setForeground(Color.white);
         ZoneAffichageDuree.setForeground(Color.white);
+        ZoneAffichageExtension.setForeground(Color.white);
         JLabel ZoneAffichageTitre3 = new JLabel(ZoneDeTexte.getText());
         ZoneAffichageTitre3.setForeground(Color.white);
         ZoneAffichageAuteur.setMaximumSize(new Dimension(20,0)); // on peut définir une taille maximale
 
-        //la scrollbar pour la fenetre de dossier 
-        JScrollPane JCB = new JScrollPane(new JTree());
+        //la scrollbar pour la fenetre de dossier
+        JTree jtree = new JTree();
+        JScrollPane JCB = new JScrollPane(jtree);
         JCB.setPreferredSize(new Dimension(150,0)); //pas besoin de mettre de height elle est definie automatiquement
         contentpane.add(JCB,BorderLayout.WEST);
 
@@ -260,6 +268,7 @@ public class interfaceplayer extends JFrame  {
         panel2.add(ZoneAffichageAuteur);
         panel2.add(ZoneAffichageDateC);
         panel2.add(ZoneAffichageDuree);
+        panel2.add(ZoneAffichageExtension);
         panel2.add(ZoneAffichageTitre3);
         panel2.setPreferredSize(new Dimension(0,50)); //pas besoin de mettre de valeur en x vue que elle est mise automatiquement 
 
@@ -279,11 +288,30 @@ public class interfaceplayer extends JFrame  {
                 String texte = ZoneDeTexte.getText();
                 //ZoneAffichageTitre3.setText(texte);
 
-                 ZoneTitre.setListData(recherche.barre_recherche(texte));
+                ZoneTitre.setListData(recherche.barre_recherche(texte));
+
+                // pour faire fonctionner les boutons d'extension
+                if(ext3.isSelected()){
+                    ZoneTitre.setListData(recherche.barreRechercheExtension(texte,"mp3"));
+                }
+                if(ext2.isSelected()){
+                    ZoneTitre.setListData(recherche.barreRechercheExtension(texte,"avi"));
+                }
+                if(ext1.isSelected()){
+                    ZoneTitre.setListData(recherche.barreRechercheExtension(texte,"mp4"));
+                }
+
             }
         });
         //JScrollPane JSCTitre = new JScrollPane(panel2);
         contentpane.add(ZoneDeTexte,BorderLayout.NORTH); //fenetre a ecrire
+    }
+
+    public static String ExtensionGetTexte(){
+        String titre = ZoneAffichageTitre.getText();
+        String []titreChaine = titre.split("\\."); //pour dire qu'on split bien avec un . sinon  ca fonctionne pas
+        String extension = titreChaine[titreChaine.length-1];
+        return extension;
     }
 
     public static void main(String[] args) throws Exception {

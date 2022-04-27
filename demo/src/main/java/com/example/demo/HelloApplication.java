@@ -167,15 +167,10 @@ public class HelloApplication {
     private static void initFX(JFXPanel fxPanel) {
 
         Media media = null;
-        System.out.println(media);
         media = new Media(new File(UpdatePath()).toURI().toString());
-        System.out.println(media);
         mediaPlayer = new MediaPlayer(media);
-        System.out.println(media);
         mediaPlayer.setAutoPlay(false);
-        System.out.println(media);
         MediaView mediaView = new MediaView(mediaPlayer);
-        System.out.println(media);
 
         Group root = new Group();
         root.getChildren().add(mediaView);

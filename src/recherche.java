@@ -21,6 +21,13 @@ public class recherche {
         fichiers.addAll(Arrays.asList(fileList));
     }
 
+    public static String Extension(String titre){
+        String []titreChaine = titre.split("\\."); // \\pour dire qu'on split bien avec un . sinon  ca fonctionne pas
+        String extension = titreChaine[titreChaine.length-1];
+        return extension;
+    }
+    // regarder ce que ca renvoie précisement
+
     public static String [] barre_recherche(String video){
         int compteur = 0;
         int compteur_liste = 0;
@@ -34,7 +41,29 @@ public class recherche {
         String [] temp = new String [compteur];
 
         for (Object fichier : fichiers) {
-            if (String.valueOf(fichier).contains(video)) {
+            if (String.valueOf(fichier).contains(video) ) {
+                temp[compteur_liste] = String.valueOf(fichier);
+                compteur_liste++;
+            }
+        }
+        return temp;
+    }
+
+
+    public static String[] barreRechercheExtension(String video , String extension){
+        int compteur = 0;
+        int compteur_liste = 0;
+
+        for (Object fichier : fichiers) {
+            if (String.valueOf(fichier).contains(video) && Extension(video).equals(extension)) {
+                compteur++;
+            }
+        }
+
+        String [] temp = new String [compteur];
+
+        for (Object fichier : fichiers) {
+            if (String.valueOf(fichier).contains(video) && Extension(video).equals(extension)) {
                 temp[compteur_liste] = String.valueOf(fichier);
                 compteur_liste++;
             }
