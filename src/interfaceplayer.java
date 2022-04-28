@@ -45,9 +45,9 @@ public class interfaceplayer extends JFrame  {
         JMenuBar mbr=new JMenuBar();
         JMenu mnuExtention=new JMenu("Extension");
         mbr.add(mnuExtention);
-        ext3=new JCheckBoxMenuItem(".mp3",true);
+        ext3=new JCheckBoxMenuItem(".mp3");
         ext2=new JCheckBoxMenuItem(".avi");
-        ext1=new JCheckBoxMenuItem(".mp4",true);
+        ext1=new JCheckBoxMenuItem(".mp4");
 
         //extension 1 (mp4)
         ext1.setMnemonic(KeyEvent.VK_A);
@@ -290,7 +290,7 @@ public class interfaceplayer extends JFrame  {
                 ZoneTitre.setListData(recherche.barre_recherche(texte));
 
                 // pour faire fonctionner les boutons d'extension
-                /*if(ext3.isSelected()){
+                if(ext3.isSelected()){
                     ZoneTitre.setListData(recherche.barreRechercheExtension(texte,"mp3"));
                 }
                 if(ext2.isSelected()){
@@ -298,7 +298,7 @@ public class interfaceplayer extends JFrame  {
                 }
                 if(ext1.isSelected()){
                     ZoneTitre.setListData(recherche.barreRechercheExtension(texte,"mp4"));
-                }*/
+                }
 
             }
         });
