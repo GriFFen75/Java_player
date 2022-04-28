@@ -11,7 +11,6 @@ import com.example.demo.HelloApplication;
 
 public class interfaceplayer extends JFrame  {
 
-    String cc = "salut"; //juste pour le teste
     public String path = null;
     public String titreVideo;
     public static JLabel ZoneAffichageTitre = new JLabel();
@@ -219,13 +218,13 @@ public class interfaceplayer extends JFrame  {
         panel1.setBorder(BorderFactory.createLineBorder(Color.white, 1));
 
         //affichage de texte
-        JList ZoneTitre = new JList();
+        JList<String> ZoneTitre = new JList<>();
 
         //JScrollPane JSP = new JScrollPane(panel1);
         //panel1.setPreferredSize(new Dimension(200,0));
         ZoneTitre.setBackground(Color.lightGray);
         ZoneTitre.addListSelectionListener(e -> {
-            titreVideo = (String) ZoneTitre.getSelectedValue();
+            titreVideo = ZoneTitre.getSelectedValue();
             path = titreVideo;
             ZoneAffichageExtension.setText(ExtensionGetTexte());//Readerwiwi("fan.mp4","Expected File Name Extension") // le mettre en premier sinon ca l'update pas pour les gif et les avi
             ZoneAffichageTitre.setText("Titre :   " + titreVideo); // il faut définir chacune des Zones avant la fonction car sinon on ne peut pas accéder a au Zones dans l'action
@@ -310,8 +309,7 @@ public class interfaceplayer extends JFrame  {
     public static String ExtensionGetTexte(){
         String titre = ZoneAffichageTitre.getText();
         String []titreChaine = titre.split("\\."); //pour dire qu'on split bien avec un . sinon  ca fonctionne pas
-        String extension = titreChaine[titreChaine.length-1];
-        return extension;
+        return titreChaine[titreChaine.length-1];
     }
 
     public static void main(String[] args) throws Exception {

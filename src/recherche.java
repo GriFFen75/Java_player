@@ -23,8 +23,7 @@ public class recherche {
 
     public static String Extension(String titre){
         String []titreChaine = titre.split("\\."); // \\pour dire qu'on split bien avec un . sinon  ca fonctionne pas
-        String extension = titreChaine[titreChaine.length-1];
-        return extension;
+        return titreChaine[titreChaine.length-1];
     }
     // regarder ce que ca renvoie précisement
 
