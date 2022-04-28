@@ -4,8 +4,10 @@ import java.awt.event.*;
 
 import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
+import javax.swing.text.html.Option;
 
 import static com.drew.metadata.datareader.Readerwiwi;
+import static javax.swing.Action.SHORT_DESCRIPTION;
 
 import com.example.demo.HelloApplication;
 
@@ -26,7 +28,7 @@ public class interfaceplayer extends JFrame  {
 
         JPanel panel1 = new JPanel(); //ma fenetre droite // défini ici car j'en est besoin plus haut //environ ligne 260 sinon
 
-        setTitle("BVW .mp4 .mp3"); //j'ai defini ce titre car on commence toujours avec le .mp4 en extension (le true dans la definition du bouton)
+        setTitle("BVW"); //j'ai defini ce titre car on commence toujours avec le .mp4 en extension (le true dans la definition du bouton)
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // dispose_on_close permet de libérer les ressource de la frame et si c'est la dernière ca rend la main
         setSize(new Dimension(800,600)); // bien mettre ce avant la localisation sinon bug
@@ -34,20 +36,43 @@ public class interfaceplayer extends JFrame  {
         setLocationRelativeTo(null);// on centre la fenetre 
 
         //initialiser mes variables pour pouvoir les utiliser plus facilement
-        JTextField ZoneDeTexte = new JTextField("");
+        JTextField ZoneDeTexte = new JTextField(""); //l'entré du texte
 
         //set de l'icone de l'appli
         Image icon = Toolkit.getDefaultToolkit().getImage("image/BVW.png");
         setIconImage(icon);
 
-        //ajoute le bar de menu //helper menu peux etre ??
-        //il faudra mettre la bar de menu apres la fenetre de fichier si on veut qu'elle intéragisse avec les autre élément 
+        //ajoute le bar de menu
         JMenuBar mbr=new JMenuBar();
+
+        //pour l'ouverture de la fenetre de recherche fichier
+        JMenu mnuOpen = new JMenu("Ouvrir");
+        mbr.add(mnuOpen);
+
+        JMenuItem openFiles = new JMenuItem("Ouvrir un fichier");
+        openFiles.setIcon(new ImageIcon("image/openFiles.png"));
+        openFiles.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
+        openFiles.addActionListener(e -> {
+            recherche.liste_fichier();
+        });
+        JMenuItem openFolder = new JMenuItem("Ouvrir un dossier");
+        openFolder.setIcon(new ImageIcon("image/openFolder.png"));
+        openFolder.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_MASK));
+        openFolder.addActionListener(e -> {
+            recherche.liste_dossier();
+        });
+
+        mnuOpen.add(openFiles);
+        mnuOpen.add(openFolder);
+
         JMenu mnuExtention=new JMenu("Extension");
         mbr.add(mnuExtention);
         ext3=new JCheckBoxMenuItem(".mp3");
+        ext3.setToolTipText("Ajoute l'extension .mp3 à vos recherche");
         ext2=new JCheckBoxMenuItem(".avi");
+        ext2.setToolTipText("Ajoute l'extension .avi à vos recherche");
         ext1=new JCheckBoxMenuItem(".mp4");
+        ext1.setToolTipText("Ajoute l'extension .mp4 à vos recherche");
 
         //extension 1 (mp4)
         ext1.setMnemonic(KeyEvent.VK_A);
@@ -154,6 +179,7 @@ public class interfaceplayer extends JFrame  {
         //ajout du bouton de modification des metadata
         JButton BoutonModifData = new JButton();
         BoutonModifData.setIcon(new ImageIcon("image/modifMetadata.png"));
+        BoutonModifData.setToolTipText("Ouvre la fenêtre de modification des metadata");
         BoutonModifData.addActionListener(e -> {
             JFrame FrameModifMetadata = new JFrame("BVW / Modification des metadatas");
             FrameModifMetadata.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -196,6 +222,7 @@ public class interfaceplayer extends JFrame  {
         //bouton d'aide
         JButton BoutonAide = new JButton();
         BoutonAide.setIcon(new ImageIcon("image/aide6.png"));
+        BoutonAide.setToolTipText("Ouvre une page d'aide");
         BoutonAide.addActionListener(e -> OpenPageHelp.main(null));
         mbr.add(BoutonAide);
 
@@ -313,7 +340,7 @@ public class interfaceplayer extends JFrame  {
     }
 
     public static void main(String[] args) throws Exception {
-        recherche.liste_fichier();
+        //recherche.liste_fichier();
 
         //mettre un look 
         UIManager.setLookAndFeel(new NimbusLookAndFeel()); //look nimbus
