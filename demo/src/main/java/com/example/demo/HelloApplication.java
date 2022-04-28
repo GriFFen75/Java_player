@@ -98,12 +98,7 @@ public class HelloApplication {
 
         frame.setVisible(true);
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                initFX(fxPanel);
-            }
-        });
+        Platform.runLater(() -> initFX(fxPanel));
 
     }
     private static void fenetreFullScreen (){
@@ -143,12 +138,7 @@ public class HelloApplication {
         panelOptionFullScreen.add(boutonStop);
         panelOptionFullScreen.add(fullScreen);
         frameVideo.add(panelOptionFullScreen, BorderLayout.SOUTH);
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                initFX(fxPanel);
-            }
-        });
+        Platform.runLater(() -> initFX(fxPanel));
     }
     private static void actionPlay(){
         mediaPlayer.play();
@@ -165,7 +155,7 @@ public class HelloApplication {
 
     private static void initFX(JFXPanel fxPanel) { // beug sur cette partie je pense (media , mediaplayer , mediaview??)
 
-        Media media = null;
+        Media media;
         media = new Media(new File(UpdatePath()).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(false);
@@ -195,18 +185,15 @@ public class HelloApplication {
     public static String UpdatePath(){
         Path currentRelativePath = Paths.get("");
         String s = currentRelativePath.toAbsolutePath().toString();
-        String path = "";
+        String path;
         path = (s+"/video/"+file);
         return path;
     }
 
     public static void main(String[] args, String lien) {//,String path
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                file = lien;
-                initAndShowGUI();
-            }
+        SwingUtilities.invokeLater(() -> {
+            file = lien;
+            initAndShowGUI();
         });
 
     }
