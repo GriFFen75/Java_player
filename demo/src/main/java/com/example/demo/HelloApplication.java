@@ -171,6 +171,7 @@ public class HelloApplication {
         System.out.println(media);
 
 
+
         //Scene scene = new Scene(root,1000,800);
         fxPanel.setScene(new Scene(new Group(mediaView), panelVideo.getWidth(), panelVideo.getHeight()));
     }

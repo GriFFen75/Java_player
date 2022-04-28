@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +15,10 @@ public class apiwiwi {
         //1d66ea43
         //http://img.omdbapi.com/?apikey=1d66ea43
         //http://www.omdbapi.com/?apikey=1d66ea43&t=orphan+black&plot=full
+
+        if(film.contains(" ")){
+            film.replace(" ","+");
+        }
         URL url = new URL("http://www.omdbapi.com/?apikey=1d66ea43&plot=short&t="+film);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
@@ -27,7 +31,7 @@ public class apiwiwi {
         String output;
         List<String> apifilm = new ArrayList<>();
         while ((output = br.readLine()) != null) {
-            System.out.println(output);
+            //System.out.println(output);
             int a = -1;
             String temp = "";
             //System.out.println(output);
@@ -38,7 +42,7 @@ public class apiwiwi {
                     a++;
                 }
                 if(a==4) {
-                    //System.out.println();
+                    System.out.println();
                     apifilm.add(temp);
                     temp = "";
                     a=0;
@@ -47,7 +51,8 @@ public class apiwiwi {
                     a=-5;
                 }
                 if(output.charAt(i)!=(',') & output.charAt(i)!='[' & output.charAt(i)!=']' & output.charAt(i)!='{' & output.charAt(i)!='}')
-                    temp += output.charAt(i);
+                    System.out.print(output.charAt(i));
+                temp += output.charAt(i);
             }
             for (Object o : apifilm) {
                 if(String.valueOf(o).contains(data)){
@@ -59,7 +64,6 @@ public class apiwiwi {
         return "mal ecrit?";
     }
     public static void main(String [] args) throws IOException {
-        System.out.println(Searchwiwi("alice".replace(" ","+"),"Title"));
-
+        System.out.println(Searchwiwi("Orphan Black","Title"));
     }
 }
