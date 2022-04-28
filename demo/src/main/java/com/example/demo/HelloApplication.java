@@ -24,11 +24,13 @@ public class HelloApplication {
     public static JFrame frame = new JFrame("BVW / Lecteur vidéos");
     public static JPanel panelVideo;
     public static JPanel panelFx;
+    //private static MediaPlayer mediaPlayer;
     public static Image icon = Toolkit.getDefaultToolkit().getImage("image/BVW.png");
 
     private static void initAndShowGUI() {
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
         frame.setLayout(new BorderLayout());
         frame.setLocationRelativeTo(null);
         frame.setSize(new Dimension(800, 600));
@@ -70,7 +72,6 @@ public class HelloApplication {
         fullScreen.addActionListener(e -> {
             fenetreFullScreen();
             close(frame);
-            //mediaPlayer.reset();
         });
         panelOption.add(boutonPlay);
         panelOption.add(boutonPause);
@@ -120,6 +121,7 @@ public class HelloApplication {
         JButton fullScreen = new JButton();
         fullScreen.setIcon(new ImageIcon("image/fullScreen.png"));
         fullScreen.addActionListener(e -> {
+            exitMP();
             close(frameVideo);
             main(null,UpdatePath());
         });
@@ -135,6 +137,7 @@ public class HelloApplication {
             }
         });
     }
+    private static MediaPlayer mediaPlayer;
     private static void actionPlay(){
         mediaPlayer.play();
     }
@@ -145,16 +148,22 @@ public class HelloApplication {
     private static void close(JFrame frame){
         frame.dispose();
     }
+    private static void exitMP(){
+        mediaPlayer.stop();
+        mediaPlayer.dispose();
+        mediaPlayer = null;
+    }
 
-    private static MediaPlayer mediaPlayer;
+
 
     private static void initFX(JFXPanel fxPanel) { // beug sur cette partie je pense (media , mediaplayer , mediaview??)
 
         Media media = null;
         media = new Media(new File(UpdatePath()).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(false);
-        MediaView mediaView = new MediaView(mediaPlayer);
+        //mediaPlayer.setAutoPlay(false);
+        MediaView mediaView = null;
+        mediaView = new MediaView(mediaPlayer);
 
         Group root = new Group();
         root.getChildren().add(mediaView);
