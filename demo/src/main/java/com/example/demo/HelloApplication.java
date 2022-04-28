@@ -70,6 +70,7 @@ public class HelloApplication {
         fullScreen.addActionListener(e -> {
             fenetreFullScreen();
             close(frame);
+            //mediaPlayer.reset();
         });
         panelOption.add(boutonPlay);
         panelOption.add(boutonPause);
@@ -79,23 +80,6 @@ public class HelloApplication {
 
         frame.add(panelVideo,BorderLayout.CENTER);
 
-        //panel pour mettre le synopsis
-        JPanel panelSynopsis = new JPanel(new BorderLayout());
-        panelSynopsis.setPreferredSize(new Dimension(0,100));
-        panelSynopsis.setBackground(Color.BLACK);
-        JLabel zoneSynopsis = new JLabel("Synopsis :  " );
-        zoneSynopsis.setForeground(Color.WHITE);
-        panelSynopsis.add(zoneSynopsis);
-        frame.add(panelSynopsis,BorderLayout.SOUTH);
-
-        //panel pour toutes les autres infos
-        JPanel panelInfo = new JPanel(new BorderLayout());
-        panelInfo.setPreferredSize(new Dimension(300,0));
-        panelInfo.setBackground(Color.BLACK);
-        JLabel zoneTitre = new JLabel("Titre :  " );
-        zoneTitre.setForeground(Color.WHITE);
-        panelInfo.add(zoneTitre);
-        frame.add(panelInfo,BorderLayout.WEST);
 
         frame.setVisible(true);
 
@@ -113,7 +97,7 @@ public class HelloApplication {
         frameVideo.setIconImage(icon);
         frameVideo.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frameVideo.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        //frameVideo.setUndecorated(true); //pour enlever la barre windows en haut
+        frameVideo.setUndecorated(true); //pour enlever la barre windows en haut
 
         JFXPanel fxPanel = new JFXPanel();
         frameVideo.add(fxPanel,BorderLayout.CENTER);
