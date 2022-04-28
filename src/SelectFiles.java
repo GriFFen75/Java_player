@@ -5,19 +5,23 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+
 public class SelectFiles
 {
-    public static String GetNom(){
+
+    public static String getpath(){
         Path currentRelativePath = Paths.get("");
-        String s = currentRelativePath.toAbsolutePath().toString();
-        String[] ChaineS = s.split("\\\\");
-        if (ChaineS[0] != "C:"){
-            return ChaineS[1];
-        }
+        return currentRelativePath.toAbsolutePath().toString();
+    }
+    public static String GetNom(){
+        String s = getpath();
+        String[] ChaineS = s.split("/");
+        System.out.println(ChaineS[2]);
         return ChaineS[2];
     }
     public static File openfichier(){
-        JFileChooser choose = new JFileChooser("C:/Users/"+ GetNom()); // on choisi le répertoire racine
+        System.out.println(getpath()+"/video");
+        JFileChooser choose = new JFileChooser(getpath()+"/video"); // on choisi le répertoire racine
         FileSystemView
                 .getFileSystemView()
                 .getHomeDirectory()
@@ -35,11 +39,9 @@ public class SelectFiles
         choose.setDialogTitle("BVW / ouverture fichier");
         choose.setFileSelectionMode(JFileChooser.FILES_ONLY); // on choisi ce qu'on veut avoir (DIRECTORYONLY si on veut que les répertoires)
         int res = choose.showSaveDialog(null);
-        if(res == JFileChooser.APPROVE_OPTION)
-        {
-            if(choose.getSelectedFile().isFile())
-            {
-                // System.out.println("Vous avez selectionne le repertoire: "+ choose.getSelectedFile());
+        if(res == JFileChooser.APPROVE_OPTION) {
+            if(choose.getSelectedFile().isFile()) {
+                System.out.println("Vous avez selectionne le repertoire: "+ choose.getSelectedFile());
                 return choose.getSelectedFile();
 
             }
@@ -47,11 +49,11 @@ public class SelectFiles
         return null;
     }
     public static File opendossier(){
-        JFileChooser choose = new JFileChooser("C:/Users/"+ GetNom()); // on choisi le répertoire racine
+        System.out.println(getpath()+"/video");
+        JFileChooser choose = new JFileChooser(getpath()+"/video"); // on choisi le répertoire racine
         FileSystemView
                 .getFileSystemView()
-                .getHomeDirectory()
-        ;
+                .getHomeDirectory();
 
 ////////////////////////////extensions//////////////////////////////////////
 
@@ -65,10 +67,8 @@ public class SelectFiles
         choose.setDialogTitle("BVW / ouverture dossier");
         choose.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); // on choisi ce qu'on veut avoir (DIRECTORYONLY si on veut que les répertoires)
         int res = choose.showSaveDialog(null);
-        if(res == JFileChooser.APPROVE_OPTION)
-        {
-            if(choose.getSelectedFile().isDirectory())
-            {
+        if(res == JFileChooser.APPROVE_OPTION) {
+            if(choose.getSelectedFile().isDirectory()) {
                 // System.out.println("Vous avez selectionne le repertoire: "+ choose.getSelectedFile());
                 return choose.getSelectedFile();
 
@@ -77,9 +77,7 @@ public class SelectFiles
         return null;
     }
 
-
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         //openfichier();
         //System.out.println(openfichier());
     }

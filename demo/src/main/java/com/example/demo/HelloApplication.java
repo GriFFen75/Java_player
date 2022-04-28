@@ -117,7 +117,7 @@ public class HelloApplication {
         fullScreen.addActionListener(e -> {
             //exitMP();
             close(frameVideo);
-            main(null,UpdatePath());
+            main(null,file);
         });
         panelOptionFullScreen.add(boutonPlay);
         panelOptionFullScreen.add(boutonPause);
@@ -148,7 +148,7 @@ public class HelloApplication {
     private static void initFX(JFXPanel fxPanel) { // beug sur cette partie je pense (media , mediaplayer , mediaview??)
 
         Media media;
-        media = new Media(new File(UpdatePath()).toURI().toString());
+        media = new Media(new File(file).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         //mediaPlayer.setAutoPlay(false);
         MediaView mediaView = null;
