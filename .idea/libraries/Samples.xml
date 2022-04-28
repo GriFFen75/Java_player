@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Samples">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../../Programmation_oriente_objet/Projet/metadata-extractor-2.17.0.zip!/metadata-extractor-2.17.0/Samples" />
+      <root url="jar://$PROJECT_DIR$/../../../../Programmation_oriente_objet/Projet/metadata-extractor-2.17.0.zip!/metadata-extractor-2.17.0/Source" />
+      <root url="jar://$PROJECT_DIR$/../../../../Programmation_oriente_objet/Projet/metadata-extractor-2.17.0.zip!/metadata-extractor-2.17.0/Tests" />
+    </SOURCES>
+  </library>
+</component>
