@@ -13,7 +13,7 @@ public class videoReader extends Application {
 
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         String path = "C:\\Users\\savad\\Documents\\cours\\1ere_cybersecurite\\Programmation_oriente_objet\\Projet\\WLC\\demo4\\video\\video.mp4";
 
         Media media = new Media(new File(path).toURI().toString());

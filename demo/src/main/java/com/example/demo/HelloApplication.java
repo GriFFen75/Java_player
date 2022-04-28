@@ -19,7 +19,6 @@ import java.nio.file.Paths;
 
 public class HelloApplication {
 
-
     public static String file ;
     public static JFrame frame = new JFrame("BVW / Lecteur vidéos");
     public static JPanel panelVideo;

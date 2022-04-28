@@ -10,6 +10,8 @@ module com.example.demo {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires javafx.media;
+    requires java.desktop;
+    requires javafx.swing;
 
     opens com.example.demo to javafx.fxml;
     exports com.example.demo;
