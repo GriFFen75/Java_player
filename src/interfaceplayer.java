@@ -7,6 +7,7 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import javax.swing.text.html.Option;
 
 import static com.drew.metadata.datareader.Readerwiwi;
+import static javax.swing.Action.SHORT_DESCRIPTION;
 
 import com.example.demo.HelloApplication;
 
@@ -53,13 +54,13 @@ public class interfaceplayer extends JFrame  {
         openFiles.setIcon(new ImageIcon("image/openFiles.png"));
         openFiles.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
         openFiles.addActionListener(e -> {
-
+            recherche.liste_fichier();
         });
         JMenuItem openFolder = new JMenuItem("Ouvrir un dossier");
         openFolder.setIcon(new ImageIcon("image/openFolder.png"));
         openFolder.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_MASK));
-        openFiles.addActionListener(e -> {
-
+        openFolder.addActionListener(e -> {
+            recherche.liste_dossier();
         });
 
         mnuOpen.add(openFiles);
@@ -68,8 +69,11 @@ public class interfaceplayer extends JFrame  {
         JMenu mnuExtention=new JMenu("Extension");
         mbr.add(mnuExtention);
         ext3=new JCheckBoxMenuItem(".mp3");
+        ext3.setToolTipText("Ajoute l'extension .mp3 à vos recherche");
         ext2=new JCheckBoxMenuItem(".avi");
+        ext2.setToolTipText("Ajoute l'extension .avi à vos recherche");
         ext1=new JCheckBoxMenuItem(".mp4");
+        ext1.setToolTipText("Ajoute l'extension .mp4 à vos recherche");
 
         //extension 1 (mp4)
         ext1.setMnemonic(KeyEvent.VK_A);
@@ -176,6 +180,7 @@ public class interfaceplayer extends JFrame  {
         //ajout du bouton de modification des metadata
         JButton BoutonModifData = new JButton();
         BoutonModifData.setIcon(new ImageIcon("image/modifMetadata.png"));
+        BoutonModifData.setToolTipText("Ouvre la fenêtre de modification des metadata");
         BoutonModifData.addActionListener(e -> {
             JFrame FrameModifMetadata = new JFrame("BVW / Modification des metadatas");
             FrameModifMetadata.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -218,6 +223,7 @@ public class interfaceplayer extends JFrame  {
         //bouton d'aide
         JButton BoutonAide = new JButton();
         BoutonAide.setIcon(new ImageIcon("image/aide6.png"));
+        BoutonAide.setToolTipText("Ouvre une page d'aide");
         BoutonAide.addActionListener(e -> OpenPageHelp.main(null));
         mbr.add(BoutonAide);
 
@@ -336,7 +342,7 @@ public class interfaceplayer extends JFrame  {
     }
 
     public static void main(String[] args) throws Exception {
-        recherche.liste_fichier();
+        //recherche.liste_fichier();
 
         //mettre un look 
         UIManager.setLookAndFeel(new NimbusLookAndFeel()); //look nimbus

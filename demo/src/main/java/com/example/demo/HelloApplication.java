@@ -121,7 +121,7 @@ public class HelloApplication {
         JButton fullScreen = new JButton();
         fullScreen.setIcon(new ImageIcon("image/fullScreen.png"));
         fullScreen.addActionListener(e -> {
-            exitMP();
+            //exitMP();
             close(frameVideo);
             main(null,UpdatePath());
         });

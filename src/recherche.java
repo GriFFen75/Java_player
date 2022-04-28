@@ -1,3 +1,5 @@
+import com.example.demo.HelloApplication;
+
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,7 +15,25 @@ public class recherche {
         Path currentRelativePath = Paths.get("");
         String s = currentRelativePath.toAbsolutePath().toString();
         // creates a file object
-        File file = new File(s+"/video");
+        //File file = new File(s+"/video");
+        File file = new File(String.valueOf(SelectFiles.openfichier()));
+        // returns an array of all files
+        String[] fileList = file.list();
+        //System.out.println(str.replace(".mp4","").replace(".avi",""));
+        assert fileList != null;
+        //fichiers.addAll(Arrays.asList(fileList));
+        String[] ChaineS = file.toString().split("\\\\");
+        System.out.println(ChaineS[ChaineS.length-1]);
+        if (ChaineS[ChaineS.length-1] != "null"){
+            HelloApplication.main(null,ChaineS[ChaineS.length-1]);
+        }
+    }
+    static void liste_dossier(){
+        Path currentRelativePath = Paths.get("");
+        String s = currentRelativePath.toAbsolutePath().toString();
+        // creates a file object
+        //File file = new File(s+"/video");
+        File file = new File(String.valueOf(SelectFiles.opendossier()));
         // returns an array of all files
         String[] fileList = file.list();
         //System.out.println(str.replace(".mp4","").replace(".avi",""));
