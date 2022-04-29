@@ -34,8 +34,8 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" exported="" name="Maven: org.openjfx:javafx-graphics:mac:17.0.1" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.openjfx:javafx-media:mac:17.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:mac:17.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:mac:17.0.1" level="project" />
     <orderEntry type="library" exported="" name="javafx.swing" level="project" />
     <orderEntry type="library" exported="" name="javafx-swt" level="project" />
     <orderEntry type="module" module-name="demo" exported="" />

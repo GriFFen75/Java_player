@@ -8,7 +8,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
-
+/*
 public class videoReader extends Application {
 
     //ne sert plus
@@ -32,4 +32,4 @@ public class videoReader extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-}
+}*/

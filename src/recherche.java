@@ -1,10 +1,11 @@
+import com.example.demo.HelloApplication;
+
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 
 public class recherche {
 
@@ -14,12 +15,19 @@ public class recherche {
         Path currentRelativePath = Paths.get("");
         String s = currentRelativePath.toAbsolutePath().toString();
         // creates a file object
-        File file = new File(s+"/video");
+        //File file = new File(s+"/video");
+        File file = new File(String.valueOf(SelectFiles.openfichier()));
         // returns an array of all files
         String[] fileList = file.list();
         //System.out.println(str.replace(".mp4","").replace(".avi",""));
         assert fileList != null;
-        fichiers.addAll(Arrays.asList(fileList));
+        //fichiers.addAll(Arrays.asList(fileList));
+        String[] ChaineS = file.toString().split("\\\\");
+        System.out.println(ChaineS[ChaineS.length-1]);
+        if (ChaineS[ChaineS.length-1] != "null"){
+            HelloApplication.main(null,file.toString());
+        }
+        //HelloApplication.main(null,file.toString());
     }
     static void liste_dossier(){
         Path currentRelativePath = Paths.get("");
@@ -38,7 +46,7 @@ public class recherche {
         String []titreChaine = titre.split("\\."); // \\pour dire qu'on split bien avec un . sinon  ca fonctionne pas
         return titreChaine[titreChaine.length-1];
     }
-    // regarder ce que ca renvoie précisement
+    // regarder ce que ca renvoie prÃ©cisement
 
     public static String [] barre_recherche(String video, ArrayList ext){
         int compteur = 0;
@@ -70,21 +78,21 @@ public class recherche {
         int compteur = 0;
         int compteur_liste = 0;
 
-            for (Object fichier : fichiers) {
-                if (String.valueOf(fichier).contains(video)) {
-                    compteur++;
-                }
+        for (Object fichier : fichiers) {
+            if (String.valueOf(fichier).contains(video)) {
+                compteur++;
             }
+        }
 
 
         String [] temp = new String [compteur];
 
-            for (Object fichier : fichiers) {
-                if (String.valueOf(fichier).contains(video)) {
-                    temp[compteur_liste] = String.valueOf(fichier);
-                    compteur_liste++;
-                }
+        for (Object fichier : fichiers) {
+            if (String.valueOf(fichier).contains(video)) {
+                temp[compteur_liste] = String.valueOf(fichier);
+                compteur_liste++;
             }
+        }
 
         return temp;
     }

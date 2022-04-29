@@ -143,8 +143,6 @@ public class HelloApplication {
         mediaPlayer = null;
     }
 
-
-
     private static void initFX(JFXPanel fxPanel) { // beug sur cette partie je pense (media , mediaplayer , mediaview??)
 
         Media media;

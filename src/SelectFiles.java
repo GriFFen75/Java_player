@@ -41,7 +41,7 @@ public class SelectFiles
         int res = choose.showSaveDialog(null);
         if(res == JFileChooser.APPROVE_OPTION) {
             if(choose.getSelectedFile().isFile()) {
-                System.out.println("Vous avez selectionne le repertoire: "+ choose.getSelectedFile());
+                //System.out.println("Vous avez selectionne le repertoire: "+ choose.getSelectedFile());
                 return choose.getSelectedFile();
 
             }
@@ -71,7 +71,6 @@ public class SelectFiles
             if(choose.getSelectedFile().isDirectory()) {
                 // System.out.println("Vous avez selectionne le repertoire: "+ choose.getSelectedFile());
                 return choose.getSelectedFile();
-
             }
         }
         return null;
