@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 public class videoReader extends Application {
 
-
+    //ne sert plus
     @Override
     public void start(Stage stage) {
         String path = "/Users/wx/IdeaProjects/Java_player/video/1365070268951.mp4";
