@@ -1,12 +1,10 @@
-import com.example.demo.HelloApplication;
-
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
+
 
 public class recherche {
 
@@ -42,46 +40,52 @@ public class recherche {
     }
     // regarder ce que ca renvoie précisement
 
-    public static String [] barre_recherche(String video){
+    public static String [] barre_recherche(String video, ArrayList ext){
         int compteur = 0;
         int compteur_liste = 0;
 
-        for (Object fichier : fichiers) {
-            if (String.valueOf(fichier).contains(video)) {
-                compteur++;
+        for (Object o : ext) {
+            for (Object fichier : fichiers) {
+                if (String.valueOf(fichier).contains(video) && String.valueOf(fichier).contains((CharSequence) o)) {
+                    compteur++;
+                }
             }
         }
 
         String [] temp = new String [compteur];
 
-        for (Object fichier : fichiers) {
-            if (String.valueOf(fichier).contains(video) ) {
-                temp[compteur_liste] = String.valueOf(fichier);
-                compteur_liste++;
+        for (Object o : ext) {
+            for (Object fichier : fichiers) {
+                if (String.valueOf(fichier).contains(video) && String.valueOf(fichier).contains((CharSequence) o)) {
+                    temp[compteur_liste] = String.valueOf(fichier);
+                    compteur_liste++;
+                }
             }
         }
         return temp;
     }
 
 
-    public static String[] barreRechercheExtension(String video , String extension){
+    public static String[] barreRechercheExtension(String video){
         int compteur = 0;
         int compteur_liste = 0;
 
-        for (Object fichier : fichiers) {
-            if (String.valueOf(fichier).contains(video) && Extension(video).equals(extension)) {
-                compteur++;
+            for (Object fichier : fichiers) {
+                if (String.valueOf(fichier).contains(video)) {
+                    compteur++;
+                }
             }
-        }
+
 
         String [] temp = new String [compteur];
 
-        for (Object fichier : fichiers) {
-            if (String.valueOf(fichier).contains(video) && Extension(video).equals(extension)) {
-                temp[compteur_liste] = String.valueOf(fichier);
-                compteur_liste++;
+            for (Object fichier : fichiers) {
+                if (String.valueOf(fichier).contains(video)) {
+                    temp[compteur_liste] = String.valueOf(fichier);
+                    compteur_liste++;
+                }
             }
-        }
+
         return temp;
     }
 

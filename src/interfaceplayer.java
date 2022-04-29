@@ -1,13 +1,12 @@
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
-import javax.swing.text.html.Option;
 
 import static com.drew.metadata.datareader.Readerwiwi;
-import static javax.swing.Action.SHORT_DESCRIPTION;
 
 import com.example.demo.HelloApplication;
 
@@ -306,6 +305,10 @@ public class interfaceplayer extends JFrame  {
         ZoneDeTexte.setBackground(Color.black);
         ZoneDeTexte.setForeground(Color.white);
 
+
+        ArrayList<String> extensionss = new ArrayList<>();
+        final boolean[] vrai = {false};
+
         ZoneDeTexte.addKeyListener(new java.awt.event.KeyAdapter() {
 
             public void keyReleased(java.awt.event.KeyEvent e) {
@@ -313,18 +316,51 @@ public class interfaceplayer extends JFrame  {
                 // e.getKeyChar() est le caractère correspondant à la touche relachée
                 String texte = ZoneDeTexte.getText();
                 //ZoneAffichageTitre3.setText(texte);
+                //System.out.println(texte);
 
-                ZoneTitre.setListData(recherche.barre_recherche(texte));
+                // ici william, ou e parle tut seul
 
+                //System.out.println("??");
                 // pour faire fonctionner les boutons d'extension
                 if(ext3.isSelected()){
-                    ZoneTitre.setListData(recherche.barreRechercheExtension(texte,"mp3"));
+                    if(!extensionss.contains(".mp3")) {
+                        extensionss.add(".mp3");
+                        vrai[0] = false;
+                        //System.out.println("mp3");
+                    }
+                }
+                else{
+                    vrai[0] = true;
+                    extensionss.remove(".mp3");
                 }
                 if(ext2.isSelected()){
-                    ZoneTitre.setListData(recherche.barreRechercheExtension(texte,"avi"));
+                    if(!extensionss.contains(".avi")) {
+                        extensionss.add(".avi");
+                        vrai[0] = false;
+                        //System.out.println("avi");
+                    }
                 }
+                else{
+                    extensionss.remove(".avi");
+                    vrai[0] = true;
+                }
+
                 if(ext1.isSelected()){
-                    ZoneTitre.setListData(recherche.barreRechercheExtension(texte,"mp4"));
+                    if(!extensionss.contains(".mp4")) {
+                        extensionss.add(".mp4");
+                        vrai[0] = false;
+                        //System.out.println("mp4");
+                    }
+                }
+                else{
+                    vrai[0] = true;
+                    extensionss.remove(".mp4");
+                }
+                if(!vrai[0]) {
+                    ZoneTitre.setListData(recherche.barre_recherche(texte, extensionss));
+                }
+                else{
+                    ZoneTitre.setListData(recherche.barre_recherche(texte, (ArrayList) recherche.fichiers));
                 }
 
             }

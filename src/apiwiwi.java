@@ -42,7 +42,7 @@ public class apiwiwi {
                     a++;
                 }
                 if(a==4) {
-                    System.out.println();
+                    //System.out.println();
                     apifilm.add(temp);
                     temp = "";
                     a=0;
@@ -51,8 +51,8 @@ public class apiwiwi {
                     a=-5;
                 }
                 if(output.charAt(i)!=(',') & output.charAt(i)!='[' & output.charAt(i)!=']' & output.charAt(i)!='{' & output.charAt(i)!='}')
-                    System.out.print(output.charAt(i));
-                temp += output.charAt(i);
+                    //System.out.print(output.charAt(i));
+                    temp += output.charAt(i);
             }
             for (Object o : apifilm) {
                 if(String.valueOf(o).contains(data)){
