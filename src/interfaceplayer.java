@@ -362,7 +362,6 @@ public class interfaceplayer extends JFrame  {
                 else{
                     ZoneTitre.setListData(recherche.barre_recherche(texte, (ArrayList) recherche.fichiers));
                 }
-
             }
         });
         //JScrollPane JSCTitre = new JScrollPane(panel2);
