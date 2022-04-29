@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class recherche {
 
@@ -24,7 +25,7 @@ public class recherche {
         //fichiers.addAll(Arrays.asList(fileList));
         String[] ChaineS = file.toString().split("\\\\");
         System.out.println(ChaineS[ChaineS.length-1]);
-        if (ChaineS[ChaineS.length-1] != "null"){
+        if (!Objects.equals(ChaineS[ChaineS.length - 1], "null")){
             HelloApplication.main(null,ChaineS[ChaineS.length-1]);
         }
     }
