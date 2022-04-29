@@ -11,7 +11,7 @@ public class Extension {
         //recherche.liste_fichier();
         //System.out.println(recherche.fichiers);
         String longueur = "";
-        ArrayList retourne = new ArrayList();
+        ArrayList<String> retourne = new ArrayList<String>();
 
         //for (String s : ext) {
             for (int i = 0; i < recherche.fichiers.size(); i++) {
@@ -35,11 +35,11 @@ public class Extension {
 
     public static void autre() throws IOException, TikaException, SAXException {
         recherche.liste_fichier();
-        //System.out.println(recherche.fichiers);
+        System.out.println(recherche.fichiers);
         for(int i = 0; i < recherche.fichiers.size();i++){
             System.out.println(recherche.fichiers.get(i));
             System.out.println(apiwiwi.Searchwiwi(datareader.ReaderTitle(recherche.fichiers.get(i)),"Title"));
-            System.out.println(apiwiwi.Searchwiwi(datareader.ReaderTitle(recherche.fichiers.get(i)),"Released"));
+            //System.out.println(apiwiwi.Searchwiwi(datareader.Readerwiwi(recherche.fichiers.get(i),"Released")));
 
         }
     }
@@ -48,8 +48,8 @@ public class Extension {
         ArrayList<String> ext = new ArrayList<String>();
         ext.add(".mp3");
         ext.add(".mp4");
-        //System.out.println(Exten(ext));
-        //autre();
+        //System.out.println(ext);
+        autre();
 
     }
 }

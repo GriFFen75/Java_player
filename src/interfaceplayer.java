@@ -1,4 +1,3 @@
-
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -31,8 +30,8 @@ public class interfaceplayer extends JFrame  {
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // dispose_on_close permet de libérer les ressource de la frame et si c'est la dernière ca rend la main
         setSize(new Dimension(800,600)); // bien mettre ce avant la localisation sinon bug
-        //setExtendedState(JFrame.MAXIMIZED_BOTH); // pour mettre la fenetre en pleine écran 
-        setLocationRelativeTo(null);// on centre la fenetre 
+        //setExtendedState(JFrame.MAXIMIZED_BOTH); // pour mettre la fenetre en pleine écran
+        setLocationRelativeTo(null);// on centre la fenetre
 
         //initialiser mes variables pour pouvoir les utiliser plus facilement
         JTextField ZoneDeTexte = new JTextField(""); //l'entré du texte
@@ -145,7 +144,7 @@ public class interfaceplayer extends JFrame  {
         mnuExtention.add(ext2);
         mnuExtention.add(ext3);
 
-        //on ajoute le trie dans la bar de menu 
+        //on ajoute le trie dans la bar de menu
         JMenu mnuTri=new JMenu("Trier par");
         mbr.add(mnuTri);
 
@@ -164,7 +163,7 @@ public class interfaceplayer extends JFrame  {
         // pour le tri alphabetique
         tri3.setMnemonic(KeyEvent.VK_B);
 
-        //definir que les boutons de tri en temps que groupe avant de les ajouter 
+        //definir que les boutons de tri en temps que groupe avant de les ajouter
         ButtonGroup groupB = new ButtonGroup();
         groupB.add(tri1);
         groupB.add(tri2);
@@ -224,7 +223,6 @@ public class interfaceplayer extends JFrame  {
         BoutonAide.setToolTipText("Ouvre une page d'aide");
         BoutonAide.addActionListener(e -> OpenPageHelp.main(null));
         mbr.add(BoutonAide);
-
 
         setJMenuBar(mbr);
 
@@ -295,7 +293,7 @@ public class interfaceplayer extends JFrame  {
         panel2.add(ZoneAffichageDuree);
         panel2.add(ZoneAffichageExtension);
         panel2.add(ZoneAffichageTitre3);
-        panel2.setPreferredSize(new Dimension(0,50)); //pas besoin de mettre de valeur en x vue que elle est mise automatiquement 
+        panel2.setPreferredSize(new Dimension(0,50)); //pas besoin de mettre de valeur en x vue que elle est mise automatiquement
 
         // ajout d'une frontière qui bouge entre le tree et la fenetre centrale
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT , JCB , panel1);
@@ -308,6 +306,8 @@ public class interfaceplayer extends JFrame  {
 
         ArrayList<String> extensionss = new ArrayList<>();
         final boolean[] vrai = {false};
+        final boolean[] vrai2 = {false};
+        final boolean[] vrai3 = {false};
 
         ZoneDeTexte.addKeyListener(new java.awt.event.KeyAdapter() {
 
@@ -336,27 +336,27 @@ public class interfaceplayer extends JFrame  {
                 if(ext2.isSelected()){
                     if(!extensionss.contains(".avi")) {
                         extensionss.add(".avi");
-                        vrai[0] = false;
+                        vrai2[0] = false;
                         //System.out.println("avi");
                     }
                 }
                 else{
                     extensionss.remove(".avi");
-                    vrai[0] = true;
+                    vrai2[0] = true;
                 }
 
                 if(ext1.isSelected()){
                     if(!extensionss.contains(".mp4")) {
                         extensionss.add(".mp4");
-                        vrai[0] = false;
+                        vrai3[0] = false;
                         //System.out.println("mp4");
                     }
                 }
                 else{
-                    vrai[0] = true;
+                    vrai3[0] = true;
                     extensionss.remove(".mp4");
                 }
-                if(!vrai[0]) {
+                if(!vrai[0] || !vrai2[0] ||! vrai3[0]) {
                     ZoneTitre.setListData(recherche.barre_recherche(texte, extensionss));
                 }
                 else{
@@ -377,7 +377,7 @@ public class interfaceplayer extends JFrame  {
     public static void main(String[] args) throws Exception {
         //recherche.liste_fichier();
 
-        //mettre un look 
+        //mettre un look
         UIManager.setLookAndFeel(new NimbusLookAndFeel()); //look nimbus
 
         //créer la fenetre avec le constructeur interfaceplayer

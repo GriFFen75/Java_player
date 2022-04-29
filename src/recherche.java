@@ -21,7 +21,7 @@ public class recherche {
         String[] fileList = file.list();
         //System.out.println(str.replace(".mp4","").replace(".avi",""));
         assert fileList != null;
-        //fichiers.addAll(Arrays.asList(fileList));
+        fichiers.addAll(Arrays.asList(fileList));
         String[] ChaineS = file.toString().split("\\\\");
         System.out.println(ChaineS[ChaineS.length-1]);
         if (ChaineS[ChaineS.length-1] != "null"){
