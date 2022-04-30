@@ -7,7 +7,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
+
 public class recherche {
+
+    public static File file;
 
     public static List<String> fichiers = new ArrayList<>();
 
@@ -23,24 +27,31 @@ public class recherche {
         //assert fileList != null;
         //fichiers.addAll(Arrays.asList(fileList)); // c'est quoi ???
         String[] ChaineS = file.toString().split("\\\\");
-        System.out.println(ChaineS[ChaineS.length-1]);
+        //System.out.println(ChaineS[ChaineS.length-1]);
         if (ChaineS[ChaineS.length-1] != "null"){
-            HelloApplication.main(null,file.toString());
+            HelloApplication.main(file.toString());
         }
     }
-    static void liste_dossier(){
-        Path currentRelativePath = Paths.get("");
-        String s = currentRelativePath.toAbsolutePath().toString();
+    public static void liste_dossier(){
+        //Path currentRelativePath = Paths.get("");
+        //String s = currentRelativePath.toAbsolutePath().toString();
         // creates a file object
         //File file = new File(s+"/video");
-        File file = new File(String.valueOf(SelectFiles.opendossier()));
-        // returns an array of all files
-        String[] fileList = file.list();
-        //System.out.println(str.replace(".mp4","").replace(".avi",""));
-        assert fileList != null;
-        fichiers.clear();
-        fichiers.addAll(Arrays.asList(fileList));
-        System.out.println(fichiers);
+        file = new File(String.valueOf(SelectFiles.opendossier()));
+        System.out.println("code recheche.liste_dossier"+file);
+        if (file.toString() != "null"){ //si on ferme la plage sans rien selectionner
+            //System.out.println(file);
+            // returns an array of all files
+            String[] fileList = file.list();
+            //System.out.println(str.replace(".mp4","").replace(".avi",""));
+            assert fileList != null;
+            fichiers.clear();
+            fichiers.addAll(Arrays.asList(fileList));
+        }
+    }
+    public static File pathDossier(){
+        System.out.println("file de recherche.pathDossier : "+file);
+        return file;
     }
 
     public static String Extension(String titre){

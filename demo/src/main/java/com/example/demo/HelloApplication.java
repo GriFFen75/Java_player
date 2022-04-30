@@ -82,7 +82,7 @@ public class HelloApplication {
 
 
         frame.setVisible(true);
-
+        System.out.println("HelloApllication.createpanel : "+file);
         Platform.runLater(() -> initFX(fxPanel));
 
     }
@@ -117,7 +117,8 @@ public class HelloApplication {
         fullScreen.addActionListener(e -> {
             //exitMP();
             close(frameVideo);
-            main(null,file);
+            //System.out.println(file);
+            main(file);
         });
         panelOptionFullScreen.add(boutonPlay);
         panelOptionFullScreen.add(boutonPause);
@@ -159,7 +160,7 @@ public class HelloApplication {
         mvw.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
         mvh.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
         mediaView.setPreserveRatio(true);
-        System.out.println(media);
+        //System.out.println(media);
 
 
 
@@ -174,19 +175,20 @@ public class HelloApplication {
         mediaPlayer.pause();
     }
 
-    public static String UpdatePath(){
+    /*public static String UpdatePath(){
         Path currentRelativePath = Paths.get("");
         String s = currentRelativePath.toAbsolutePath().toString();
         String path;
         path = (s+"/video/"+file);
         return path;
-    }
+    }*/
 
-    public static void main(String[] args, String lien) {//,String path
-        SwingUtilities.invokeLater(() -> {
+    public static void main(String lien) {//,String path
+        //SwingUtilities.invokeLater(() -> {
             file = lien;
+            //System.out.println("c'est le hello :"+file);
             initAndShowGUI();
-        });
+        //});
 
     }
 }

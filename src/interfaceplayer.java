@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -10,7 +9,6 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import static com.drew.metadata.datareader.Readerwiwi;
 
 import com.example.demo.HelloApplication;
-import com.rometools.rome.io.SyndFeedOutput;
 
 public class interfaceplayer extends JFrame  {
 
@@ -29,7 +27,8 @@ public class interfaceplayer extends JFrame  {
     public JPanel contentpane = (JPanel) getContentPane();
     public static JTextField ZoneDeTexte;
     public static JList<String> ZoneTitre;
-
+    public static File PathDossier;
+    public static String pathTitre;
 
     public interfaceplayer() {
 
@@ -84,8 +83,10 @@ public class interfaceplayer extends JFrame  {
         openFolder.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_MASK));
         openFolder.addActionListener(e -> {
             recherche.liste_dossier();
+            PathDossier = recherche.pathDossier();
+            path = PathDossier.toString();
         });
-
+        System.out.println(PathDossier);
         mnuOpen.add(openFiles);
         mnuOpen.add(openFolder);
 
@@ -253,17 +254,31 @@ public class interfaceplayer extends JFrame  {
         //panel1.setPreferredSize(new Dimension(200,0));
         ZoneTitre.setBackground(Color.lightGray);
         ZoneTitre.addListSelectionListener(e -> {
-            titreVideo = ZoneTitre.getSelectedValue();
+            titreVideo=ZoneTitre.getSelectedValue();
+            pathTitre = path + "\\"+ZoneTitre.getSelectedValue();
+
+            System.out.println("le getSelectedValue interfaceplayer.setpanel1 : "+ZoneTitre.getSelectedValue());
+            System.out.println("le path du dossier interfaceplayer.setpanel1 : "+path);
+            System.out.println("le path du fichier interfaceplayer.setpanel1 : "+pathTitre);
+            System.out.println("le titreVideo interfaceplayer.setpanel1 : "+titreVideo);
+            /*if (path.contains("/")){
+            String [] listepathVideo = path.split("/" );
+            System.out.println("listepathVideo de interfaceplayer.setpanel1 / "+listepathVideo[listepathVideo.length-1]);
+            titreVideo = listepathVideo[listepathVideo.length-1];
+            }
+            if (path.contains("\\")){
+                String [] listepathVideo = path.split("\\\\" );
+                System.out.println("listepathVideo de interfaceplayer.setpanel1 \\\\ " +listepathVideo[listepathVideo.length-1]);
+                titreVideo = listepathVideo[listepathVideo.length-1];
+            }*/
+
             ZoneAffichageExtension.setText(ExtensionGetTexte());//Readerwiwi("fan.mp4","Expected File Name Extension") // le mettre en premier sinon ca l'update pas pour les gif et les avi
             ZoneAffichageTitre.setText("Titre :   " + titreVideo); // il faut définir chacune des Zones avant la fonction car sinon on ne peut pas accéder a au Zones dans l'action
             //ZoneAffichageAuteur.setText(); //attend que l'api de william sois prête
             ZoneAffichageDateC.setText("Date de création :   " + Readerwiwi(titreVideo, "Creation Time"));
             ZoneAffichageDuree.setText("Durée :     " + Readerwiwi(titreVideo, "Duration in Seconds"));
-            //System.out.println(path);
-            HelloApplication.main(null, path); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
-            //System.out.println(path);
-            HelloApplication.closeFrame(); // oblige de faire ca sinon il y a 2 fenêtres
-
+            HelloApplication.main(pathTitre); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
+            //HelloApplication.closeFrame(); // oblige de faire ca sinon il y a 2 fenêtres
         });
 
         panel1.add(ZoneTitre, BorderLayout.NORTH);
