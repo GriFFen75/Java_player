@@ -20,7 +20,7 @@ public class datareader {
     public static String Readerwiwi(String path,String data){ // detecte le reader de l'extension
         Path currentRelativePath = Paths.get("");
         String s = currentRelativePath.toAbsolutePath().toString();
-        File file = new File(s+"/video/"+path);
+        File file = new File(path);
         try {
             Metadata metadata = ImageMetadataReader.readMetadata(file);
             if(data.equals("Creation Time") || data.equals("Modification Time")) {

@@ -276,8 +276,8 @@ public class interfaceplayer extends JFrame  {
             ZoneAffichageExtension.setText(ExtensionGetTexte());//Readerwiwi("fan.mp4","Expected File Name Extension") // le mettre en premier sinon ca l'update pas pour les gif et les avi
             ZoneAffichageTitre.setText("Titre :   " + titreVideo); // il faut définir chacune des Zones avant la fonction car sinon on ne peut pas accéder a au Zones dans l'action
             //ZoneAffichageAuteur.setText(); //attend que l'api de william sois prête
-            ZoneAffichageDateC.setText("Date de création :   " + Readerwiwi(titreVideo, "Creation Time"));
-            ZoneAffichageDuree.setText("Durée :     " + Readerwiwi(titreVideo, "Duration in Seconds"));
+            ZoneAffichageDateC.setText("Date de création :   " + Readerwiwi(pathTitre, "Creation Time"));
+            ZoneAffichageDuree.setText("Durée :     " + Readerwiwi(pathTitre, "Duration in Seconds"));
             HelloApplication.main(pathTitre); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
             //HelloApplication.closeFrame(); // oblige de faire ca sinon il y a 2 fenêtres
         });
