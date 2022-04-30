@@ -18,16 +18,15 @@ public class recherche {
         //File file = new File(s+"/video");
         File file = new File(String.valueOf(SelectFiles.openfichier()));
         // returns an array of all files
-        String[] fileList = file.list();
+        //String[] fileList = file.list(); //c'est quoi ??
         //System.out.println(str.replace(".mp4","").replace(".avi",""));
-        assert fileList != null;
-        fichiers.addAll(Arrays.asList(fileList));
+        //assert fileList != null;
+        //fichiers.addAll(Arrays.asList(fileList)); // c'est quoi ???
         String[] ChaineS = file.toString().split("\\\\");
         System.out.println(ChaineS[ChaineS.length-1]);
         if (ChaineS[ChaineS.length-1] != "null"){
             HelloApplication.main(null,file.toString());
         }
-        //HelloApplication.main(null,file.toString());
     }
     static void liste_dossier(){
         Path currentRelativePath = Paths.get("");
@@ -39,7 +38,9 @@ public class recherche {
         String[] fileList = file.list();
         //System.out.println(str.replace(".mp4","").replace(".avi",""));
         assert fileList != null;
+        fichiers.clear();
         fichiers.addAll(Arrays.asList(fileList));
+        System.out.println(fichiers);
     }
 
     public static String Extension(String titre){

@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -8,6 +10,7 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import static com.drew.metadata.datareader.Readerwiwi;
 
 import com.example.demo.HelloApplication;
+import com.rometools.rome.io.SyndFeedOutput;
 
 public class interfaceplayer extends JFrame  {
 
@@ -21,27 +24,50 @@ public class interfaceplayer extends JFrame  {
     public static JCheckBoxMenuItem ext3;
     public static JCheckBoxMenuItem ext2;
     public static JCheckBoxMenuItem ext1;
+    public static Image icon = Toolkit.getDefaultToolkit().getImage("image/BVW.png");
+    public static JPanel panel1 = new JPanel(); //ma fenetre droite // défini ici car j'en est besoin plus haut
+    public JPanel contentpane = (JPanel) getContentPane();
+    public static JTextField ZoneDeTexte;
+    public static JList<String> ZoneTitre;
 
-    public interfaceplayer(){
 
-        JPanel panel1 = new JPanel(); //ma fenetre droite // défini ici car j'en est besoin plus haut //environ ligne 260 sinon
+    public interfaceplayer() {
+
+
 
         setTitle("BVW"); //j'ai defini ce titre car on commence toujours avec le .mp4 en extension (le true dans la definition du bouton)
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // dispose_on_close permet de libérer les ressource de la frame et si c'est la dernière ca rend la main
-        setSize(new Dimension(800,600)); // bien mettre ce avant la localisation sinon bug
+        setSize(new Dimension(800, 600)); // bien mettre ce avant la localisation sinon bug
         //setExtendedState(JFrame.MAXIMIZED_BOTH); // pour mettre la fenetre en pleine écran
         setLocationRelativeTo(null);// on centre la fenetre
 
         //initialiser mes variables pour pouvoir les utiliser plus facilement
-        JTextField ZoneDeTexte = new JTextField(""); //l'entré du texte
+        ZoneDeTexte = new JTextField(""); //l'entré du texte
 
         //set de l'icone de l'appli
-        Image icon = Toolkit.getDefaultToolkit().getImage("image/BVW.png");
         setIconImage(icon);
 
+        //on set le MenuBar
+        setJMenuBar(CreationMenuBar());
+
+        //on set le panel
+        contentpane.setLayout(new BorderLayout());
+
+        //on set le panel1
+        SetPanel1();
+
+       //on set le panel2
+       SetPanel2();
+
+       //on ajoute le fonctionnement au tri par extension
+       TriExtension();
+
+    }
+    public JMenuBar CreationMenuBar() {
+
         //ajoute le bar de menu
-        JMenuBar mbr=new JMenuBar();
+        JMenuBar mbr = new JMenuBar();
 
         //pour l'ouverture de la fenetre de recherche fichier
         JMenu mnuOpen = new JMenu("Ouvrir");
@@ -63,13 +89,13 @@ public class interfaceplayer extends JFrame  {
         mnuOpen.add(openFiles);
         mnuOpen.add(openFolder);
 
-        JMenu mnuExtention=new JMenu("Extension");
+        JMenu mnuExtention = new JMenu("Extension");
         mbr.add(mnuExtention);
-        ext3=new JCheckBoxMenuItem(".mp3");
+        ext3 = new JCheckBoxMenuItem(".mp3");
         ext3.setToolTipText("Ajoute l'extension .mp3 à vos recherche");
-        ext2=new JCheckBoxMenuItem(".avi");
+        ext2 = new JCheckBoxMenuItem(".avi");
         ext2.setToolTipText("Ajoute l'extension .avi à vos recherche");
-        ext1=new JCheckBoxMenuItem(".mp4");
+        ext1 = new JCheckBoxMenuItem(".mp4");
         ext1.setToolTipText("Ajoute l'extension .mp4 à vos recherche");
 
         //extension 1 (mp4)
@@ -77,20 +103,16 @@ public class interfaceplayer extends JFrame  {
         ext1.addItemListener(e -> {
             //mettre le code de ce qu'on veut faire si la case ext1 est coché
             //attention le code ne gère pas la décoche si on ne met pas de condition
-            if(ext1.getState()){
-                setTitle(getTitle()+" .mp4");
-            }
-            else{
-                if (ext2.getState() && ext3.getState()){
-                    setTitle("BVW"+" .avi"+" .mp3");
-                }
-                else if(ext2.getState()){
-                    setTitle("BVW"+" .avi");
-                }
-                else if(ext3.getState()){
-                    setTitle("BVW"+" .mp3");
-                }
-                else{
+            if (ext1.getState()) {
+                setTitle(getTitle() + " .mp4");
+            } else {
+                if (ext2.getState() && ext3.getState()) {
+                    setTitle("BVW" + " .avi" + " .mp3");
+                } else if (ext2.getState()) {
+                    setTitle("BVW" + " .avi");
+                } else if (ext3.getState()) {
+                    setTitle("BVW" + " .mp3");
+                } else {
                     setTitle("BVW");
                 }
             }
@@ -100,20 +122,16 @@ public class interfaceplayer extends JFrame  {
         ext2.setMnemonic(KeyEvent.VK_Z);
         ext2.addItemListener(e -> {
             //mettre le code de ce qu'on veut faire si la case ext2 est coché
-            if(ext2.getState()){
-                setTitle(getTitle()+" .avi");
-            }
-            else{
-                if (ext1.getState() && ext3.getState()){
-                    setTitle("BVW"+" .mp4"+" .mp3");
-                }
-                else if(ext1.getState()){
-                    setTitle("BVW"+" .mp4");
-                }
-                else if(ext3.getState()){
-                    setTitle("BVW"+" .mp3");
-                }
-                else{
+            if (ext2.getState()) {
+                setTitle(getTitle() + " .avi");
+            } else {
+                if (ext1.getState() && ext3.getState()) {
+                    setTitle("BVW" + " .mp4" + " .mp3");
+                } else if (ext1.getState()) {
+                    setTitle("BVW" + " .mp4");
+                } else if (ext3.getState()) {
+                    setTitle("BVW" + " .mp3");
+                } else {
                     setTitle("BVW");
                 }
             }
@@ -122,20 +140,16 @@ public class interfaceplayer extends JFrame  {
         ext3.setMnemonic(KeyEvent.VK_E);
         ext3.addItemListener(e -> {
             //mettre le code de ce qu'on veut faire si la case ext3 est coché
-            if(ext3.getState()){
-                setTitle(getTitle()+" .mp3");
-            }
-            else{
-                if (ext1.getState() && ext2.getState()){
-                    setTitle("BVW"+" .mp4"+" .avi");
-                }
-                else if(ext1.getState()){
-                    setTitle("BVW"+" .mp4");
-                }
-                else if(ext2.getState()){
-                    setTitle("BVW"+" .avi");
-                }
-                else{
+            if (ext3.getState()) {
+                setTitle(getTitle() + " .mp3");
+            } else {
+                if (ext1.getState() && ext2.getState()) {
+                    setTitle("BVW" + " .mp4" + " .avi");
+                } else if (ext1.getState()) {
+                    setTitle("BVW" + " .mp4");
+                } else if (ext2.getState()) {
+                    setTitle("BVW" + " .avi");
+                } else {
                     setTitle("BVW");
                 }
             }
@@ -145,7 +159,7 @@ public class interfaceplayer extends JFrame  {
         mnuExtention.add(ext3);
 
         //on ajoute le trie dans la bar de menu
-        JMenu mnuTri=new JMenu("Trier par");
+        JMenu mnuTri = new JMenu("Trier par");
         mbr.add(mnuTri);
 
         JRadioButton tri1 = new JRadioButton("Realisateur");
@@ -188,7 +202,7 @@ public class interfaceplayer extends JFrame  {
 
 
             //mise en place des zones de lecture et d'écriture pour les metadata
-            JPanel PanelModifMeta = new JPanel(new GridLayout(4,2));
+            JPanel PanelModifMeta = new JPanel(new GridLayout(4, 2));
             PanelModifMeta.add(new JLabel(ZoneAffichageTitre.getText()));
             PanelModifMeta.add(new JTextField());
             PanelModifMeta.add(new JLabel(ZoneAffichageAuteur.getText()));
@@ -210,7 +224,7 @@ public class interfaceplayer extends JFrame  {
             annuler.addActionListener(e12 -> FrameModifMetadata.dispose());
             PanelActionMeta.add(appliquer);
             PanelActionMeta.add(annuler);
-            FrameModifMetadata.add(PanelActionMeta,BorderLayout.SOUTH);
+            FrameModifMetadata.add(PanelActionMeta, BorderLayout.SOUTH);
 
             FrameModifMetadata.setVisible(true);
         });
@@ -224,39 +238,29 @@ public class interfaceplayer extends JFrame  {
         BoutonAide.addActionListener(e -> OpenPageHelp.main(null));
         mbr.add(BoutonAide);
 
-        setJMenuBar(mbr);
-
-        //on set le panneau
-        JPanel contentpane = (JPanel) getContentPane();
-        contentpane.setLayout(new BorderLayout());
-
-        //zone de texte multiligne  //plus utiliser
-        JTextArea ZoneTexteArea = new JTextArea();
-        ZoneTexteArea.setBackground(Color.black);
-        ZoneTexteArea.setForeground(Color.white);
-        //contentpane.add(ZoneTexteArea);
-
+        return mbr;
+    }
+    public void SetPanel1() {
         //panel fichier // panel de droite
         panel1.setLayout(new BorderLayout());
         panel1.setBackground(Color.black);
         panel1.setBorder(BorderFactory.createLineBorder(Color.white, 1));
 
         //affichage de texte
-        JList<String> ZoneTitre = new JList<>();
+        ZoneTitre = new JList<>();
 
-        //JScrollPane JSP = new JScrollPane(panel1);
+        JScrollPane JSP = new JScrollPane(panel1);
         //panel1.setPreferredSize(new Dimension(200,0));
         ZoneTitre.setBackground(Color.lightGray);
         ZoneTitre.addListSelectionListener(e -> {
             titreVideo = ZoneTitre.getSelectedValue();
-            path = titreVideo;
             ZoneAffichageExtension.setText(ExtensionGetTexte());//Readerwiwi("fan.mp4","Expected File Name Extension") // le mettre en premier sinon ca l'update pas pour les gif et les avi
             ZoneAffichageTitre.setText("Titre :   " + titreVideo); // il faut définir chacune des Zones avant la fonction car sinon on ne peut pas accéder a au Zones dans l'action
             //ZoneAffichageAuteur.setText(); //attend que l'api de william sois prête
-            ZoneAffichageDateC.setText("Date de création :   "+ Readerwiwi(path,"Creation Time"));
-            ZoneAffichageDuree.setText("Durée :     "+Readerwiwi(path,"Duration in Seconds"));
-
-            HelloApplication.main(null,path); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
+            ZoneAffichageDateC.setText("Date de création :   " + Readerwiwi(titreVideo, "Creation Time"));
+            ZoneAffichageDuree.setText("Durée :     " + Readerwiwi(titreVideo, "Duration in Seconds"));
+            //System.out.println(path);
+            HelloApplication.main(null, path); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
             //System.out.println(path);
             HelloApplication.closeFrame(); // oblige de faire ca sinon il y a 2 fenêtres
 
@@ -264,46 +268,41 @@ public class interfaceplayer extends JFrame  {
 
         panel1.add(ZoneTitre, BorderLayout.NORTH);
         contentpane.add(panel1);
-
+    }
+    public void SetPanel2() {
         ZoneAffichageTitre.setForeground(Color.white);
         ZoneAffichageAuteur.setForeground(Color.white);
         ZoneAffichageDateC.setForeground(Color.white);
         ZoneAffichageDuree.setForeground(Color.white);
         ZoneAffichageExtension.setForeground(Color.white);
-        JLabel ZoneAffichageTitre3 = new JLabel(ZoneDeTexte.getText());
-        ZoneAffichageTitre3.setForeground(Color.white);
-        ZoneAffichageAuteur.setMaximumSize(new Dimension(20,0)); // on peut définir une taille maximale
+        ZoneAffichageAuteur.setMaximumSize(new Dimension(20, 0)); // on peut définir une taille maximale
 
-        //la scrollbar pour la fenetre de dossier
-        JTree jtree = new JTree();
-        JScrollPane JCB = new JScrollPane(jtree);
-        JCB.setPreferredSize(new Dimension(150,0)); //pas besoin de mettre de height elle est definie automatiquement
-        contentpane.add(JCB,BorderLayout.WEST);
+        //la scrollbar pour la fenetre de dossier //////////////////mettre le nouveau panel pour les info
+
 
         //fenetre info (en bas)
         JPanel panel2 = new JPanel(); // ma fenetre au sud pour les info
-        panel2.setLayout(new GridLayout(4,1)); // ligne, colonne
+        panel2.setLayout(new GridLayout(4, 1)); // ligne, colonne
         panel2.setBackground(Color.black);
         panel2.setForeground(Color.white);
         panel2.setBorder(BorderFactory.createLineBorder(Color.white, 1));
-        contentpane.add(panel2,BorderLayout.SOUTH);
+        contentpane.add(panel2, BorderLayout.SOUTH);
         panel2.add(ZoneAffichageTitre);
         panel2.add(ZoneAffichageAuteur);
         panel2.add(ZoneAffichageDateC);
         panel2.add(ZoneAffichageDuree);
         panel2.add(ZoneAffichageExtension);
-        panel2.add(ZoneAffichageTitre3);
-        panel2.setPreferredSize(new Dimension(0,50)); //pas besoin de mettre de valeur en x vue que elle est mise automatiquement
+        panel2.setPreferredSize(new Dimension(0, 50)); //pas besoin de mettre de valeur en x vue que elle est mise automatiquement
 
         // ajout d'une frontière qui bouge entre le tree et la fenetre centrale
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT , JCB , panel1);
-        contentpane.add(splitPane);
+        //JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT , JCB , panel1); // on est remettra un quand la fenetre sera faite
+        //contentpane.add(splitPane);
 
         //zone de texte recherche //on recupère en temps réel le texte
         ZoneDeTexte.setBackground(Color.black);
         ZoneDeTexte.setForeground(Color.white);
-
-
+    }
+    public void TriExtension(){
         ArrayList<String> extensionss = new ArrayList<>();
         final boolean[] vrai = {false};
         final boolean[] vrai2 = {false};
