@@ -261,6 +261,7 @@ public class interfaceplayer extends JFrame  {
             System.out.println("le path du dossier interfaceplayer.setpanel1 : "+path);
             System.out.println("le path du fichier interfaceplayer.setpanel1 : "+pathTitre);
             System.out.println("le titreVideo interfaceplayer.setpanel1 : "+titreVideo);
+            System.out.println("si le getSelectedValue et le titreVideo sont différent c'est qu'il y a une erreur");
             /*if (path.contains("/")){
             String [] listepathVideo = path.split("/" );
             System.out.println("listepathVideo de interfaceplayer.setpanel1 / "+listepathVideo[listepathVideo.length-1]);
