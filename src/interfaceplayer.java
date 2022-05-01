@@ -238,6 +238,13 @@ public class interfaceplayer extends JFrame  {
         });
         mbr.add(BoutonModifData);
 
+        //bouton panel affiche playlist
+        JButton BoutonShowPlaylist = new JButton();
+        BoutonShowPlaylist.setIcon(new ImageIcon("image/playlist.png"));
+        BoutonShowPlaylist.setToolTipText("Ouvre une nouvelle fenêtre pour voir la playlist");
+        BoutonShowPlaylist.addActionListener(e -> new PanelShowPlaylist());
+
+        mbr.add(BoutonShowPlaylist);
 
         //bouton d'aide
         JButton BoutonAide = new JButton();
@@ -245,6 +252,8 @@ public class interfaceplayer extends JFrame  {
         BoutonAide.setToolTipText("Ouvre une page d'aide");
         BoutonAide.addActionListener(e -> new OpenPageHelp());
         mbr.add(BoutonAide);
+
+
 
         return mbr;
     }
@@ -264,22 +273,8 @@ public class interfaceplayer extends JFrame  {
             ZoneTitre.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
                     if (SwingUtilities.isLeftMouseButton(e) && e.getClickCount() == 2) {
-                        titreVideo=ZoneTitre.getSelectedValue();
-                        pathTitre = path + "\\"+ZoneTitre.getSelectedValue();
+                        actionClicZoneTitre ();
 
-                        System.out.println("le getSelectedValue interfaceplayer.setpanel1 : "+ZoneTitre.getSelectedValue());
-                        System.out.println("le path du dossier interfaceplayer.setpanel1 : "+path);
-                        System.out.println("le path du fichier interfaceplayer.setpanel1 : "+pathTitre);
-                        System.out.println("le titreVideo interfaceplayer.setpanel1 : "+titreVideo);
-                        System.out.println("si le getSelectedValue et le titreVideo sont différent c'est qu'il y a une erreur");
-
-                        ZoneAffichageExtension.setText(ExtensionGetTexte());//Readerwiwi("fan.mp4","Expected File Name Extension") // le mettre en premier sinon ca l'update pas pour les gif et les avi
-                        ZoneAffichageTitre.setText("Titre :   " + titreVideo); // il faut définir chacune des Zones avant la fonction car sinon on ne peut pas accéder a au Zones dans l'action
-                        //ZoneAffichageAuteur.setText(); //attend que l'api de william sois prête
-                        ZoneAffichageDateC.setText("Date de création :   " + Readerwiwi(pathTitre, "Creation Time"));
-                        ZoneAffichageDuree.setText("Durée :     " + Readerwiwi(pathTitre, "Duration in Seconds"));
-                        new VideoReader(pathTitre); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
-//                        VideoReader.close(); // oblige de faire ca sinon il y a 2 fenêtres
                     }
                 }
             });
@@ -291,35 +286,36 @@ public class interfaceplayer extends JFrame  {
 
         contentpane.add(panel1);
     }
+    public void actionClicZoneTitre () {
 
+
+        titreVideo = ZoneTitre.getSelectedValue();
+        pathTitre = path + "\\" + ZoneTitre.getSelectedValue();
+
+        System.out.println("le getSelectedValue interfaceplayer.setpanel1 : " + ZoneTitre.getSelectedValue());
+        System.out.println("le path du dossier interfaceplayer.setpanel1 : " + path);
+        System.out.println("le path du fichier interfaceplayer.setpanel1 : " + pathTitre);
+        System.out.println("le titreVideo interfaceplayer.setpanel1 : " + titreVideo);
+        System.out.println("si le getSelectedValue et le titreVideo sont différent c'est qu'il y a une erreur");
+
+        ZoneAffichageExtension.setText(ExtensionGetTexte());//Readerwiwi("fan.mp4","Expected File Name Extension") // le mettre en premier sinon ca l'update pas pour les gif et les avi
+        ZoneAffichageTitre.setText("Titre :   " + titreVideo); // il faut définir chacune des Zones avant la fonction car sinon on ne peut pas accéder a au Zones dans l'action
+        //ZoneAffichageAuteur.setText(); //attend que l'api de william sois prête
+        ZoneAffichageDateC.setText("Date de création :   " + Readerwiwi(pathTitre, "Creation Time"));
+        ZoneAffichageDuree.setText("Durée :     " + Readerwiwi(pathTitre, "Duration in Seconds"));
+        new VideoReader(pathTitre); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
+//                        VideoReader.close(); // oblige de faire ca sinon il y a 2 fenêtres
+    }
     public void PopMenuClicDroit(){
         JPopupMenu ClicDroitMenu = new JPopupMenu("Menu");
 
         JMenuItem ouvrir = new JMenuItem("Ouvrir");
-        ZoneTitre.addListSelectionListener(et -> {
-            ZoneTitre.addMouseListener(new MouseAdapter() {
-                public void mouseClicked(MouseEvent e) {
-                    if (SwingUtilities.isRightMouseButton(e) && e.getClickCount() == 1) {
-                        titreVideo = ZoneTitre.getSelectedValue();
-                        pathTitre = path + "\\"+ZoneTitre.getSelectedValue();
-
-                        System.out.println("le getSelectedValue interfaceplayer.setpanel1 : "+ZoneTitre.getSelectedValue());
-                        System.out.println("le path du dossier interfaceplayer.setpanel1 : "+path);
-                        System.out.println("le path du fichier interfaceplayer.setpanel1 : "+pathTitre);
-                        System.out.println("le titreVideo interfaceplayer.setpanel1 : "+titreVideo);
-                        System.out.println("si le getSelectedValue et le titreVideo sont différent c'est qu'il y a une erreur");
-
-                        ZoneAffichageExtension.setText(ExtensionGetTexte());//Readerwiwi("fan.mp4","Expected File Name Extension") // le mettre en premier sinon ca l'update pas pour les gif et les avi
-                        ZoneAffichageTitre.setText("Titre :   " + titreVideo); // il faut définir chacune des Zones avant la fonction car sinon on ne peut pas accéder a au Zones dans l'action
-                        //ZoneAffichageAuteur.setText(); //attend que l'api de william sois prête
-                        ZoneAffichageDateC.setText("Date de création :   " + Readerwiwi(pathTitre, "Creation Time"));
-                        ZoneAffichageDuree.setText("Durée :     " + Readerwiwi(pathTitre, "Duration in Seconds"));
-                        new VideoReader(pathTitre); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
-                        //VideoReader.closeFrame(); // oblige de faire ca sinon il y a 2 fenêtres
-                    }
-                }
+        ouvrir.addActionListener(e -> {
+            ZoneTitre.addListSelectionListener(et -> {
+                actionClicZoneTitre();
             });
         });
+
         JMenuItem addPlaylist = new JMenuItem("Ajouter à la playlist");
         addPlaylist.addActionListener(e -> {
             pathTitre = path + "\\"+ZoneTitre.getSelectedValue();
@@ -329,14 +325,13 @@ public class interfaceplayer extends JFrame  {
         ClicDroitMenu.add(ouvrir);
         ClicDroitMenu.add(addPlaylist);
 
-        ZoneTitre.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                //événement click droit de la souris
-                if (SwingUtilities.isRightMouseButton(e) && e.getClickCount() == 1){
-                    ClicDroitMenu.show(ZoneTitre , e.getX(), e.getY());
+            ZoneTitre.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    if (SwingUtilities.isRightMouseButton(e) && e.getClickCount() == 1) {
+                        ClicDroitMenu.show(ZoneTitre, e.getX(), e.getY());
+                    }
                 }
-            }
-        });
+            });
 
     }
 
