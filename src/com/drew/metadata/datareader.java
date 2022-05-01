@@ -18,8 +18,8 @@ import java.nio.file.Paths;
 
 public class datareader {
     public static String Readerwiwi(String path,String data){ // detecte le reader de l'extension
-        Path currentRelativePath = Paths.get("");
-        String s = currentRelativePath.toAbsolutePath().toString();
+//        Path currentRelativePath = Paths.get("");
+//        String s = currentRelativePath.toAbsolutePath().toString();
         File file = new File(path);
         try {
             Metadata metadata = ImageMetadataReader.readMetadata(file);
@@ -116,10 +116,9 @@ public class datareader {
         return "il n'y a pas de titre";
     }
 
-    public static void main(String[] args) throws TikaException, IOException, SAXException {
-        System.out.println("titre:"+ReaderTitle("1365070268951.mp4"));
-        System.out.println(Readerwiwi("fan.mp4","ALL"));
-        //System.out.println(Readerwiwi("fan.mp4","File Name"));
-
-    }
+//    public static void main(String[] args) throws TikaException, IOException, SAXException {
+//        System.out.println("titre:"+ReaderTitle("1365070268951.mp4"));
+//        System.out.println(Readerwiwi("fan.mp4","ALL"));
+//        //System.out.println(Readerwiwi("fan.mp4","File Name"));
+//    }
 }

@@ -1,8 +1,6 @@
-import com.example.demo.HelloApplication;
+import com.example.demo.VideoReader;
 
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,9 +13,9 @@ public class recherche {
 
     public static List<String> fichiers = new ArrayList<>();
 
-    static void liste_fichier(){
-        Path currentRelativePath = Paths.get("");
-        String s = currentRelativePath.toAbsolutePath().toString();
+    public static void liste_fichier(){
+//        Path currentRelativePath = Paths.get("");
+//        String s = currentRelativePath.toAbsolutePath().toString();
         // creates a file object
         //File file = new File(s+"/video");
         File file = new File(String.valueOf(SelectFiles.openfichier()));
@@ -29,7 +27,7 @@ public class recherche {
         String[] ChaineS = file.toString().split("\\\\");
         //System.out.println(ChaineS[ChaineS.length-1]);
         if (ChaineS[ChaineS.length-1] != "null"){
-            HelloApplication.main(file.toString());
+            new VideoReader(file.toString());
         }
     }
     public static void liste_dossier(){
@@ -54,7 +52,7 @@ public class recherche {
         return file;
     }
 
-    public static String Extension(String titre){
+    public String Extension(String titre){
         String []titreChaine = titre.split("\\."); // \\pour dire qu'on split bien avec un . sinon  ca fonctionne pas
         return titreChaine[titreChaine.length-1];
     }
@@ -86,7 +84,7 @@ public class recherche {
     }
 
 
-    public static String[] barreRechercheExtension(String video){
+    public String[] barreRechercheExtension(String video){
         int compteur = 0;
         int compteur_liste = 0;
 
@@ -109,11 +107,11 @@ public class recherche {
         return temp;
     }
 
-    static void affichage(String[] liste){
-        for (String s : liste) {
-            System.out.println(s);
-        }
-        //System.out.println(liste.length);
-        //System.out.println("stop");
-    }
+//    static void affichage(String[] liste){
+//        for (String s : liste) {
+//            System.out.println(s);
+//        }
+//        //System.out.println(liste.length);
+//        //System.out.println("stop");
+//    }
 }

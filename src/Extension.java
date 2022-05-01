@@ -44,12 +44,11 @@ public class Extension {
         }
     }
 
-    public static void main(String [] args) throws IOException, TikaException, SAXException {
-        ArrayList<String> ext = new ArrayList<String>();
-        ext.add(".mp3");
-        ext.add(".mp4");
-        //System.out.println(ext);
-        autre();
-
-    }
+//    public static void main(String [] args) throws IOException, TikaException, SAXException {
+//        ArrayList<String> ext = new ArrayList<String>();
+//        ext.add(".mp3");
+//        ext.add(".mp4");
+//        //System.out.println(ext);
+//        autre();
+//    }
 }

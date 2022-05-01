@@ -13,20 +13,18 @@ import javafx.scene.media.MediaView;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 
-public class HelloApplication {
+public class VideoReader {
 
-    public static String file ;
+    public  String file ;
     public static JFrame frame = new JFrame("BVW / Lecteur vidéos");
-    public static JPanel panelVideo;
-    public static JPanel panelFx;
+    public  JPanel panelVideo;
+    public  JPanel panelFx;
     //private static MediaPlayer mediaPlayer;
-    public static Image icon = Toolkit.getDefaultToolkit().getImage("image/BVW.png");
+    public  Image icon = Toolkit.getDefaultToolkit().getImage("image/BVW.png");
 
-    private static void initAndShowGUI() {
+    private void initAndShowGUI() {
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -38,7 +36,7 @@ public class HelloApplication {
         frame.setIconImage(icon);
         createPanel();
     }
-    private static void createPanel(){
+    private void createPanel(){
         //créer un panel pour réunir la video + la barre avec les boutons pour la modif de la vidéo
         panelVideo = new JPanel(new BorderLayout());
         //on met de border pour que ça sois plus joli
@@ -86,7 +84,7 @@ public class HelloApplication {
         Platform.runLater(() -> initFX(fxPanel));
 
     }
-    private static void fenetreFullScreen (){
+    private void fenetreFullScreen (){
         JFrame frameVideo = new JFrame("BVW / Lecture");
         frameVideo.setLayout(new BorderLayout());
         frameVideo.setIconImage(icon);
@@ -118,7 +116,7 @@ public class HelloApplication {
             //exitMP();
             close(frameVideo);
             //System.out.println(file);
-            main(file);
+            new VideoReader(file);
         });
 
         panelOptionFullScreen.add(boutonPlay);
@@ -129,30 +127,29 @@ public class HelloApplication {
         Platform.runLater(() -> initFX(fxPanel));
     }
     private static MediaPlayer mediaPlayer;
-    private static void actionPlay(){
+    private void actionPlay(){
         mediaPlayer.play();
     }
 
-    public static void closeFrame(){ // parce que j'ai 2 fenêtres qui s'ouvrent
+
+    private static void close (Frame frame){
         frame.dispose();
     }
-    private static void close(JFrame frame){
-        frame.dispose();
+    public static void close(){ //pour éviter la surcharge
+        close(frame);
     }
-    private static void exitMP(){
+    private void exitMP(){
         mediaPlayer.stop();
         mediaPlayer.dispose();
         mediaPlayer = null;
     }
 
-    private static void initFX(JFXPanel fxPanel) { // beug sur cette partie je pense (media , mediaplayer , mediaview??)
+    private void initFX(JFXPanel fxPanel) { // beug sur cette partie je pense (media , mediaplayer , mediaview??)
 
-        Media media;
-        media = new Media(new File(file).toURI().toString());
+        Media media = new Media(new File(file).toURI().toString()); // il faudrait faire un code de verification si le media existe
         mediaPlayer = new MediaPlayer(media);
         //mediaPlayer.setAutoPlay(false);
-        MediaView mediaView = null;
-        mediaView = new MediaView(mediaPlayer);
+        MediaView mediaView = new MediaView(mediaPlayer);
 
         Group root = new Group();
         root.getChildren().add(mediaView);
@@ -169,12 +166,13 @@ public class HelloApplication {
         fxPanel.setScene(new Scene(new Group(mediaView), panelVideo.getWidth(), panelVideo.getHeight()));
     }
 
-    private static void actionStop(){
+    private void actionStop(){
         mediaPlayer.stop();
     }
-    private static void actionPause(){
+    private void actionPause(){
         mediaPlayer.pause();
     }
+
 
     /*public static String UpdatePath(){
         Path currentRelativePath = Paths.get("");
@@ -183,13 +181,10 @@ public class HelloApplication {
         path = (s+"/video/"+file);
         return path;
     }*/
-
-    public static void main(String lien) {//,String path
+    public VideoReader(String lien) {//,String path
         //SwingUtilities.invokeLater(() -> {
-            file = lien;
-            //System.out.println("c'est le hello :"+file);
-            initAndShowGUI();
+        file = lien;
+        initAndShowGUI();
         //});
-
     }
 }

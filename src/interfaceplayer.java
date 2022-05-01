@@ -1,8 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -10,31 +8,28 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 import static com.drew.metadata.datareader.Readerwiwi;
 
-import com.example.demo.HelloApplication;
-import com.rometools.rome.io.SyndFeedOutput;
+import com.example.demo.VideoReader;
 
 public class interfaceplayer extends JFrame  {
 
     public String path = null;
     public String titreVideo;
-    public static JLabel ZoneAffichageTitre = new JLabel();
+    public  JLabel ZoneAffichageTitre = new JLabel();
     public JLabel ZoneAffichageAuteur = new JLabel();  // voir a zoneTitre Pourquoi elles sont ici
     public JLabel ZoneAffichageDateC = new JLabel();
     public JLabel ZoneAffichageDuree = new JLabel();
     public JLabel ZoneAffichageExtension = new JLabel();
-    public static JCheckBoxMenuItem ext3;
-    public static JCheckBoxMenuItem ext2;
-    public static JCheckBoxMenuItem ext1;
-    public static Image icon = Toolkit.getDefaultToolkit().getImage("image/BVW.png");
-    public static JPanel panel1 = new JPanel(); //ma fenetre droite // défini ici car j'en est besoin plus haut
+    public  JCheckBoxMenuItem ext3;
+    public  JCheckBoxMenuItem ext2;
+    public  JCheckBoxMenuItem ext1;
+    public  Image icon = Toolkit.getDefaultToolkit().getImage("image/BVW.png");
+    public  JPanel panel1 = new JPanel(); //ma fenetre droite // défini ici car j'en est besoin plus haut
     public JPanel contentpane = (JPanel) getContentPane();
-    public static JTextField ZoneDeTexte;
-    public static JList<String> ZoneTitre;
-    public static JPanel panelInfo = new JPanel(new GridLayout(9,1));
-    public int MaxBouton;
-    public JPanel panelBoutonAddPlaylist;
-    public static String pathTitre;
-    public static File PathDossier;
+    public  JTextField ZoneDeTexte;
+    public  JList<String> ZoneTitre;
+    public  JPanel panelInfo = new JPanel(new GridLayout(9,1));
+    public  String pathTitre;
+    public  File PathDossier;
 
 
     public interfaceplayer() {
@@ -248,7 +243,7 @@ public class interfaceplayer extends JFrame  {
         JButton BoutonAide = new JButton();
         BoutonAide.setIcon(new ImageIcon("image/aide6.png"));
         BoutonAide.setToolTipText("Ouvre une page d'aide");
-        BoutonAide.addActionListener(e -> OpenPageHelp.main(null));
+        BoutonAide.addActionListener(e -> new OpenPageHelp());
         mbr.add(BoutonAide);
 
         return mbr;
@@ -268,7 +263,7 @@ public class interfaceplayer extends JFrame  {
         ZoneTitre.addListSelectionListener(et -> {
             ZoneTitre.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
-                    if (e.getClickCount() == 2) {
+                    if (SwingUtilities.isLeftMouseButton(e) && e.getClickCount() == 2) {
                         titreVideo=ZoneTitre.getSelectedValue();
                         pathTitre = path + "\\"+ZoneTitre.getSelectedValue();
 
@@ -283,8 +278,8 @@ public class interfaceplayer extends JFrame  {
                         //ZoneAffichageAuteur.setText(); //attend que l'api de william sois prête
                         ZoneAffichageDateC.setText("Date de création :   " + Readerwiwi(pathTitre, "Creation Time"));
                         ZoneAffichageDuree.setText("Durée :     " + Readerwiwi(pathTitre, "Duration in Seconds"));
-                        HelloApplication.main(pathTitre); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
-                        //HelloApplication.closeFrame(); // oblige de faire ca sinon il y a 2 fenêtres
+                        new VideoReader(pathTitre); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
+//                        VideoReader.close(); // oblige de faire ca sinon il y a 2 fenêtres
                     }
                 }
             });
@@ -296,44 +291,39 @@ public class interfaceplayer extends JFrame  {
 
         contentpane.add(panel1);
     }
-    /*public void SetpanelBouton(){
-        panelBoutonAddPlaylist = new JPanel();
-        panelBoutonAddPlaylist.setBackground(Color.gray);
-        panelBoutonAddPlaylist.setPreferredSize(new Dimension(20,0));
-        //MaxBouton = ZoneTitre.getMaxSelectionIndex();
-        System.out.println(MaxBouton);
-        panelBoutonAddPlaylist.setLayout(new GridLayout(MaxBouton,1));
-        JButton boutonAddPlaylist = new JButton();
-        boutonAddPlaylist.setIcon(new ImageIcon("image/addplaylist.png"));
-        boutonAddPlaylist.setSize(new Dimension(10,10));
-        for (int i = 0;i<MaxBouton;i++){
-            panelBoutonAddPlaylist.add(boutonAddPlaylist);
-            System.out.println(i);
-        }
-        panel1.add(panelBoutonAddPlaylist,BorderLayout.EAST);
-    }*/
 
     public void PopMenuClicDroit(){
         JPopupMenu ClicDroitMenu = new JPopupMenu("Menu");
 
         JMenuItem ouvrir = new JMenuItem("Ouvrir");
-        ouvrir.addActionListener(e -> {
-            ZoneTitre.addListSelectionListener(et -> {
-                titreVideo = ZoneTitre.getSelectedValue();
-                ZoneAffichageExtension.setText(ExtensionGetTexte());//Readerwiwi("fan.mp4","Expected File Name Extension") // le mettre en premier sinon ca l'update pas pour les gif et les avi
-                ZoneAffichageTitre.setText("Titre :   " + titreVideo); // il faut définir chacune des Zones avant la fonction car sinon on ne peut pas accéder a au Zones dans l'action
-                //ZoneAffichageAuteur.setText(); //attend que l'api de william sois prête
-                ZoneAffichageDateC.setText("Date de création :   " + Readerwiwi(titreVideo, "Creation Time"));
-                ZoneAffichageDuree.setText("Durée :     " + Readerwiwi(titreVideo, "Duration in Seconds"));
-                //System.out.println(path);
-                HelloApplication.main( path); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
-                //System.out.println(path);
-                HelloApplication.closeFrame(); // oblige de faire ca sinon il y a 2 fenêtres
+        ZoneTitre.addListSelectionListener(et -> {
+            ZoneTitre.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    if (SwingUtilities.isRightMouseButton(e) && e.getClickCount() == 1) {
+                        titreVideo = ZoneTitre.getSelectedValue();
+                        pathTitre = path + "\\"+ZoneTitre.getSelectedValue();
+
+                        System.out.println("le getSelectedValue interfaceplayer.setpanel1 : "+ZoneTitre.getSelectedValue());
+                        System.out.println("le path du dossier interfaceplayer.setpanel1 : "+path);
+                        System.out.println("le path du fichier interfaceplayer.setpanel1 : "+pathTitre);
+                        System.out.println("le titreVideo interfaceplayer.setpanel1 : "+titreVideo);
+                        System.out.println("si le getSelectedValue et le titreVideo sont différent c'est qu'il y a une erreur");
+
+                        ZoneAffichageExtension.setText(ExtensionGetTexte());//Readerwiwi("fan.mp4","Expected File Name Extension") // le mettre en premier sinon ca l'update pas pour les gif et les avi
+                        ZoneAffichageTitre.setText("Titre :   " + titreVideo); // il faut définir chacune des Zones avant la fonction car sinon on ne peut pas accéder a au Zones dans l'action
+                        //ZoneAffichageAuteur.setText(); //attend que l'api de william sois prête
+                        ZoneAffichageDateC.setText("Date de création :   " + Readerwiwi(pathTitre, "Creation Time"));
+                        ZoneAffichageDuree.setText("Durée :     " + Readerwiwi(pathTitre, "Duration in Seconds"));
+                        new VideoReader(pathTitre); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
+                        //VideoReader.closeFrame(); // oblige de faire ca sinon il y a 2 fenêtres
+                    }
+                }
             });
         });
         JMenuItem addPlaylist = new JMenuItem("Ajouter à la playlist");
         addPlaylist.addActionListener(e -> {
-            recherche.liste_fichier();
+            pathTitre = path + "\\"+ZoneTitre.getSelectedValue();
+            Playlist.ajout(pathTitre);
         });
 
         ClicDroitMenu.add(ouvrir);
@@ -459,7 +449,7 @@ public class interfaceplayer extends JFrame  {
         contentpane.add(ZoneDeTexte,BorderLayout.NORTH); //fenetre a ecrire
     }
 
-    public static String ExtensionGetTexte(){
+    public String ExtensionGetTexte(){
         String titre = ZoneAffichageTitre.getText();
         String []titreChaine = titre.split("\\."); //pour dire qu'on split bien avec un . sinon  ca fonctionne pas
         return titreChaine[titreChaine.length-1];
@@ -476,8 +466,6 @@ public class interfaceplayer extends JFrame  {
         fenetre.dispose();
         new interfaceplayer();
 
-
-
-        //HelloApplication.main(null,null); //à l'ouverture de cette fenêtre on ferme la page de principal et quand on ferme cette page on r'ouvre la page principal
+        //VideoReader.main(null,null); //à l'ouverture de cette fenêtre on ferme la page de principal et quand on ferme cette page on r'ouvre la page principal
     }
 }

@@ -12,16 +12,16 @@ public class Playlist {
         liste.removeLast();
     }
 
-    public static void main(String [] args){
-        recherche.liste_fichier();
-
-        for(String a : recherche.fichiers){
-            //System.out.println(a);
-            ajout(a);
-        }
-
-        System.out.println(liste);
-        retire();
-        System.out.println(liste);
-    }
+//    public static void main(String [] args){
+//        recherche.liste_fichier();
+//
+//        for(String a : recherche.fichiers){
+//            //System.out.println(a);
+//            ajout(a);
+//        }
+//
+//        System.out.println(liste);
+//        retire();
+//        System.out.println(liste);
+//    }
 }

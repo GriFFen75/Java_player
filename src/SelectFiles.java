@@ -76,8 +76,4 @@ public class SelectFiles
         return null;
     }
 
-    public static void main(String[] args) {
-        //openfichier();
-        //System.out.println(openfichier());
-    }
 } 
