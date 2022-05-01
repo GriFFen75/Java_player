@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -29,6 +30,11 @@ public class interfaceplayer extends JFrame  {
     public JPanel contentpane = (JPanel) getContentPane();
     public static JTextField ZoneDeTexte;
     public static JList<String> ZoneTitre;
+    public static JPanel panelInfo = new JPanel(new GridLayout(9,1));
+    public int MaxBouton;
+    public JPanel panelBoutonAddPlaylist;
+    public static String pathTitre;
+    public static File PathDossier;
 
 
     public interfaceplayer() {
@@ -63,6 +69,9 @@ public class interfaceplayer extends JFrame  {
        //on ajoute le fonctionnement au tri par extension
        TriExtension();
 
+       // on ajoute le panel des metadata
+        SetPanelInfo();
+
     }
     public JMenuBar CreationMenuBar() {
 
@@ -77,15 +86,19 @@ public class interfaceplayer extends JFrame  {
         openFiles.setIcon(new ImageIcon("image/openFiles.png"));
         openFiles.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
         openFiles.addActionListener(e -> {
+
             recherche.liste_fichier();
         });
         JMenuItem openFolder = new JMenuItem("Ouvrir un dossier");
         openFolder.setIcon(new ImageIcon("image/openFolder.png"));
         openFolder.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_MASK));
         openFolder.addActionListener(e -> {
+            ZoneTitre.removeAll();
             recherche.liste_dossier();
+            PathDossier = recherche.pathDossier();
+            path = PathDossier.toString();
         });
-
+        System.out.println(PathDossier);
         mnuOpen.add(openFiles);
         mnuOpen.add(openFolder);
 
@@ -252,22 +265,99 @@ public class interfaceplayer extends JFrame  {
         JScrollPane JSP = new JScrollPane(panel1);
         //panel1.setPreferredSize(new Dimension(200,0));
         ZoneTitre.setBackground(Color.lightGray);
-        ZoneTitre.addListSelectionListener(e -> {
-            titreVideo = ZoneTitre.getSelectedValue();
-            ZoneAffichageExtension.setText(ExtensionGetTexte());//Readerwiwi("fan.mp4","Expected File Name Extension") // le mettre en premier sinon ca l'update pas pour les gif et les avi
-            ZoneAffichageTitre.setText("Titre :   " + titreVideo); // il faut définir chacune des Zones avant la fonction car sinon on ne peut pas accéder a au Zones dans l'action
-            //ZoneAffichageAuteur.setText(); //attend que l'api de william sois prête
-            ZoneAffichageDateC.setText("Date de création :   " + Readerwiwi(titreVideo, "Creation Time"));
-            ZoneAffichageDuree.setText("Durée :     " + Readerwiwi(titreVideo, "Duration in Seconds"));
-            //System.out.println(path);
-            HelloApplication.main( path); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
-            //System.out.println(path);
-            HelloApplication.closeFrame(); // oblige de faire ca sinon il y a 2 fenêtres
+        ZoneTitre.addListSelectionListener(et -> {
+            ZoneTitre.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    if (e.getClickCount() == 2) {
+                        titreVideo=ZoneTitre.getSelectedValue();
+                        pathTitre = path + "\\"+ZoneTitre.getSelectedValue();
 
+                        System.out.println("le getSelectedValue interfaceplayer.setpanel1 : "+ZoneTitre.getSelectedValue());
+                        System.out.println("le path du dossier interfaceplayer.setpanel1 : "+path);
+                        System.out.println("le path du fichier interfaceplayer.setpanel1 : "+pathTitre);
+                        System.out.println("le titreVideo interfaceplayer.setpanel1 : "+titreVideo);
+                        System.out.println("si le getSelectedValue et le titreVideo sont différent c'est qu'il y a une erreur");
+
+                        ZoneAffichageExtension.setText(ExtensionGetTexte());//Readerwiwi("fan.mp4","Expected File Name Extension") // le mettre en premier sinon ca l'update pas pour les gif et les avi
+                        ZoneAffichageTitre.setText("Titre :   " + titreVideo); // il faut définir chacune des Zones avant la fonction car sinon on ne peut pas accéder a au Zones dans l'action
+                        //ZoneAffichageAuteur.setText(); //attend que l'api de william sois prête
+                        ZoneAffichageDateC.setText("Date de création :   " + Readerwiwi(pathTitre, "Creation Time"));
+                        ZoneAffichageDuree.setText("Durée :     " + Readerwiwi(pathTitre, "Duration in Seconds"));
+                        HelloApplication.main(pathTitre); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
+                        //HelloApplication.closeFrame(); // oblige de faire ca sinon il y a 2 fenêtres
+                    }
+                }
+            });
         });
 
-        panel1.add(ZoneTitre, BorderLayout.NORTH);
+        panel1.add(ZoneTitre, BorderLayout.WEST);
+
+        PopMenuClicDroit();
+
         contentpane.add(panel1);
+    }
+    /*public void SetpanelBouton(){
+        panelBoutonAddPlaylist = new JPanel();
+        panelBoutonAddPlaylist.setBackground(Color.gray);
+        panelBoutonAddPlaylist.setPreferredSize(new Dimension(20,0));
+        //MaxBouton = ZoneTitre.getMaxSelectionIndex();
+        System.out.println(MaxBouton);
+        panelBoutonAddPlaylist.setLayout(new GridLayout(MaxBouton,1));
+        JButton boutonAddPlaylist = new JButton();
+        boutonAddPlaylist.setIcon(new ImageIcon("image/addplaylist.png"));
+        boutonAddPlaylist.setSize(new Dimension(10,10));
+        for (int i = 0;i<MaxBouton;i++){
+            panelBoutonAddPlaylist.add(boutonAddPlaylist);
+            System.out.println(i);
+        }
+        panel1.add(panelBoutonAddPlaylist,BorderLayout.EAST);
+    }*/
+
+    public void PopMenuClicDroit(){
+        JPopupMenu ClicDroitMenu = new JPopupMenu("Menu");
+
+        JMenuItem ouvrir = new JMenuItem("Ouvrir");
+        ouvrir.addActionListener(e -> {
+            ZoneTitre.addListSelectionListener(et -> {
+                titreVideo = ZoneTitre.getSelectedValue();
+                ZoneAffichageExtension.setText(ExtensionGetTexte());//Readerwiwi("fan.mp4","Expected File Name Extension") // le mettre en premier sinon ca l'update pas pour les gif et les avi
+                ZoneAffichageTitre.setText("Titre :   " + titreVideo); // il faut définir chacune des Zones avant la fonction car sinon on ne peut pas accéder a au Zones dans l'action
+                //ZoneAffichageAuteur.setText(); //attend que l'api de william sois prête
+                ZoneAffichageDateC.setText("Date de création :   " + Readerwiwi(titreVideo, "Creation Time"));
+                ZoneAffichageDuree.setText("Durée :     " + Readerwiwi(titreVideo, "Duration in Seconds"));
+                //System.out.println(path);
+                HelloApplication.main( path); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
+                //System.out.println(path);
+                HelloApplication.closeFrame(); // oblige de faire ca sinon il y a 2 fenêtres
+            });
+        });
+        JMenuItem addPlaylist = new JMenuItem("Ajouter à la playlist");
+        addPlaylist.addActionListener(e -> {
+            recherche.liste_fichier();
+        });
+
+        ClicDroitMenu.add(ouvrir);
+        ClicDroitMenu.add(addPlaylist);
+
+        ZoneTitre.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                //événement click droit de la souris
+                if (SwingUtilities.isRightMouseButton(e) && e.getClickCount() == 1){
+                    ClicDroitMenu.show(ZoneTitre , e.getX(), e.getY());
+                }
+            }
+        });
+
+    }
+
+    public void SetPanelInfo(){
+        //code du panel pour les infos
+        panelInfo.setBackground(Color.black);
+        panelInfo.setForeground(Color.white);
+        panelInfo.setPreferredSize(new Dimension(200,0));
+        panelInfo.add(new JTextField("coucou"));
+        // on ajoute ce qu'on veut ici
+        contentpane.add(panelInfo,BorderLayout.WEST);
     }
     public void SetPanel2() {
         ZoneAffichageTitre.setForeground(Color.white);
@@ -276,8 +366,6 @@ public class interfaceplayer extends JFrame  {
         ZoneAffichageDuree.setForeground(Color.white);
         ZoneAffichageExtension.setForeground(Color.white);
         ZoneAffichageAuteur.setMaximumSize(new Dimension(20, 0)); // on peut définir une taille maximale
-
-        //la scrollbar pour la fenetre de dossier //////////////////mettre le nouveau panel pour les info
 
 
         //fenetre info (en bas)
@@ -294,13 +382,14 @@ public class interfaceplayer extends JFrame  {
         panel2.add(ZoneAffichageExtension);
         panel2.setPreferredSize(new Dimension(0, 50)); //pas besoin de mettre de valeur en x vue que elle est mise automatiquement
 
-        // ajout d'une frontière qui bouge entre le tree et la fenetre centrale
-        //JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT , JCB , panel1); // on est remettra un quand la fenetre sera faite
-        //contentpane.add(splitPane);
+        // ajout d'une frontière qui bouge entre le panelInfo et la fenetre centrale
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT , panelInfo , panel1); // on est remettra un quand la fenetre sera faite
+        contentpane.add(splitPane);
 
         //zone de texte recherche //on recupère en temps réel le texte
         ZoneDeTexte.setBackground(Color.black);
         ZoneDeTexte.setForeground(Color.white);
+
     }
     public void TriExtension(){
         ArrayList<String> extensionss = new ArrayList<>();
@@ -318,6 +407,9 @@ public class interfaceplayer extends JFrame  {
                 //System.out.println(texte);
 
                 // ici william, ou e parle tut seul
+                //MaxBouton = ZoneTitre.getLastVisibleIndex(); // pour savoir le nombre max de titre qu'il y a affiché
+                //System.out.println("le MaxBouton a mettre dans triExtension : "+MaxBouton);
+                //SetpanelBouton();
 
                 //System.out.println("??");
                 // pour faire fonctionner les boutons d'extension
