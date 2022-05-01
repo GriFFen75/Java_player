@@ -120,6 +120,7 @@ public class HelloApplication {
             //System.out.println(file);
             main(file);
         });
+
         panelOptionFullScreen.add(boutonPlay);
         panelOptionFullScreen.add(boutonPause);
         panelOptionFullScreen.add(boutonStop);
