@@ -244,7 +244,11 @@ public class interfaceplayer extends JFrame  {
         JButton BoutonShowPlaylist = new JButton();
         BoutonShowPlaylist.setIcon(new ImageIcon("image/playlist.png"));
         BoutonShowPlaylist.setToolTipText("Ouvre une nouvelle fenêtre pour voir la playlist");
-        BoutonShowPlaylist.addActionListener(e -> new PanelShowPlaylist());
+        BoutonShowPlaylist.addActionListener(e -> {
+            PanelShowPlaylist panel = new PanelShowPlaylist();
+            panel.add(Playlist.affichage());
+        });
+
 
         mbr.add(BoutonShowPlaylist);
 
