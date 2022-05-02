@@ -327,8 +327,9 @@ public class interfaceplayer extends JFrame  {
 
         JMenuItem addPlaylist = new JMenuItem("Ajouter à la playlist");
         addPlaylist.addActionListener(e -> {
-            pathTitre = path + "\\"+ZoneTitre.getSelectedValue();
-            Playlist.ajout(pathTitre);
+            pathTitre = path + "/"+ZoneTitre.getSelectedValue();
+            //System.out.println("bizzare nbon /"+ZoneTitre.getSelectedValue());
+            Playlist.ajout(ZoneTitre.getSelectedValue());
         });
 
         ClicDroitMenu.add(ouvrir);
