@@ -20,9 +20,9 @@ public class interfaceplayer extends JFrame  {
     public JLabel ZoneAffichageDateC = new JLabel();
     public JLabel ZoneAffichageDuree = new JLabel();
     public JLabel ZoneAffichageExtension = new JLabel();
-    public  JCheckBoxMenuItem ext3;
-    public  JCheckBoxMenuItem ext2;
-    public  JCheckBoxMenuItem ext1;
+    public static JCheckBoxMenuItem ext3;
+    public static JCheckBoxMenuItem ext2;
+    public static JCheckBoxMenuItem ext1;
     public  Image icon = Toolkit.getDefaultToolkit().getImage("image/BVW.png");
     public  JPanel panel1 = new JPanel(); //ma fenetre droite // défini ici car j'en est besoin plus haut
     public JPanel contentpane = (JPanel) getContentPane();
@@ -46,6 +46,7 @@ public class interfaceplayer extends JFrame  {
 
         //initialiser mes variables pour pouvoir les utiliser plus facilement
         ZoneDeTexte = new JTextField(""); //l'entré du texte
+
 
         //set de l'icone de l'appli
         setIconImage(icon);
@@ -246,7 +247,7 @@ public class interfaceplayer extends JFrame  {
         BoutonShowPlaylist.setToolTipText("Ouvre une nouvelle fenêtre pour voir la playlist");
         BoutonShowPlaylist.addActionListener(e -> {
             PanelShowPlaylist panel = new PanelShowPlaylist();
-            panel.add(Playlist.affichage());
+            //panel.add(Playlist.affichage());
         });
 
 
@@ -312,6 +313,7 @@ public class interfaceplayer extends JFrame  {
         new VideoReader(pathTitre); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
 //                        VideoReader.close(); // oblige de faire ca sinon il y a 2 fenêtres
         SetPanelInfo();// pour afficher le panel info apres avoir lancer le film
+        System.out.println("affichage de la ZoneTitre dans le main : "+ZoneTitre);
     }
     public void PopMenuClicDroit(){
         JPopupMenu ClicDroitMenu = new JPopupMenu("Menu");
