@@ -297,7 +297,7 @@ public class interfaceplayer extends JFrame  {
 
 
         titreVideo = ZoneTitre.getSelectedValue();
-        pathTitre = path + "\\" + ZoneTitre.getSelectedValue();
+        pathTitre = path + "/" + ZoneTitre.getSelectedValue();
 
         System.out.println("le getSelectedValue interfaceplayer.setpanel1 : " + ZoneTitre.getSelectedValue());
         System.out.println("le path du dossier interfaceplayer.setpanel1 : " + path);
