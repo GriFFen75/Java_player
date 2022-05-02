@@ -18,6 +18,7 @@ public class Playlist {
     public static JList affichage(){
         JList ListePourAffichage = new JList();
         String[] splitList = liste.toString().split(",");
+        System.out.println(splitList[1]);
         for (int i = 0;i< splitList.length;i++){
             //ListePourAffichage.setListData(recherche.barre_recherche(splitList[i]));
         }

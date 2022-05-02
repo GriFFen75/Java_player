@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -65,7 +66,8 @@ public class interfaceplayer extends JFrame  {
        TriExtension();
 
        // on ajoute le panel des metadata
-        SetPanelInfo();
+        //SetPanelInfo();
+        contentpane.add(panelInfo,BorderLayout.WEST);
 
     }
     public JMenuBar CreationMenuBar() {
@@ -305,6 +307,7 @@ public class interfaceplayer extends JFrame  {
         ZoneAffichageDuree.setText("Durée :     " + Readerwiwi(pathTitre, "Duration in Seconds"));
         new VideoReader(pathTitre); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
 //                        VideoReader.close(); // oblige de faire ca sinon il y a 2 fenêtres
+        SetPanelInfo();// pour afficher le panel info apres avoir lancer le film
     }
     public void PopMenuClicDroit(){
         JPopupMenu ClicDroitMenu = new JPopupMenu("Menu");
@@ -335,14 +338,19 @@ public class interfaceplayer extends JFrame  {
 
     }
 
-    public void SetPanelInfo(){
-        //code du panel pour les infos
-        panelInfo.setBackground(Color.black);
-        panelInfo.setForeground(Color.white);
-        panelInfo.setPreferredSize(new Dimension(200,0));
-        panelInfo.add(new JTextField("coucou"));
-        // on ajoute ce qu'on veut ici
-        contentpane.add(panelInfo,BorderLayout.WEST);
+    public void SetPanelInfo() {
+        try{
+            //code du panel pour les infos
+            panelInfo.setBackground(Color.black);
+            panelInfo.setForeground(Color.white);
+            panelInfo.setPreferredSize(new Dimension(200,0));
+            panelInfo.add(new JLabel("Vrais titre : "+apiwiwi.Searchwiwi(titreVideo,"Title")));
+            // on ajoute ce qu'on veut ici
+        }
+        catch (IOException e){
+            System.out.println("SetPanelInfo : "+e);
+        }
+
     }
     public void SetPanel2() {
         ZoneAffichageTitre.setForeground(Color.white);
