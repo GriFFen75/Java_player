@@ -1,4 +1,5 @@
 import com.example.demo.VideoReader;
+import com.tutorialspoint.media.demo;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -27,7 +28,8 @@ public class recherche {
         String[] ChaineS = file.toString().split("\\\\");
         //System.out.println(ChaineS[ChaineS.length-1]);
         if (ChaineS[ChaineS.length-1] != "null"){
-            new VideoReader(file.toString());
+            //new VideoReader(file.toString());
+            demo.video(file.toString());
         }
     }
     public static void liste_dossier(){

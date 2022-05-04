@@ -10,6 +10,7 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import static com.drew.metadata.datareader.Readerwiwi;
 
 import com.example.demo.VideoReader;
+import com.tutorialspoint.media.demo;
 
 public class interfaceplayer extends JFrame  {
 
@@ -310,7 +311,8 @@ public class interfaceplayer extends JFrame  {
         //ZoneAffichageAuteur.setText(); //attend que l'api de william sois prête
         ZoneAffichageDateC.setText("Date de création :   " + Readerwiwi(pathTitre, "Creation Time"));
         ZoneAffichageDuree.setText("Durée :     " + Readerwiwi(pathTitre, "Duration in Seconds"));
-        new VideoReader(pathTitre); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
+        demo.video(path+"/"+titreVideo);
+        //new VideoReader(pathTitre); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
 //                        VideoReader.close(); // oblige de faire ca sinon il y a 2 fenêtres
         SetPanelInfo();// pour afficher le panel info apres avoir lancer le film
         System.out.println("affichage de la ZoneTitre dans le main : "+ZoneTitre);

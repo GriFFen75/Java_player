@@ -1,11 +1,15 @@
 import java.awt.*;
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class OpenPageHelp {
     public OpenPageHelp(){
         try
         {
-            File file = new File("C:\\Users\\savad\\Documents\\cours\\1ere_cybersecurite\\Programmation_oriente_objet\\Projet\\WLC\\Java_player\\PageAide\\page d'accueil.html");
+            Path currentRelativePath = Paths.get("");
+            String s = currentRelativePath.toAbsolutePath().toString();
+            File file = new File(s+"/PageAide/page d'accueil.html");
             if(!Desktop.isDesktopSupported())
             {
                 System.out.println("not supported");
