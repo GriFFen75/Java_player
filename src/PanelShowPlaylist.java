@@ -15,16 +15,19 @@ public class PanelShowPlaylist extends JFrame {
         frame.setVisible(true);
     }
     public void CreatePanel(){
-        JPanel panel = new JPanel();
+        JFrame frame = new JFrame("Hello World");
+        frame.setSize(250, 250);
+        frame.setVisible(true);
 
         //System.out.println("PanelShowPlaylist.createPanel : Playlist affichage : " + Playlist.affichage());
         //panel.add(Playlist.liste)
-        panel.add(Playlist.affichage());
-        panel.setLayout(new BorderLayout());
-        panel.add(new JLabel("coucou"));
-        panel.setBackground(Color.black);
+        System.out.println("test de caca"+Playlist.affichage());
+        frame.add(Playlist.affichage());
+        frame.setLayout(new BorderLayout());
+        frame.add(new JLabel("coucou"));
+        frame.setBackground(Color.black);
 
-        frame.add(panel);
+        frame.add(frame);
     }
     public PanelShowPlaylist(){
         CreateFrame();

@@ -27,25 +27,18 @@ public class Playlist {
 
 
     public static JList<String> affichage() {
-        JFrame frame = new JFrame("Hello World");
-        frame.setSize(250, 250);
-        frame.setVisible(true);
 
         //String[] splitList = liste.toString().split(",");
         //System.out.println(splitList[1]);
 
-
         for (int i = 0; i < liste.size(); i++) {
-            //String[] splitListSplit = splitList[i].split("\\\\");
-            //ListePourAffichage.setListData(recherche.barre_recherche(splitListSplit[splitListSplit.length-1],(ArrayList) recherche.fichiers));
-            //titre = splitListSplit[splitListSplit.length - 1];
-            //System.out.println("Playlist.affichage le titre : " + splitListSplit[splitListSplit.length - 1]);
-           // ListePourAffichage.setListData(recherche.barre_recherche(titre, (ArrayList) recherche.fichiers));
+            ListePourAffichage.setListData(recherche.barre_recherche(titre, (ArrayList) recherche.fichiers));
             System.out.println("Playlist.affichage : ListePourAffichage : " + liste);
-            JLabel label = new JLabel(String.valueOf(liste), JLabel.CENTER);
-            frame.add(label);
+            //JLabel label = new JLabel(String.valueOf(liste), JLabel.CENTER);
+            //frame.add(label);
 
         }
+        System.out.println("laaaaa"+ListePourAffichage);
 //        System.out.println("Playlist.affichage : ListePourAffichage à l'index 1 : "+ListePourAffichage);
 //        System.out.println("Playlist.affichage : ListePourAffichage en dehors de la boucle for : "+ListePourAffichage);
         return ListePourAffichage;
