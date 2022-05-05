@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="groupdocs.assembly" type="repository">
+    <properties maven-id="com.groupdocs:groupdocs-assembly:18.5" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/groupdocs/groupdocs-assembly/18.5/groupdocs-assembly-18.5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

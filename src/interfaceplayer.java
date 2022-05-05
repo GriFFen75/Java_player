@@ -86,7 +86,11 @@ public class interfaceplayer extends JFrame  {
         openFiles.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
         openFiles.addActionListener(e -> {
 
-            recherche.liste_fichier();
+            try {
+                recherche.liste_fichier();
+            } catch (UnsupportedLookAndFeelException ex) {
+                throw new RuntimeException(ex);
+            }
         });
         JMenuItem openFolder = new JMenuItem("Ouvrir un dossier");
         openFolder.setIcon(new ImageIcon("image/openFolder.png"));
@@ -247,7 +251,7 @@ public class interfaceplayer extends JFrame  {
         BoutonShowPlaylist.setIcon(new ImageIcon("image/playlist.png"));
         BoutonShowPlaylist.setToolTipText("Ouvre une nouvelle fenêtre pour voir la playlist");
         BoutonShowPlaylist.addActionListener(e -> {
-            PanelShowPlaylist panel = new PanelShowPlaylist();
+            new PanelShowPlaylist();
             //panel.add(Playlist.affichage());
         });
 
@@ -274,19 +278,21 @@ public class interfaceplayer extends JFrame  {
         //affichage de texte
         ZoneTitre = new JList<>();
 
-        JScrollPane JSP = new JScrollPane(panel1);
+        new JScrollPane(panel1);
         //panel1.setPreferredSize(new Dimension(200,0));
         ZoneTitre.setBackground(Color.lightGray);
-        ZoneTitre.addListSelectionListener(et -> {
-            ZoneTitre.addMouseListener(new MouseAdapter() {
-                public void mouseClicked(MouseEvent e) {
-                    if (SwingUtilities.isLeftMouseButton(e) && e.getClickCount() == 2) {
+        ZoneTitre.addListSelectionListener(et -> ZoneTitre.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (SwingUtilities.isLeftMouseButton(e) && e.getClickCount() == 2) {
+                    try {
                         actionClicZoneTitre ();
-
+                    } catch (UnsupportedLookAndFeelException ex) {
+                        throw new RuntimeException(ex);
                     }
+
                 }
-            });
-        });
+            }
+        }));
 
         panel1.add(ZoneTitre, BorderLayout.WEST);
 
@@ -294,7 +300,7 @@ public class interfaceplayer extends JFrame  {
 
         contentpane.add(panel1);
     }
-    public void actionClicZoneTitre () {
+    public void actionClicZoneTitre () throws UnsupportedLookAndFeelException {
 
 
         titreVideo = ZoneTitre.getSelectedValue();
@@ -307,11 +313,17 @@ public class interfaceplayer extends JFrame  {
         System.out.println("si le getSelectedValue et le titreVideo sont différent c'est qu'il y a une erreur");
 
         ZoneAffichageExtension.setText(ExtensionGetTexte());//Readerwiwi("fan.mp4","Expected File Name Extension") // le mettre en premier sinon ca l'update pas pour les gif et les avi
+        System.out.println("cheelou ici "+ExtensionGetTexte());
         ZoneAffichageTitre.setText("Titre :   " + titreVideo); // il faut définir chacune des Zones avant la fonction car sinon on ne peut pas accéder a au Zones dans l'action
         //ZoneAffichageAuteur.setText(); //attend que l'api de william sois prête
         ZoneAffichageDateC.setText("Date de création :   " + Readerwiwi(pathTitre, "Creation Time"));
         ZoneAffichageDuree.setText("Durée :     " + Readerwiwi(pathTitre, "Duration in Seconds"));
-        demo.video(path+"/"+titreVideo);
+        if(pathTitre.contains("null")){
+            System.out.println("gros probleme");
+            System.exit(0);
+        }
+        demo.video(pathTitre);
+
         //new VideoReader(pathTitre); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
 //                        VideoReader.close(); // oblige de faire ca sinon il y a 2 fenêtres
         SetPanelInfo();// pour afficher le panel info apres avoir lancer le film
@@ -321,11 +333,13 @@ public class interfaceplayer extends JFrame  {
         JPopupMenu ClicDroitMenu = new JPopupMenu("Menu");
 
         JMenuItem ouvrir = new JMenuItem("Ouvrir");
-        ouvrir.addActionListener(e -> {
-            ZoneTitre.addListSelectionListener(et -> {
+        ouvrir.addActionListener(e -> ZoneTitre.addListSelectionListener(et -> {
+            try {
                 actionClicZoneTitre();
-            });
-        });
+            } catch (UnsupportedLookAndFeelException ex) {
+                throw new RuntimeException(ex);
+            }
+        }));
 
         JMenuItem addPlaylist = new JMenuItem("Ajouter à la playlist");
         addPlaylist.addActionListener(e -> {
@@ -353,7 +367,7 @@ public class interfaceplayer extends JFrame  {
             panelInfo.setBackground(Color.black);
             panelInfo.setForeground(Color.white);
             panelInfo.setPreferredSize(new Dimension(200,0));
-            panelInfo.add(new JLabel("Vrais titre : "+apiwiwi.Searchwiwi(titreVideo,"Title")));
+            panelInfo.add(new JLabel("Vrai titre : "+apiwiwi.Searchwiwi(titreVideo,"Title")));
             // on ajoute ce qu'on veut ici
         }
         catch (IOException e){

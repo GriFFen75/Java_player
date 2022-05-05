@@ -2,6 +2,7 @@ import com.drew.metadata.datareader;
 import org.apache.tika.exception.TikaException;
 import org.xml.sax.SAXException;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -33,7 +34,7 @@ public class Extension {
         return new String[0];
     }
 
-    public static void autre() throws IOException, TikaException, SAXException {
+    public static void autre() throws IOException, TikaException, SAXException, UnsupportedLookAndFeelException {
         recherche.liste_fichier();
         System.out.println(recherche.fichiers);
         for(int i = 0; i < recherche.fichiers.size();i++){

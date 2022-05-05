@@ -9,14 +9,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.Serial;
 import java.util.List;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JToggleButton;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
+
 import uk.co.caprica.vlcj.media.Media;
 import uk.co.caprica.vlcj.media.MediaEventAdapter;
 import uk.co.caprica.vlcj.media.MediaParsedStatus;
@@ -112,21 +108,7 @@ public class demo extends JFrame {
                                            MediaParsedStatus newStatus) {
                 if(newStatus == MediaParsedStatus.DONE) {
                     MediaPlayer mediaPlayer = mediaPlayerComponent.mediaPlayer();
-                    List<TrackDescription> videoTracks = mediaPlayer.video().trackDescriptions();
-                    System.out.println(videoTracks.get(1));
 
-                    List<TitleDescription> titles = mediaPlayer.titles().titleDescriptions();
-                    if(!titles.isEmpty()) {
-                        System.out.println(titles.get(0));
-                    }
-                    List<ChapterDescription> chapters = mediaPlayer.chapters().descriptions();
-                    if(!chapters.isEmpty()) {
-                        System.out.println(chapters.get(0));
-                    }
-                    List<? extends TrackInfo> trackInfo = mediaPlayer.media().info().tracks();
-                    if(!trackInfo.isEmpty()) {
-                        System.out.println(trackInfo.get(0));
-                    }
                 }
             }
         });
@@ -135,10 +117,11 @@ public class demo extends JFrame {
         //mediaPlayerComponent.mediaPlayer().fullScreen().set(true);
         mediaPlayerComponent.mediaPlayer().fullScreen().toggle();
     }
-    public void initialize() {
+    public void initialize() throws UnsupportedLookAndFeelException {
 
         setBounds(100, 100, 800, 600);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        UIManager.setLookAndFeel(new NimbusLookAndFeel());
         addWindowListener(new WindowAdapter() {
 
             @Override
@@ -207,7 +190,7 @@ public class demo extends JFrame {
         audioPlayerComponent.mediaPlayer().media().startPaused(path);
     }
 
-    public static void video(String video){
+    public static void video(String video) throws UnsupportedLookAndFeelException {
         try {
             UIManager.setLookAndFeel(
                     UIManager.getSystemLookAndFeelClassName());

@@ -45,5 +45,9 @@
     <orderEntry type="library" name="Maven: org.openjfx:javafx-media:win:17.0.1" level="project" />
     <orderEntry type="library" exported="" name="Maven: org.openjfx:javafx-graphics:17.0.1" level="project" />
     <orderEntry type="library" exported="" name="uk.co.caprica.vlcj" level="project" />
+    <orderEntry type="library" exported="" name="groupdocs.metadata" level="project" />
+    <orderEntry type="library" exported="" name="groupdocs.conversion" level="project" />
+    <orderEntry type="library" exported="" name="groupdocs.assembly" level="project" />
+    <orderEntry type="library" exported="" name="groupdocs.java.client" level="project" />
   </component>
 </module>

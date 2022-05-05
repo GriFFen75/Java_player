@@ -1,11 +1,12 @@
 import com.example.demo.VideoReader;
 import com.tutorialspoint.media.demo;
 
+import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import java.util.Objects;
 
 
 public class recherche {
@@ -14,7 +15,7 @@ public class recherche {
 
     public static List<String> fichiers = new ArrayList<>();
 
-    public static void liste_fichier(){
+    public static void liste_fichier() throws UnsupportedLookAndFeelException {
 //        Path currentRelativePath = Paths.get("");
 //        String s = currentRelativePath.toAbsolutePath().toString();
         // creates a file object
@@ -27,7 +28,7 @@ public class recherche {
         //fichiers.addAll(Arrays.asList(fileList)); // c'est quoi ???
         String[] ChaineS = file.toString().split("\\\\");
         //System.out.println(ChaineS[ChaineS.length-1]);
-        if (ChaineS[ChaineS.length-1] != "null"){
+        if (!Objects.equals(ChaineS[ChaineS.length - 1], "null")){
             //new VideoReader(file.toString());
             demo.video(file.toString());
         }
@@ -39,7 +40,7 @@ public class recherche {
         //File file = new File(s+"/video");
         file = new File(String.valueOf(SelectFiles.opendossier()));
         System.out.println("code recheche.liste_dossier"+file);
-        if (file.toString() != "null"){ //si on ferme la plage sans rien selectionner
+        if (!Objects.equals(file.toString(), "null")){ //si on ferme la plage sans rien selectionner
             //System.out.println(file);
             // returns an array of all files
             String[] fileList = file.list();

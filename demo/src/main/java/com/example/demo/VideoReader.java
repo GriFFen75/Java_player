@@ -116,7 +116,7 @@ public class VideoReader {
             //exitMP();
             close(frameVideo);
             //System.out.println(file);
-            new VideoReader(file);
+            //new VideoReader(file);    --->
         });
 
         panelOptionFullScreen.add(boutonPlay);
