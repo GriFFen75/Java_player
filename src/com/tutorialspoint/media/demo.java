@@ -75,6 +75,8 @@ public class demo extends JFrame {
             @Override
             public void error(MediaPlayer mediaPlayer) {
                 SwingUtilities.invokeLater(() -> System.out.println("Failed to load Media."));
+                setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
             }
         };
         audioPlayerComponent = new AudioPlayerComponent();

@@ -285,12 +285,18 @@ public class interfaceplayer extends JFrame  {
             public void mouseClicked(MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e) && e.getClickCount() == 2) {
                     try {
+                        System.out.println(SwingUtilities.isLeftMouseButton(e)+"    "+e.getClickCount());
                         actionClicZoneTitre ();
                     } catch (UnsupportedLookAndFeelException ex) {
                         throw new RuntimeException(ex);
                     }
 
                 }
+                else{
+                    System.out.println("NOP");
+
+                }
+                System.out.println("WTF");
             }
         }));
 
@@ -319,27 +325,29 @@ public class interfaceplayer extends JFrame  {
         ZoneAffichageDateC.setText("Date de création :   " + Readerwiwi(pathTitre, "Creation Time"));
         ZoneAffichageDuree.setText("Durée :     " + Readerwiwi(pathTitre, "Duration in Seconds"));
         if(pathTitre.contains("null")){
-            System.out.println("gros probleme");
+            System.out.println("\n\n\n\ngros probleme\n\n\n\n");
             System.exit(0);
         }
+        System.out.println("\n\n\n");
         demo.video(pathTitre);
 
         //new VideoReader(pathTitre); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
 //                        VideoReader.close(); // oblige de faire ca sinon il y a 2 fenêtres
         SetPanelInfo();// pour afficher le panel info apres avoir lancer le film
-        System.out.println("affichage de la ZoneTitre dans le main : "+ZoneTitre);
+        //System.out.println("affichage de la ZoneTitre dans le main : "+ZoneTitre);
     }
     public void PopMenuClicDroit(){
         JPopupMenu ClicDroitMenu = new JPopupMenu("Menu");
 
         JMenuItem ouvrir = new JMenuItem("Ouvrir");
-        ouvrir.addActionListener(e -> ZoneTitre.addListSelectionListener(et -> {
+        ouvrir.addActionListener(e -> {
+            //System.out.println("wjoaidhbjfnjaos "+titreVideo);
             try {
                 actionClicZoneTitre();
             } catch (UnsupportedLookAndFeelException ex) {
                 throw new RuntimeException(ex);
             }
-        }));
+        });
 
         JMenuItem addPlaylist = new JMenuItem("Ajouter à la playlist");
         addPlaylist.addActionListener(e -> {
@@ -355,6 +363,7 @@ public class interfaceplayer extends JFrame  {
                 public void mouseClicked(MouseEvent e) {
                     if (SwingUtilities.isRightMouseButton(e) && e.getClickCount() == 1) {
                         ClicDroitMenu.show(ZoneTitre, e.getX(), e.getY());
+
                     }
                 }
             });
