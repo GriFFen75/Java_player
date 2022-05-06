@@ -1,7 +1,6 @@
 package com.tutorialspoint.media;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
@@ -35,7 +34,8 @@ public class demo extends JFrame {
     @Serial
     private static final long serialVersionUID = 1L;
     private static final String AUDIO_PATH = "file:///Users/wx/IdeaProjects/Java_player/video/akatsuki.mp3";
-    private static final String LOGO_PATH = "file:///Users/wx/IdeaProjects/Java_player/image/play.png";
+
+//    private static final String LOGO_PATH = "file:///Users/wx/IdeaProjects/Java_player/image/play.png";
     private final CallbackMediaPlayerComponent mediaPlayerComponent;
     private final AudioPlayerComponent audioPlayerComponent;
 
@@ -52,6 +52,7 @@ public class demo extends JFrame {
             public void mouseWheelMoved(MouseWheelEvent e) {
                 super.mouseWheelMoved(e);
                 System.out.println("Mouse wheel moved. " + e.getScrollAmount());
+                volumeChanged(mediaPlayer(),e.getScrollAmount());
             }
 
             @Override
@@ -94,12 +95,12 @@ public class demo extends JFrame {
                 .text("sous titre de william")
                 .size(40)
                 .colour(Color.WHITE)
-                .position(MarqueePosition.BOTTOM_RIGHT)
+                .position(MarqueePosition.BOTTOM)
                 .opacity(0.5f)
                 .enable();
         mediaPlayerComponent.mediaPlayer().marquee().set(marquee);
         Logo logo = Logo.logo()
-                .file(LOGO_PATH)
+                //.file(LOGO_PATH)
                 .position(LogoPosition.TOP_LEFT)
                 .opacity(0.3f)
                 .enable();
@@ -116,13 +117,14 @@ public class demo extends JFrame {
         });
         //mediaPlayerComponent.mediaPlayer().fullScreen().strategy(new AdaptiveFullScreenStrategy(this));
         //mediaPlayerComponent.mediaPlayer().media().play((CallbackMedia) this);
-        //mediaPlayerComponent.mediaPlayer().fullScreen().set(true);
+        mediaPlayerComponent.mediaPlayer().fullScreen().set(true);
         mediaPlayerComponent.mediaPlayer().fullScreen().toggle();
     }
     public void initialize() throws UnsupportedLookAndFeelException {
 
         setBounds(100, 100, 800, 600);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setIconImage(Toolkit.getDefaultToolkit().getImage("image/BVW.png"));
         UIManager.setLookAndFeel(new NimbusLookAndFeel());
         addWindowListener(new WindowAdapter() {
 
@@ -148,8 +150,10 @@ public class demo extends JFrame {
         JPanel videoControlsPane = new JPanel();
         videoControlsPane.setBorder(videoBorder);
         JButton playButton = new JButton("Play");
+        playButton.setIcon(new ImageIcon("image/play.png"));
         videoControlsPane.add(playButton);
         JButton pauseButton = new JButton("Pause");
+        pauseButton.setIcon(new ImageIcon("image/pause.png"));
         videoControlsPane.add(pauseButton);
         JButton rewindButton = new JButton("Rewind");
         videoControlsPane.add(rewindButton);
@@ -159,13 +163,16 @@ public class demo extends JFrame {
         JPanel audioControlsPane = new JPanel();
         audioControlsPane.setBorder(audioBorder);
         JButton playAudioButton = new JButton("Play");
+        playAudioButton.setIcon(new ImageIcon("image/play.png"));
         audioControlsPane.add(playAudioButton);
         JButton pauseAudioButton = new JButton("Pause");
+        pauseAudioButton.setIcon(new ImageIcon("image/pause.png"));
         audioControlsPane.add(pauseAudioButton);
 
         JPanel othersPane = new JPanel();
         othersPane.setBorder(othersBorder);
         JToggleButton toggleButton = new JToggleButton("Toggle Full Screen");
+
         othersPane.add(toggleButton);
         JPanel controlsPane = new JPanel();
         controlsPane.add(videoControlsPane);
@@ -200,8 +207,8 @@ public class demo extends JFrame {
         catch (Exception e) {
             System.out.println(e);
         }
-        System.out.println("le titreee chelou :"+video);
-        demo demolication = new demo("La video");
+        System.out.println("le titre de la video dans demo.video : "+video);
+        demo demolication = new demo("BVW / Lecteur Vidéo");
         demolication.initialize();
         demolication.setVisible(true);
         demolication.loadVideo(video);

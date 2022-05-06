@@ -7,18 +7,18 @@ import java.util.LinkedList;
 
 public class Playlist {
 
-    public static JList<String> ListePourAffichage;
     static LinkedList liste = new LinkedList();
-    public static String titre;
+    //public static String titre;
 
 
     public static void ajout(String film) {
         liste.push(film);
-        System.out.println("wiwiwiw "+liste);
+        System.out.println("La liste dans playlist.ajout "+liste);
     }
 
     public static void retireIndexElement(int index) {
         liste.remove(index);
+        System.out.println("La liste dans playlist.retireIndexElement "+liste);
     }
 
     public static void retireElementJoue() {
@@ -26,23 +26,7 @@ public class Playlist {
     }
 
 
-    public static JList<String> affichage() {
 
-        //String[] splitList = liste.toString().split(",");
-        //System.out.println(splitList[1]);
-
-        for (int i = 0; i < liste.size(); i++) {
-            ListePourAffichage.setListData(recherche.barre_recherche(titre, (ArrayList) recherche.fichiers));
-            System.out.println("Playlist.affichage : ListePourAffichage : " + liste);
-            //JLabel label = new JLabel(String.valueOf(liste), JLabel.CENTER);
-            //frame.add(label);
-
-        }
-        System.out.println("laaaaa"+ListePourAffichage);
-//        System.out.println("Playlist.affichage : ListePourAffichage à l'index 1 : "+ListePourAffichage);
-//        System.out.println("Playlist.affichage : ListePourAffichage en dehors de la boucle for : "+ListePourAffichage);
-        return ListePourAffichage;
-    }
 
 
 //    public static void main(String [] args){

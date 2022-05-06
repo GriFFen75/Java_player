@@ -281,8 +281,10 @@ public class interfaceplayer extends JFrame  {
         new JScrollPane(panel1);
         //panel1.setPreferredSize(new Dimension(200,0));
         ZoneTitre.setBackground(Color.lightGray);
+        System.out.println("BONJOUR");
         ZoneTitre.addListSelectionListener(et -> ZoneTitre.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
+                System.out.println("COUCOU");
                 if (SwingUtilities.isLeftMouseButton(e) && e.getClickCount() == 2) {
                     try {
                         System.out.println(SwingUtilities.isLeftMouseButton(e)+"    "+e.getClickCount());
