@@ -33,11 +33,12 @@ public class PanelShowPlaylist extends JFrame {
         //System.out.println("panelshowplayliste.createpanel playlist.affichage"+Playlist.affichage());
         panel.setLayout(new BorderLayout());
         panel.add(affichage(),BorderLayout.EAST);
+        panel.add(new JLabel("test"), BorderLayout.NORTH);
         //ajoutJList();
         //panel.add(new JLabel("coucou"));
         panel.setBackground(Color.gray);
 
-        System.out.println("le max d'index visible dans paneshowplaylist.createpanel : "+ListePourAffichage.indexToLocation(1));
+        System.out.println("get selected value dans paneshowplaylist.createpanel : "+ListePourAffichage.indexToLocation(1));
         frame.add(panel);
     }
     public JList<String> affichage() {

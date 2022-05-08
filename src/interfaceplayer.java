@@ -10,7 +10,7 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import static com.drew.metadata.datareader.Readerwiwi;
 
 import com.example.demo.VideoReader;
-import com.tutorialspoint.media.demo;
+//import com.tutorialspoint.media.demo;
 
 public class interfaceplayer extends JFrame  {
 
@@ -314,14 +314,14 @@ public class interfaceplayer extends JFrame  {
         titreVideo = ZoneTitre.getSelectedValue();
         pathTitre = path + "/" + ZoneTitre.getSelectedValue();
 
-        System.out.println("le getSelectedValue interfaceplayer.setpanel1 : " + ZoneTitre.getSelectedValue());
-        System.out.println("le path du dossier interfaceplayer.setpanel1 : " + path);
+//        System.out.println("le getSelectedValue interfaceplayer.setpanel1 : " + ZoneTitre.getSelectedValue());
+//        System.out.println("le path du dossier interfaceplayer.setpanel1 : " + path);
         System.out.println("le path du fichier interfaceplayer.setpanel1 : " + pathTitre);
-        System.out.println("le titreVideo interfaceplayer.setpanel1 : " + titreVideo);
-        System.out.println("si le getSelectedValue et le titreVideo sont différent c'est qu'il y a une erreur");
+//        System.out.println("le titreVideo interfaceplayer.setpanel1 : " + titreVideo);
+//        System.out.println("si le getSelectedValue et le titreVideo sont différent c'est qu'il y a une erreur");
 
         ZoneAffichageExtension.setText(ExtensionGetTexte());//Readerwiwi("fan.mp4","Expected File Name Extension") // le mettre en premier sinon ca l'update pas pour les gif et les avi
-        System.out.println("cheelou ici "+ExtensionGetTexte());
+//        System.out.println("cheelou ici "+ExtensionGetTexte());
         ZoneAffichageTitre.setText("Titre :   " + titreVideo); // il faut définir chacune des Zones avant la fonction car sinon on ne peut pas accéder a au Zones dans l'action
         //ZoneAffichageAuteur.setText(); //attend que l'api de william sois prête
         ZoneAffichageDateC.setText("Date de création :   " + Readerwiwi(pathTitre, "Creation Time"));
@@ -355,7 +355,7 @@ public class interfaceplayer extends JFrame  {
         addPlaylist.addActionListener(e -> {
             pathTitre = path + "/"+ZoneTitre.getSelectedValue();
             //System.out.println("bizzare nbon /"+ZoneTitre.getSelectedValue());
-            Playlist.ajout(ZoneTitre.getSelectedValue());
+            Playlist.ajout(pathTitre);
         });
 
         ClicDroitMenu.add(ouvrir);

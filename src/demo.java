@@ -1,4 +1,4 @@
-package com.tutorialspoint.media;
+//package com.tutorialspoint.media;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -30,6 +30,7 @@ import uk.co.caprica.vlcj.player.component.AudioPlayerComponent;
 import uk.co.caprica.vlcj.player.component.CallbackMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.embedded.fullscreen.adaptive.AdaptiveFullScreenStrategy;
 
+
 public class demo extends JFrame {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -38,6 +39,8 @@ public class demo extends JFrame {
 //    private static final String LOGO_PATH = "file:///Users/wx/IdeaProjects/Java_player/image/play.png";
     private final CallbackMediaPlayerComponent mediaPlayerComponent;
     private final AudioPlayerComponent audioPlayerComponent;
+
+    public static String statueBouton = new String();
 
     public demo(String title) {
         super(title);
@@ -159,6 +162,8 @@ public class demo extends JFrame {
         videoControlsPane.add(rewindButton);
         JButton skipButton = new JButton("Skip");
         videoControlsPane.add(skipButton);
+        JButton nextButton = new JButton("Next");
+        videoControlsPane.add(nextButton);
 
         JPanel audioControlsPane = new JPanel();
         audioControlsPane.setBorder(audioBorder);
@@ -184,6 +189,18 @@ public class demo extends JFrame {
         pauseButton.addActionListener(e -> mediaPlayerComponent.mediaPlayer().controls().pause());
         rewindButton.addActionListener(e -> mediaPlayerComponent.mediaPlayer().controls().skipTime(-14000)); //en microseconde
         skipButton.addActionListener(e -> mediaPlayerComponent.mediaPlayer().controls().skipTime(4000));
+        nextButton.addActionListener(e -> {
+//                statueBouton="true";
+            dispose();
+            for (int i=0;i<Playlist.liste.size();i++) {
+                try {
+                    System.out.println("le titre de la video qu'on va lancer dans la liste d'attente de demo : "+ Playlist.liste.get(i));
+                    video(String.valueOf(Playlist.liste.get(i)));
+                } catch (UnsupportedLookAndFeelException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
         playAudioButton.addActionListener(e -> audioPlayerComponent.mediaPlayer().controls().play());
         pauseAudioButton.addActionListener(e -> audioPlayerComponent.mediaPlayer().controls().pause());
         toggleButton.addActionListener(e -> mediaPlayerComponent.mediaPlayer().fullScreen().toggle());
@@ -205,7 +222,7 @@ public class demo extends JFrame {
                     UIManager.getSystemLookAndFeelClassName());
         }
         catch (Exception e) {
-            System.out.println(e);
+            System.out.println("Erreur !!!! : "+e);
         }
         System.out.println("le titre de la video dans demo.video : "+video);
         demo demolication = new demo("BVW / Lecteur Vidéo");
