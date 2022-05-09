@@ -100,6 +100,7 @@ public class interfaceplayer extends JFrame  {
             recherche.liste_dossier();
             PathDossier = recherche.pathDossier();
             path = PathDossier.toString();
+            ZoneDeTexte.setCaretPosition(0);
         });
         System.out.println(PathDossier);
         mnuOpen.add(openFiles);
@@ -282,13 +283,21 @@ public class interfaceplayer extends JFrame  {
         //panel1.setPreferredSize(new Dimension(200,0));
         ZoneTitre.setBackground(Color.lightGray);
         System.out.println("BONJOUR");
-        ZoneTitre.addListSelectionListener(et -> ZoneTitre.addMouseListener(new MouseAdapter() {
+            ZoneTitre.addListSelectionListener(et -> ZoneTitre.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 System.out.println("COUCOU");
-                if (SwingUtilities.isLeftMouseButton(e) && e.getClickCount() == 2) {
+                 if (SwingUtilities.isLeftMouseButton(e) && e.getClickCount() == 1){
                     try {
-                        System.out.println(SwingUtilities.isLeftMouseButton(e)+"    "+e.getClickCount());
-                        actionClicZoneTitre ();
+                        actionClicZoneTitre();
+                    } catch (UnsupportedLookAndFeelException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+                else if (SwingUtilities.isLeftMouseButton(e) && e.getClickCount() == 2) {
+                    try {
+                        System.out.println("le montant de clic dans setpanel1 : "+e.getClickCount());
+                        //actionClicZoneTitre ();
+                        demo.video(pathTitre);
                     } catch (UnsupportedLookAndFeelException ex) {
                         throw new RuntimeException(ex);
                     }
@@ -327,11 +336,11 @@ public class interfaceplayer extends JFrame  {
         ZoneAffichageDateC.setText("Date de création :   " + Readerwiwi(pathTitre, "Creation Time"));
         ZoneAffichageDuree.setText("Durée :     " + Readerwiwi(pathTitre, "Duration in Seconds"));
         if(pathTitre.contains("null")){
-            System.out.println("\n\n\n\ngros probleme\n\n\n\n");
+            System.out.println("\nLe path contient null\n");
             System.exit(0);
         }
-        System.out.println("\n\n\n");
-        demo.video(pathTitre);
+        System.out.println("\n\n");
+        //demo.video(pathTitre);
 
         //new VideoReader(pathTitre); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
 //                        VideoReader.close(); // oblige de faire ca sinon il y a 2 fenêtres
@@ -346,6 +355,7 @@ public class interfaceplayer extends JFrame  {
             //System.out.println("wjoaidhbjfnjaos "+titreVideo);
             try {
                 actionClicZoneTitre();
+                demo.video(pathTitre);
             } catch (UnsupportedLookAndFeelException ex) {
                 throw new RuntimeException(ex);
             }
@@ -372,13 +382,16 @@ public class interfaceplayer extends JFrame  {
 
     }
 
+    JLabel VraiTitre = new JLabel();
     public void SetPanelInfo() {
         try{
             //code du panel pour les infos
             panelInfo.setBackground(Color.black);
             panelInfo.setForeground(Color.white);
             panelInfo.setPreferredSize(new Dimension(200,0));
-            panelInfo.add(new JLabel("Vrai titre : "+apiwiwi.Searchwiwi(titreVideo,"Title")));
+            VraiTitre.setText("Vrai titre : "+apiwiwi.Searchwiwi(titreVideo,"Title"));
+            VraiTitre.setForeground(Color.white);
+            panelInfo.add(VraiTitre);
             // on ajoute ce qu'on veut ici
         }
         catch (IOException e){

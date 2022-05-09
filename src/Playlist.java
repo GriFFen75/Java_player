@@ -15,7 +15,7 @@ public class Playlist {
     public static void ajout(String film) {
         liste.push(film);
         System.out.println("La liste dans playlist.ajout "+liste);
-        retireElementJoue();
+        //retireElementJoue();
     }
 
     public static void retireIndexElement(int index) {
@@ -24,10 +24,12 @@ public class Playlist {
     }
 
     public static void retireElementJoue() {
-        if (liste.size() > 10){
+        //if (liste.size() > 10){
+        if (liste.size() > 0) {
             System.out.println("un element en moins ");
-            liste.removeLast();
+            liste.removeFirst();
         }
+        //}
     }
 //    public void nextVideo() throws UnsupportedLookAndFeelException {
 //        while (demo.statueBouton=="true"){

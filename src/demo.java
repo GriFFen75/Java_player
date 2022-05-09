@@ -189,24 +189,24 @@ public class demo extends JFrame {
         pauseButton.addActionListener(e -> mediaPlayerComponent.mediaPlayer().controls().pause());
         rewindButton.addActionListener(e -> mediaPlayerComponent.mediaPlayer().controls().skipTime(-14000)); //en microseconde
         skipButton.addActionListener(e -> mediaPlayerComponent.mediaPlayer().controls().skipTime(4000));
-        nextButton.addActionListener(e -> {
-//                statueBouton="true";
-            dispose();
-            for (int i=0;i<Playlist.liste.size();i++) {
-                try {
-                    System.out.println("le titre de la video qu'on va lancer dans la liste d'attente de demo : "+ Playlist.liste.get(i));
-                    video(String.valueOf(Playlist.liste.get(i)));
-                } catch (UnsupportedLookAndFeelException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
+        nextButton.addActionListener(e -> actionBoutonNext());
         playAudioButton.addActionListener(e -> audioPlayerComponent.mediaPlayer().controls().play());
         pauseAudioButton.addActionListener(e -> audioPlayerComponent.mediaPlayer().controls().pause());
         toggleButton.addActionListener(e -> mediaPlayerComponent.mediaPlayer().fullScreen().toggle());
 
         this.setContentPane(contentPane);
         this.setVisible(true);
+    }
+    //private int i = 0;
+    public void actionBoutonNext(){ //plus facile de créer une fonction que d'écrire tout dans l'action du bouton
+        dispose();
+            try {
+                System.out.println("le titre de la video qu'on va lancer dans la liste d'attente de demo : "+ Playlist.liste.get(0));
+                video(String.valueOf(Playlist.liste.get(0)));
+                Playlist.retireElementJoue();
+            } catch (UnsupportedLookAndFeelException ex) {
+                throw new RuntimeException("\n\n\n ERROR try catch dans demo.actionBoutonNext : \n" + ex);
+            }
     }
     public void loadVideo(String path) {
         mediaPlayerComponent.mediaPlayer().media().startPaused(path);
