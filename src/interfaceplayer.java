@@ -1,15 +1,17 @@
+import javax.swing.*;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.swing.*;
-import javax.swing.plaf.nimbus.NimbusLookAndFeel;
-
 import static com.drew.metadata.datareader.Readerwiwi;
 
-import com.example.demo.VideoReader;
+
 //import com.tutorialspoint.media.demo;
 
 public class interfaceplayer extends JFrame  {
@@ -322,6 +324,7 @@ public class interfaceplayer extends JFrame  {
 
         titreVideo = ZoneTitre.getSelectedValue();
         pathTitre = path + "/" + ZoneTitre.getSelectedValue();
+        System.out.println("normalement :   "+pathTitre);
 
 //        System.out.println("le getSelectedValue interfaceplayer.setpanel1 : " + ZoneTitre.getSelectedValue());
 //        System.out.println("le path du dossier interfaceplayer.setpanel1 : " + path);

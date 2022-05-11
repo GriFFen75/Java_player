@@ -1,7 +1,6 @@
 package com.drew.metadata;
 
 
-import java.io.*;
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
 import org.apache.tika.exception.TikaException;
@@ -12,6 +11,7 @@ import org.apache.tika.sax.BodyContentHandler;
 import org.xml.sax.SAXException;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,6 +25,10 @@ public class datareader {
             Metadata metadata = ImageMetadataReader.readMetadata(file);
             if(data.equals("Creation Time") || data.equals("Modification Time")) {
                 String []temp = print(metadata, data).split(" ");
+
+                if(temp[0].equals("")){
+                    return "Pas de date";
+                }
                 switch (temp[0]) {
                     case "Mon" -> temp[0] = "Lundi";
                     case "Tue" -> temp[0] = "Mardi";
@@ -48,7 +52,8 @@ public class datareader {
                     case "Nov" -> temp[1] = "Novembre";
                     case "Dec" -> temp[1] = "Decembre";
                 }
-                return temp[0]+" "+temp[2]+" "+temp[1]+" "+temp[5]+" à "+temp[3];
+                String dateeee = temp[0] + " " + temp[2] + " " + temp[1] + " " + temp[5] + " à " + temp[3];
+                return dateeee;
             }
             if(data.equals("Duration in Seconds")){
                 return print(metadata, data)+" seconds";
@@ -116,9 +121,9 @@ public class datareader {
         return "il n'y a pas de titre";
     }
 
-//    public static void main(String[] args) throws TikaException, IOException, SAXException {
-//        System.out.println("titre:"+ReaderTitle("1365070268951.mp4"));
-//        System.out.println(Readerwiwi("fan.mp4","ALL"));
-//        //System.out.println(Readerwiwi("fan.mp4","File Name"));
-//    }
+    public static void main(String[] args) throws TikaException, IOException, SAXException {
+        System.out.println("titre:"+ReaderTitle("alice.avi"));
+        System.out.println(Readerwiwi("alice.avi","ALL"));
+        //System.out.println(Readerwiwi("fan.mp4","File Name"));
+    }
 }

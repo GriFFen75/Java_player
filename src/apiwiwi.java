@@ -60,12 +60,14 @@ public class apiwiwi {
                     return temp2[1].replaceAll("\"","");
                 }
             }
+            return "mal ecrit? nop pour l'isntant ca marche pas, parce que dans la video il n'y pas de titre OK! sinon NTRRRRR";
         }
-        return "mal ecrit?";
+
+        return "mal ecrit? nop pour l'isntant ca marche pas, parce que dans la video il n'y pas de titre OK!";
     }
 
 
-//    public static void main(String [] args) throws IOException {
-//        System.out.println(Searchwiwi("Orphan Black","Title"));
-//    }
+    public static void main(String [] args) throws IOException {
+        System.out.println(Searchwiwi("Orphan Black","Title"));
+    }
 }

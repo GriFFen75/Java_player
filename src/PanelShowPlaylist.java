@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class PanelShowPlaylist extends JFrame {
 
+    private JList<String> langages;
     public JList<String> ListePourAffichage = new JList<>();
     public JPanel panel;
 
@@ -36,9 +37,15 @@ public class PanelShowPlaylist extends JFrame {
         panel.add(new JLabel("test"), BorderLayout.NORTH);
         //ajoutJList();
         //panel.add(new JLabel("coucou"));
-        panel.setBackground(Color.gray);
+
+        JButton myButton = new JButton("My Button");
+        panel.add(myButton);
+
+        //créer la liste des langages
 
         System.out.println("get selected value dans paneshowplaylist.createpanel : "+ListePourAffichage.indexToLocation(1));
+
+
         frame.add(panel);
     }
     public JList<String> affichage() {
