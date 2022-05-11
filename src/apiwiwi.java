@@ -1,3 +1,6 @@
+import org.apache.tika.exception.TikaException;
+import org.xml.sax.SAXException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -5,6 +8,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.drew.metadata.datareader.ReaderTitle;
 
 public class apiwiwi {
 
@@ -67,7 +72,8 @@ public class apiwiwi {
     }
 
 
-    public static void main(String [] args) throws IOException {
-        System.out.println(Searchwiwi("Orphan Black","Title"));
+    public static void main(String [] args) throws IOException, TikaException, SAXException {
+        System.out.println(ReaderTitle("laponie.mp4"));
+        System.out.println(Searchwiwi(ReaderTitle("laponie.mp4"),"Plot"));
     }
 }

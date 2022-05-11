@@ -42,5 +42,6 @@
     <orderEntry type="library" exported="" name="groupdocs.conversion" level="project" />
     <orderEntry type="library" exported="" name="groupdocs.assembly" level="project" />
     <orderEntry type="library" exported="" name="groupdocs.java.client" level="project" />
+    <orderEntry type="library" exported="" name="mp4parser.isoparser" level="application" />
   </component>
 </module>

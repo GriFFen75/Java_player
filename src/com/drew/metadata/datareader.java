@@ -122,8 +122,8 @@ public class datareader {
     }
 
     public static void main(String[] args) throws TikaException, IOException, SAXException {
-        System.out.println("titre:"+ReaderTitle("alice.avi"));
-        System.out.println(Readerwiwi("alice.avi","ALL"));
+        System.out.println("titre:"+ReaderTitle("laponie.mp4"));
+        System.out.println(Readerwiwi("laponie.mp4","Creation Time"));
         //System.out.println(Readerwiwi("fan.mp4","File Name"));
     }
 }
