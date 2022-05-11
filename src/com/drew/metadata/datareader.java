@@ -52,8 +52,11 @@ public class datareader {
                     case "Nov" -> temp[1] = "Novembre";
                     case "Dec" -> temp[1] = "Decembre";
                 }
-                String dateeee = temp[0] + " " + temp[2] + " " + temp[1] + " " + temp[5] + " à " + temp[3];
-                return dateeee;
+                if(temp.length >3) {
+                    String dateeee = temp[0] + " " + temp[2] + " " + temp[1] + " " + temp[5] + " à " + temp[3];
+                    return dateeee;
+                }
+                return temp[0] + " " + temp[1] +" " +temp[2];
             }
             if(data.equals("Duration in Seconds")){
                 return print(metadata, data)+" seconds";
