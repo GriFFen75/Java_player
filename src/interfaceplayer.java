@@ -293,16 +293,16 @@ public class interfaceplayer extends JFrame  {
                         throw new RuntimeException(ex);
                     }
                 }
-                else if (SwingUtilities.isLeftMouseButton(e) && e.getClickCount() == 2) {
-                    try {
-                        System.out.println("le montant de clic dans setpanel1 : "+e.getClickCount());
-                        //actionClicZoneTitre ();
-                        demo.video(pathTitre);
-                    } catch (UnsupportedLookAndFeelException ex) {
-                        throw new RuntimeException(ex);
-                    }
-
-                }
+//                else if (SwingUtilities.isLeftMouseButton(e) && e.getClickCount() == 2) {
+//                    try {
+//                        System.out.println("le montant de clic dans setpanel1 : "+e.getClickCount());
+//                        //actionClicZoneTitre ();
+//                        demo.video(pathTitre);
+//                    } catch (UnsupportedLookAndFeelException ex) {
+//                        throw new RuntimeException(ex);
+//                    }
+//
+//                }
                 else{
                     System.out.println("NOP");
 
