@@ -144,8 +144,8 @@ public class demo extends JFrame {
         //Create a video border
         Border videoBorder = BorderFactory.createTitledBorder("Video Controls");
 
-        //Create an audio border
-        Border audioBorder = BorderFactory.createTitledBorder("Audio Controls");
+//        //Create an audio border
+//        Border audioBorder = BorderFactory.createTitledBorder("Audio Controls");
 
         //Create others border
         Border othersBorder = BorderFactory.createTitledBorder("Others");
@@ -165,24 +165,24 @@ public class demo extends JFrame {
         JButton nextButton = new JButton("Next");
         videoControlsPane.add(nextButton);
 
-        JPanel audioControlsPane = new JPanel();
-        audioControlsPane.setBorder(audioBorder);
-        JButton playAudioButton = new JButton("Play");
-        playAudioButton.setIcon(new ImageIcon("image/play.png"));
-        audioControlsPane.add(playAudioButton);
-        JButton pauseAudioButton = new JButton("Pause");
-        pauseAudioButton.setIcon(new ImageIcon("image/pause.png"));
-        audioControlsPane.add(pauseAudioButton);
+//        JPanel audioControlsPane = new JPanel();
+//        audioControlsPane.setBorder(audioBorder);
+//        JButton playAudioButton = new JButton("Play");
+//        playAudioButton.setIcon(new ImageIcon("image/play.png"));
+//        audioControlsPane.add(playAudioButton);
+//        JButton pauseAudioButton = new JButton("Pause");
+//        pauseAudioButton.setIcon(new ImageIcon("image/pause.png"));
+//        audioControlsPane.add(pauseAudioButton);
 
-        JPanel othersPane = new JPanel();
-        othersPane.setBorder(othersBorder);
-        JToggleButton toggleButton = new JToggleButton("Toggle Full Screen");
+//        JPanel othersPane = new JPanel();
+//        othersPane.setBorder(othersBorder);
+//        JToggleButton toggleButton = new JToggleButton("Toggle Full Screen");
 
-        othersPane.add(toggleButton);
+//        othersPane.add(toggleButton);
         JPanel controlsPane = new JPanel();
         controlsPane.add(videoControlsPane);
-        controlsPane.add(audioControlsPane);
-        controlsPane.add(othersPane);
+//        controlsPane.add(audioControlsPane);
+//        controlsPane.add(othersPane);
         contentPane.add(controlsPane, BorderLayout.SOUTH);
 
         playButton.addActionListener(e -> mediaPlayerComponent.mediaPlayer().controls().play());
@@ -190,9 +190,9 @@ public class demo extends JFrame {
         rewindButton.addActionListener(e -> mediaPlayerComponent.mediaPlayer().controls().skipTime(-14000)); //en microseconde
         skipButton.addActionListener(e -> mediaPlayerComponent.mediaPlayer().controls().skipTime(4000));
         nextButton.addActionListener(e -> actionBoutonNext());
-        playAudioButton.addActionListener(e -> audioPlayerComponent.mediaPlayer().controls().play());
-        pauseAudioButton.addActionListener(e -> audioPlayerComponent.mediaPlayer().controls().pause());
-        toggleButton.addActionListener(e -> mediaPlayerComponent.mediaPlayer().fullScreen().toggle());
+//        playAudioButton.addActionListener(e -> audioPlayerComponent.mediaPlayer().controls().play());
+//        pauseAudioButton.addActionListener(e -> audioPlayerComponent.mediaPlayer().controls().pause());
+//        toggleButton.addActionListener(e -> mediaPlayerComponent.mediaPlayer().fullScreen().toggle());
 
         this.setContentPane(contentPane);
         this.setVisible(true);

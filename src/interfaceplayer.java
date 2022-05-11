@@ -365,7 +365,7 @@ public class interfaceplayer extends JFrame  {
 
         //new VideoReader(pathTitre); //on lance main de HelloApllication en recupérant le texte situer dans la Zone du Titre
 //                        VideoReader.close(); // oblige de faire ca sinon il y a 2 fenêtres
-        SetPanelInfo();// pour afficher le panel info apres avoir lancer le film
+        //SetPanelInfo();// pour afficher le panel info apres avoir lancer le film
         //System.out.println("affichage de la ZoneTitre dans le main : "+ZoneTitre);
     }
     public void PopMenuClicDroit(){
@@ -389,8 +389,14 @@ public class interfaceplayer extends JFrame  {
             Playlist.ajout(pathTitre);
         });
 
+        JMenuItem afficheMetadata = new JMenuItem("Afficher les metadata");
+        afficheMetadata.addActionListener(e -> {
+            SetPanelInfo();
+        });
+
         ClicDroitMenu.add(ouvrir);
         ClicDroitMenu.add(addPlaylist);
+        ClicDroitMenu.add(afficheMetadata);
 
             ZoneTitre.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
