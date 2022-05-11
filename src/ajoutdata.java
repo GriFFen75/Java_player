@@ -17,7 +17,6 @@ import java.util.List;
  */
 public class ajoutdata {
 
-
     public static void main(String[] args) throws IOException {
         ajoutdata cmd = new ajoutdata();
         cmd.writeRandomMetadata("/Users/wx/IdeaProjects/Java_player/video/laponie.mp4",
