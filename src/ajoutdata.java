@@ -17,11 +17,15 @@ import java.util.List;
  */
 public class ajoutdata {
 
-    public static void main(String[] args) throws IOException {
-        ajoutdata cmd = new ajoutdata();
-        cmd.writeRandomMetadata("/Users/wx/IdeaProjects/Java_player/video/laponie.mp4",
-                "Harry Potter");
+//    public static void main(String[] args) throws IOException {
+//        ajoutdata cmd = new ajoutdata();
+//        cmd.writeRandomMetadata("C:\\Users\\savad\\IdeaProjects\\Java_player2\\video\\laponie.mp4", "Harry Potter");
+//
+//    }
 
+    public ajoutdata(String path , String NewTitre) throws IOException {
+        //ajoutdata cmd = new ajoutdata();
+        writeRandomMetadata(path, NewTitre);
     }
 
     public FileChannel splitFileAndInsert(File f, long pos, long length) throws IOException {
@@ -41,6 +45,7 @@ public class ajoutdata {
         System.out.println(transferred);
         tmpWrite.close();
         tmp.delete();
+        System.out.println("ajoutdata.splitfileandinsert le write : "+write);
         return write;
     }
 

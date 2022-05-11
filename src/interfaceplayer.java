@@ -1,3 +1,6 @@
+import org.apache.tika.exception.TikaException;
+import org.xml.sax.SAXException;
+
 import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.*;
@@ -222,8 +225,17 @@ public class interfaceplayer extends JFrame  {
 
             //mise en place des zones de lecture et d'écriture pour les metadata
             JPanel PanelModifMeta = new JPanel(new GridLayout(4, 2));
-            PanelModifMeta.add(new JLabel(ZoneAffichageTitre.getText()));
-            PanelModifMeta.add(new JTextField());
+            try {
+                PanelModifMeta.add(new JLabel("Vrais Titre : "+com.drew.metadata.datareader.ReaderTitle(pathTitre)));
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (TikaException ex) {
+                throw new RuntimeException(ex);
+            } catch (SAXException ex) {
+                throw new RuntimeException(ex);
+            }
+            JTextField ZoneDeTexteModifMeta = new JTextField();
+            PanelModifMeta.add(ZoneDeTexteModifMeta);
             PanelModifMeta.add(new JLabel(ZoneAffichageAuteur.getText()));
             PanelModifMeta.add(new JTextField());
             PanelModifMeta.add(new JLabel(ZoneAffichageDateC.getText()));//"Date de création"+ Readerwiwi(path,"Creation Time"))
@@ -237,6 +249,12 @@ public class interfaceplayer extends JFrame  {
             JButton appliquer = new JButton("Appliquer");
             appliquer.addActionListener(e1 -> {
                 ////////////// mettre le code ici /////////////
+                try {
+                    new ajoutdata(pathTitre,ZoneDeTexteModifMeta.getText());
+                    SetPanelInfo();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
                 FrameModifMetadata.dispose(); //on ferme la frame de modification mais uniquement quand on aura save les modif
             });
             JButton annuler = new JButton("Annuler");
@@ -313,7 +331,7 @@ public class interfaceplayer extends JFrame  {
             }
         }));
 
-        panel1.add(ZoneTitre, BorderLayout.WEST);
+        panel1.add(ZoneTitre, BorderLayout.EAST);
 
         PopMenuClicDroit();
 
@@ -386,19 +404,57 @@ public class interfaceplayer extends JFrame  {
     }
 
     JLabel VraiTitre = new JLabel();
+    JTextArea Synopsis = new JTextArea();
+    JLabel Director = new JLabel();
+    JLabel Auteur = new JLabel();
+    JLabel Acteur = new JLabel();
+    JLabel Pays = new JLabel();
     public void SetPanelInfo() {
         try{
             //code du panel pour les infos
+
             panelInfo.setBackground(Color.black);
             panelInfo.setForeground(Color.white);
-            panelInfo.setPreferredSize(new Dimension(200,0));
-            VraiTitre.setText("Vrai titre : "+apiwiwi.Searchwiwi(titreVideo,"Title"));
+            panelInfo.setPreferredSize(new Dimension(500,0));
+            VraiTitre.setText("Titre : "+com.drew.metadata.datareader.ReaderTitle(pathTitre));//VraiTitre.setText("Vrai titre : "+apiwiwi.Searchwiwi(titreVideo,"Title"));
             VraiTitre.setForeground(Color.white);
             panelInfo.add(VraiTitre);
+
+            Director.setText("Directeur : "+apiwiwi.Searchwiwi(com.drew.metadata.datareader.ReaderTitle(pathTitre),"Director"));
+            Director.setForeground(Color.white);
+            panelInfo.add(Director);
+
+            Auteur.setText("Auteur : "+apiwiwi.Searchwiwi(com.drew.metadata.datareader.ReaderTitle(pathTitre),"Writer"));
+            Auteur.setForeground(Color.white);
+            panelInfo.add(Auteur);
+
+            Acteur.setText("Acteurs : "+apiwiwi.Searchwiwi(com.drew.metadata.datareader.ReaderTitle(pathTitre),"Actors"));
+            Acteur.setForeground(Color.white);
+            panelInfo.add(Acteur);
+
+            Pays.setText("Pays : "+apiwiwi.Searchwiwi(com.drew.metadata.datareader.ReaderTitle(pathTitre),"Country"));
+            Pays.setForeground(Color.white);
+            panelInfo.add(Pays);
+
+            Synopsis.setText("Synopsis : "+apiwiwi.Searchwiwi(com.drew.metadata.datareader.ReaderTitle(pathTitre),"Plot"));
+            Synopsis.setForeground(Color.white);
+            Synopsis.setBackground(Color.black);
+            Synopsis.setLineWrap(true);
+            Synopsis.setWrapStyleWord(true);
+            Synopsis.setEditable(false);
+            //Synopsis.setSize(500,200);
+            //Synopsis.setMaximumSize(new Dimension(300,200));
+            panelInfo.add(Synopsis);
+
+
             // on ajoute ce qu'on veut ici
         }
         catch (IOException e){
             System.out.println("SetPanelInfo : "+e);
+        } catch (TikaException e) {
+            throw new RuntimeException(e);
+        } catch (SAXException e) {
+            throw new RuntimeException(e);
         }
 
     }
@@ -426,8 +482,8 @@ public class interfaceplayer extends JFrame  {
         panel2.setPreferredSize(new Dimension(0, 50)); //pas besoin de mettre de valeur en x vue que elle est mise automatiquement
 
         // ajout d'une frontière qui bouge entre le panelInfo et la fenetre centrale
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT , panelInfo , panel1); // on est remettra un quand la fenetre sera faite
-        contentpane.add(splitPane);
+//        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT , panelInfo , panel1); // on est remettra un quand la fenetre sera faite
+//        contentpane.add(splitPane);
 
         //zone de texte recherche //on recupère en temps réel le texte
         ZoneDeTexte.setBackground(Color.black);

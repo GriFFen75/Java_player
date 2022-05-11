@@ -103,12 +103,12 @@ public class datareader {
 
     public static String ReaderTitle(String path) throws IOException, TikaException, SAXException {
         Path currentRelativePath = Paths.get("");
-        String s = currentRelativePath.toAbsolutePath().toString();
-        File file = new File(s+"/video/"+path);
+//        String s = currentRelativePath.toAbsolutePath().toString();
+//        File file = new File(s+"/video/"+path);
         Parser parser = new AutoDetectParser();
         BodyContentHandler handler = new BodyContentHandler();
         org.apache.tika.metadata.Metadata metadata = new org.apache.tika.metadata.Metadata();
-        FileInputStream inputstream = new FileInputStream(file);
+        FileInputStream inputstream = new FileInputStream(path);
         ParseContext context = new ParseContext();
         parser.parse(inputstream, handler, metadata, context);
         String[] metadataNames = metadata.names();
@@ -121,9 +121,9 @@ public class datareader {
         return "il n'y a pas de titre";
     }
 
-    public static void main(String[] args) throws TikaException, IOException, SAXException {
-        System.out.println("titre:"+ReaderTitle("laponie.mp4"));
-        System.out.println(Readerwiwi("laponie.mp4","Creation Time"));
-        //System.out.println(Readerwiwi("fan.mp4","File Name"));
-    }
+//    public static void main(String[] args) throws TikaException, IOException, SAXException {
+//        System.out.println("titre:"+ReaderTitle("laponie.mp4"));
+//        System.out.println(Readerwiwi("laponie.mp4","Creation Time"));
+//        //System.out.println(Readerwiwi("fan.mp4","File Name"));
+//    }
 }
