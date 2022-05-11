@@ -24,7 +24,7 @@ public class apiwiwi {
         if(film.contains(" ")){
             film.replace(" ","+");
         }
-        URL url = new URL("http://www.omdbapi.com/?apikey=1d66ea43&plot=short&t="+film);
+        URL url = new URL("http://www.omdbapi.com/?apikey=1d66ea43&language=fr&plot=short&t="+film);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
         con.setDoOutput(true);
